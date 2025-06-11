@@ -1,5 +1,329 @@
 import { NextResponse } from 'next/server'
 
+// Real INTEC professors from our scraper (20 professors)
+const REAL_INTEC_PROFESSORS = [
+  {
+    id: 'intec_1',
+    name: 'Aida González',
+    email: 'aida.gonzalez@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias Sociales y Humanidades',
+    department: 'Ciencias Sociales y Humanidades',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_2',
+    name: 'Alejandro Santos',
+    email: 'alejandro.santos@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias Básicas y Ambientales',
+    department: 'Ciencias Básicas y Ambientales',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_3',
+    name: 'Alejandro Toirac',
+    email: 'alejandro.toirac@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ingeniería',
+    department: 'Ingeniería',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_4',
+    name: 'Alejandro Vallejo',
+    email: 'alejandro.vallejo@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias de la Salud',
+    department: 'Ciencias de la Salud',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_5',
+    name: 'Alex Anderson Pascual',
+    email: 'alex.anderson@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Economía y Negocios',
+    department: 'Economía y Negocios',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_6',
+    name: 'Alexander Pimentel',
+    email: 'alexander.pimentel@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ingeniería',
+    department: 'Ingeniería',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_7',
+    name: 'Alfonsina Martínez',
+    email: 'alfonsina.martinez@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ingeniería',
+    department: 'Ingeniería',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_8',
+    name: 'Alfredo Padrón',
+    email: 'alfredo.padron@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias Sociales y Humanidades',
+    department: 'Ciencias Sociales y Humanidades',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_9',
+    name: 'Ana Lebrón',
+    email: 'ana.lebron@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias de la Salud',
+    department: 'Ciencias de la Salud',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_10',
+    name: 'Carlos Cordero',
+    email: 'carlos.cordero@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ingeniería',
+    department: 'Ingeniería',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_11',
+    name: 'David Rivas',
+    email: 'david.rivas@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ingeniería',
+    department: 'Ingeniería',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_12',
+    name: 'Daisy Reyes',
+    email: 'daisy.reyes@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Economía y Negocios',
+    department: 'Economía y Negocios',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_13',
+    name: 'Diana Corrales',
+    email: 'diana.corrales@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias Básicas y Ambientales',
+    department: 'Ciencias Básicas y Ambientales',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_14',
+    name: 'Eduardo Sánchez',
+    email: 'eduardo.sanchez@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ingeniería',
+    department: 'Ingeniería',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_15',
+    name: 'Fernando Santamaría',
+    email: 'fernando.santamaria@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias de la Salud',
+    department: 'Ciencias de la Salud',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_16',
+    name: 'Gustavo Caffaro',
+    email: 'gustavo.caffaro@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Economía y Negocios',
+    department: 'Economía y Negocios',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_17',
+    name: 'Henry Rosa Polanco',
+    email: 'henry.rosa@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Economía y Negocios',
+    department: 'Economía y Negocios',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_18',
+    name: 'Joan Guerrero',
+    email: 'joan.guerrero@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias Sociales y Humanidades',
+    department: 'Ciencias Sociales y Humanidades',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_19',
+    name: 'Luis Rodríguez De Francisco',
+    email: 'luis.rodriguez@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ciencias Básicas y Ambientales',
+    department: 'Ciencias Básicas y Ambientales',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  },
+  {
+    id: 'intec_20',
+    name: 'Miguel Arias',
+    email: 'miguel.arias@intec.edu.do',
+    university: 'INTEC',
+    school: 'Departamento de Ingeniería',
+    department: 'Ingeniería',
+    campus: 'Santo Domingo',
+    averageRating: 0,
+    totalReviews: 0,
+    wouldTakeAgainPercent: 0,
+    averageDifficulty: 0,
+    topTags: [],
+    isVerified: false,
+    source: 'intec_scraper'
+  }
+]
+
 // Real PUCMM professors from our scraper (sample of 94)
 const REAL_PUCMM_PROFESSORS = [
   {
@@ -130,25 +454,38 @@ export async function POST(request: Request) {
   const searchParams = new URL(request.url).searchParams
   const university = searchParams.get('university')
   
-  let results = REAL_PUCMM_PROFESSORS
+  let results = []
+  let message = ''
   
-  if (university && university !== 'PUCMM') {
+  if (!university) {
+    // Return all professors if no university specified
+    results = [...REAL_PUCMM_PROFESSORS, ...REAL_INTEC_PROFESSORS]
+    message = 'Mock data - 94 PUCMM + 20 INTEC professors'
+  } else if (university.toUpperCase() === 'PUCMM') {
+    results = REAL_PUCMM_PROFESSORS
+    message = 'Mock data - 94 real PUCMM professors'
+  } else if (university.toUpperCase() === 'INTEC') {
+    results = REAL_INTEC_PROFESSORS
+    message = 'Mock data - 20 real INTEC professors'
+  } else {
     results = []
+    message = `No professors found for ${university} - only PUCMM and INTEC have scraped data`
   }
 
   return NextResponse.json({
     success: true,
     results,
     total: results.length,
-    message: 'Mock data - 94 real PUCMM professors'
+    message
   })
 }
 
 export async function GET() {
+  const allProfessors = [...REAL_PUCMM_PROFESSORS, ...REAL_INTEC_PROFESSORS]
   return NextResponse.json({
     success: true,
-    results: REAL_PUCMM_PROFESSORS,
-    total: REAL_PUCMM_PROFESSORS.length,
-    message: 'Mock data - 94 real PUCMM professors'
+    results: allProfessors,
+    total: allProfessors.length,
+    message: 'Mock data - 94 PUCMM + 20 INTEC professors'
   })
 } 
