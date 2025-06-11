@@ -26,7 +26,13 @@ export default function CompleteProfilePage() {
     { id: '1', name: 'INTEC' },
     { id: '2', name: 'PUCMM' },
     { id: '3', name: 'UASD' },
-    { id: '4', name: 'UNIBE' },
+    { id: '4', name: 'UNPHU' },
+    { id: '5', name: 'UNIBE' },
+    { id: '6', name: 'UTESA' },
+    { id: '7', name: 'UCNE' },
+    { id: '8', name: 'O&M' },
+    { id: '9', name: 'APEC' },
+    { id: '10', name: 'UNICARIBE' },
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,10 +79,10 @@ export default function CompleteProfilePage() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Completa tu perfil
+            Completa tu perfil (Opcional)
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Necesitamos algunos datos adicionales para personalizar tu experiencia
+            CalificaTuProfe es completamente anónimo. Esta información es opcional y privada.
           </p>
         </div>
 
@@ -156,13 +162,20 @@ export default function CompleteProfilePage() {
             )}
           </div>
 
-          <div>
+          <div className="flex gap-4">
+            <button
+              type="button"
+              onClick={() => router.push('/dashboard')}
+              className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Omitir (mantener anónimo)
+            </button>
             <button
               type="submit"
-              disabled={loading || (!formData.name || (formData.isStudent && !formData.institution))}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
+              disabled={loading}
+              className="flex-1 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
             >
-              {loading ? 'Guardando...' : 'Guardar y continuar'}
+              {loading ? 'Guardando...' : 'Guardar perfil'}
             </button>
           </div>
         </form>

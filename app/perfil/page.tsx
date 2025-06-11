@@ -38,19 +38,18 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // TODO: Replace with actual API call
-        // Mock data for now
+        // For anonymous reviews, only show minimal profile data
         setProfile({
-          name: session?.user?.name || '',
+          name: session?.user?.name || 'Usuario Anónimo',
           email: session?.user?.email || '',
           image: session?.user?.image || null,
           isStudent: true,
-          institution: 'INTEC',
-          bio: 'Estudiante de Ingeniería de Software',
+          institution: '', // Don't assume institution
+          bio: '', // Empty bio by default
           socialLinks: {
-            twitter: 'https://twitter.com/username',
-            linkedin: 'https://linkedin.com/in/username',
-            github: 'https://github.com/username'
+            twitter: '',
+            linkedin: '',
+            github: ''
           }
         })
       } catch (error) {
@@ -62,6 +61,8 @@ export default function ProfilePage() {
 
     if (session?.user) {
       fetchProfile()
+    } else {
+      setLoading(false)
     }
   }, [session])
 
@@ -125,7 +126,12 @@ export default function ProfilePage() {
         <div className="bg-white shadow rounded-lg">
           {/* Header */}
           <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">Tu Perfil</h1>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Tu Perfil</h1>
+              <p className="text-sm text-gray-600 mt-1">
+                CalificaTuProfe utiliza un sistema de reseñas anónimo. Tu información personal no se mostrará públicamente.
+              </p>
+            </div>
             <button
               onClick={() => isEditing ? handleSave() : setIsEditing(true)}
               disabled={saving}
@@ -200,13 +206,23 @@ export default function ProfilePage() {
                       onChange={(e) => setProfile(prev => ({ ...prev, institution: e.target.value }))}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     >
+                      <option value="">Preferir no especificar (recomendado para anonimato)</option>
                       <option value="INTEC">INTEC</option>
                       <option value="PUCMM">PUCMM</option>
                       <option value="UASD">UASD</option>
+                      <option value="UNPHU">UNPHU</option>
                       <option value="UNIBE">UNIBE</option>
+                      <option value="UTESA">UTESA</option>
+                      <option value="UCNE">UCNE</option>
+                      <option value="O&M">O&M</option>
+                      <option value="APEC">APEC</option>
+                      <option value="UNICARIBE">UNICARIBE</option>
+                      <option value="OTRA">Otra universidad</option>
                     </select>
                   ) : (
-                    <p className="mt-1 text-sm text-gray-900">{profile.institution}</p>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {profile.institution || 'No especificado (anónimo)'}
+                    </p>
                   )}
                 </div>
 
