@@ -153,9 +153,9 @@ export default function InstitutionPage() {
           type: 'Privada',
           description: 'Universidad privada con enfoque en ciencias de la salud y formación humanística integral.',
           website: 'https://www.unphu.edu.do',
-          totalProfessors: 456,
-          averageRating: 4.2,
-          departmentCount: 7
+          totalProfessors: 0, // No real data available yet
+          averageRating: 0,
+          departmentCount: 0
         },
         utesa: {
           id: 'utesa',
@@ -166,9 +166,9 @@ export default function InstitutionPage() {
           type: 'Privada',
           description: 'Universidad tecnológica con programas innovadores y formación práctica.',
           website: 'https://www.utesa.edu',
-          totalProfessors: 298,
-          averageRating: 4.0,
-          departmentCount: 5
+          totalProfessors: 0, // No real data available yet
+          averageRating: 0,
+          departmentCount: 0
         },
         unicaribe: {
           id: 'unicaribe',
@@ -179,9 +179,9 @@ export default function InstitutionPage() {
           type: 'Privada',
           description: 'Universidad moderna con enfoque en la innovación educativa y tecnológica.',
           website: 'https://www.unicaribe.edu.do',
-          totalProfessors: 187,
-          averageRating: 3.9,
-          departmentCount: 4
+          totalProfessors: 0, // No real data available yet
+          averageRating: 0,
+          departmentCount: 0
         },
         'o&m': {
           id: 'o&m',
@@ -192,9 +192,9 @@ export default function InstitutionPage() {
           type: 'Privada',
           description: 'Universidad pionera en administración de empresas y ciencias económicas.',
           website: 'https://www.oym.edu.do',
-          totalProfessors: 234,
-          averageRating: 4.0,
-          departmentCount: 5
+          totalProfessors: 0, // No real data available yet
+          averageRating: 0,
+          departmentCount: 0
         },
         apec: {
           id: 'apec',
@@ -205,83 +205,23 @@ export default function InstitutionPage() {
           type: 'Privada',
           description: 'Universidad de alta calidad académica con programas de pregrado y postgrado.',
           website: 'https://www.unapec.edu.do',
-          totalProfessors: 321,
-          averageRating: 4.1,
-          departmentCount: 6
+          totalProfessors: 0, // No real data available yet
+          averageRating: 0,
+          departmentCount: 0
         }
       }
 
-      // Institution-specific departments
+      // Institution-specific departments - only use fake data as fallback if no real data
       const departmentsByInstitution: Record<string, Department[]> = {
-        intec: [
-          { id: 'ingenieria', name: 'Ingeniería', professorCount: 89, averageRating: 4.4 },
-          { id: 'ciencias', name: 'Ciencias Básicas', professorCount: 34, averageRating: 4.2 },
-          { id: 'administracion', name: 'Administración', professorCount: 42, averageRating: 4.1 },
-          { id: 'arquitectura', name: 'Arquitectura', professorCount: 28, averageRating: 4.3 },
-          { id: 'medicina', name: 'Medicina', professorCount: 65, averageRating: 4.2 },
-          { id: 'comunicacion', name: 'Comunicación', professorCount: 18, averageRating: 4.0 }
-        ],
-        uasd: [
-          { id: 'medicina', name: 'Medicina', professorCount: 156, averageRating: 4.1 },
-          { id: 'derecho', name: 'Derecho', professorCount: 134, averageRating: 4.0 },
-          { id: 'ingenieria', name: 'Ingeniería', professorCount: 198, averageRating: 4.2 },
-          { id: 'administracion', name: 'Administración', professorCount: 145, averageRating: 3.9 },
-          { id: 'humanidades', name: 'Humanidades', professorCount: 98, averageRating: 4.1 },
-          { id: 'ciencias', name: 'Ciencias', professorCount: 87, averageRating: 4.0 },
-          { id: 'psicologia', name: 'Psicología', professorCount: 76, averageRating: 4.2 },
-          { id: 'economia', name: 'Economía', professorCount: 54, averageRating: 3.8 },
-          { id: 'educacion', name: 'Educación', professorCount: 89, averageRating: 4.0 },
-          { id: 'agropecuaria', name: 'Agropecuaria', professorCount: 43, averageRating: 4.1 },
-          { id: 'arte', name: 'Artes', professorCount: 32, averageRating: 4.3 },
-          { id: 'farmacia', name: 'Farmacia', professorCount: 28, averageRating: 4.2 }
-        ],
-        pucmm: [
-          { id: 'ingenieria', name: 'Ingeniería', professorCount: 125, averageRating: 4.5 },
-          { id: 'medicina', name: 'Medicina', professorCount: 98, averageRating: 4.4 },
-          { id: 'administracion', name: 'Administración', professorCount: 87, averageRating: 4.3 },
-          { id: 'derecho', name: 'Derecho', professorCount: 76, averageRating: 4.2 },
-          { id: 'arquitectura', name: 'Arquitectura', professorCount: 54, averageRating: 4.4 },
-          { id: 'psicologia', name: 'Psicología', professorCount: 43, averageRating: 4.3 },
-          { id: 'comunicacion', name: 'Comunicación', professorCount: 32, averageRating: 4.1 },
-          { id: 'humanidades', name: 'Humanidades', professorCount: 28, averageRating: 4.2 }
-        ],
-        unphu: [
-          { id: 'medicina', name: 'Medicina', professorCount: 156, averageRating: 4.3 },
-          { id: 'odontologia', name: 'Odontología', professorCount: 87, averageRating: 4.2 },
-          { id: 'farmacia', name: 'Farmacia', professorCount: 43, averageRating: 4.1 },
-          { id: 'enfermeria', name: 'Enfermería', professorCount: 54, averageRating: 4.2 },
-          { id: 'psicologia', name: 'Psicología', professorCount: 32, averageRating: 4.3 },
-          { id: 'administracion', name: 'Administración', professorCount: 28, averageRating: 4.0 },
-          { id: 'derecho', name: 'Derecho', professorCount: 56, averageRating: 4.1 }
-        ],
-        utesa: [
-          { id: 'ingenieria', name: 'Ingeniería', professorCount: 98, averageRating: 4.1 },
-          { id: 'administracion', name: 'Administración', professorCount: 76, averageRating: 4.0 },
-          { id: 'derecho', name: 'Derecho', professorCount: 45, averageRating: 3.9 },
-          { id: 'comunicacion', name: 'Comunicación', professorCount: 32, averageRating: 4.0 },
-          { id: 'psicologia', name: 'Psicología', professorCount: 47, averageRating: 4.1 }
-        ],
-        unicaribe: [
-          { id: 'administracion', name: 'Administración', professorCount: 54, averageRating: 3.9 },
-          { id: 'ingenieria', name: 'Ingeniería', professorCount: 43, averageRating: 4.0 },
-          { id: 'comunicacion', name: 'Comunicación', professorCount: 32, averageRating: 3.8 },
-          { id: 'psicologia', name: 'Psicología', professorCount: 58, averageRating: 4.1 }
-        ],
-        'o&m': [
-          { id: 'administracion', name: 'Administración', professorCount: 87, averageRating: 4.1 },
-          { id: 'economia', name: 'Economía', professorCount: 54, averageRating: 4.0 },
-          { id: 'derecho', name: 'Derecho', professorCount: 43, averageRating: 3.9 },
-          { id: 'comunicacion', name: 'Comunicación', professorCount: 28, averageRating: 4.0 },
-          { id: 'psicologia', name: 'Psicología', professorCount: 22, averageRating: 4.1 }
-        ],
-        apec: [
-          { id: 'administracion', name: 'Administración', professorCount: 98, averageRating: 4.2 },
-          { id: 'ingenieria', name: 'Ingeniería', professorCount: 76, averageRating: 4.1 },
-          { id: 'derecho', name: 'Derecho', professorCount: 54, averageRating: 4.0 },
-          { id: 'comunicacion', name: 'Comunicación', professorCount: 43, averageRating: 4.1 },
-          { id: 'psicologia', name: 'Psicología', professorCount: 32, averageRating: 4.2 },
-          { id: 'medicina', name: 'Medicina', professorCount: 18, averageRating: 4.3 }
-        ]
+        // All institutions will use real calculated data from professors if available
+        intec: [],
+        uasd: [],
+        pucmm: [], // PUCMM will get real data from professors
+        unphu: [],
+        utesa: [],
+        unicaribe: [],
+        'o&m': [],
+        apec: []
       }
 
       // Institution-specific professors
@@ -354,6 +294,13 @@ export default function InstitutionPage() {
       // Update institution professor count with real data if we have professors
       if (professors.length > 0) {
         currentInstitution.totalProfessors = professors.length
+        // Also update department count from real data  
+        currentInstitution.departmentCount = departments.length
+        // Update average rating if we have professors with ratings
+        const professorsWithRatings = professors.filter((prof: Professor) => prof.rating > 0)
+        if (professorsWithRatings.length > 0) {
+          currentInstitution.averageRating = professorsWithRatings.reduce((sum: number, prof: Professor) => sum + prof.rating, 0) / professorsWithRatings.length
+        }
       }
       
       setInstitution(currentInstitution)
@@ -586,44 +533,61 @@ export default function InstitutionPage() {
           </div>
 
           {/* Professors Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filteredProfessors.map((professor) => (
-              <button
-                key={professor.id}
-                onClick={() => handleProfessorClick(professor.id)}
-                className="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-md transition-shadow text-left"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1 font-heading">
-                      {professor.name}
-                    </h3>
-                    <p className="text-gray-600">{professor.department}</p>
-                    <p className="text-sm text-gray-500">{professor.totalRatings} calificaciones</p>
+          {filteredProfessors.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredProfessors.map((professor) => (
+                <button
+                  key={professor.id}
+                  onClick={() => handleProfessorClick(professor.id)}
+                  className="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-md transition-shadow text-left"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-1 font-heading">
+                        {professor.name}
+                      </h3>
+                      <p className="text-gray-600">{professor.department}</p>
+                      <p className="text-sm text-gray-500">{professor.totalRatings} calificaciones</p>
+                    </div>
+                    <div className={`w-12 h-12 rounded-full ${getRatingBg(professor.rating)} flex items-center justify-center text-white font-bold`}>
+                      {professor.rating.toFixed(1)}
+                    </div>
                   </div>
-                  <div className={`w-12 h-12 rounded-full ${getRatingBg(professor.rating)} flex items-center justify-center text-white font-bold`}>
-                    {professor.rating.toFixed(1)}
-                  </div>
-                </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {professor.tags.slice(0, 3).map(tag => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                  {professor.tags.length > 3 && (
-                    <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">
-                      +{professor.tags.length - 3} más
-                    </span>
-                  )}
-                </div>
-              </button>
-            ))}
-          </div>
+                  <div className="flex flex-wrap gap-2">
+                    {professor.tags.slice(0, 3).map(tag => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {professor.tags.length > 3 && (
+                      <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">
+                        +{professor.tags.length - 3} más
+                      </span>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
+              <div className="text-gray-400 mb-4">
+                <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">No hay profesores disponibles</h3>
+              <p className="text-gray-600 mb-4">
+                Aún no hemos agregado profesores de esta institución a nuestra base de datos.
+              </p>
+              <p className="text-sm text-gray-500">
+                Próximamente agregaremos más universidades dominicanas.
+              </p>
+            </div>
+          )}
 
           {/* View All Button */}
           <div className="text-center mt-8">
