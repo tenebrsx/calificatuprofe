@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { collection, query, where, orderBy, limit, getDocs, Query, DocumentData } from 'firebase/firestore'
-import { db } from '@/lib/firebase/config'
+import { normalizeText } from '@/lib/utils/textNormalization'
 
 interface SearchFilters {
   university?: string
@@ -13,107 +12,117 @@ interface SearchRequest {
   query: string
   filters: SearchFilters
   limit?: number
-  sortBy?: 'name' | 'rating' | 'reviews'
+  sortBy?: 'name' | 'rating' | 'reviews' | 'relevance'
   sortOrder?: 'asc' | 'desc'
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body: SearchRequest = await request.json()
-    const { query: searchQuery, filters, limit: searchLimit = 50, sortBy = 'name', sortOrder = 'asc' } = body
-
-    // Start with base collection reference
-    const professorsRef = collection(db, 'professors')
-    let firestoreQuery: Query<DocumentData> = professorsRef
-
-    // Apply filters
-    if (filters.university) {
-      firestoreQuery = query(firestoreQuery, where('university', '==', filters.university))
-    }
-
-    if (filters.department) {
-      firestoreQuery = query(firestoreQuery, where('department', '==', filters.department))
-    }
-
-    if (filters.minRating && filters.minRating > 0) {
-      firestoreQuery = query(firestoreQuery, where('averageRating', '>=', filters.minRating))
-    }
-
-    if (filters.maxRating && filters.maxRating < 5) {
-      firestoreQuery = query(firestoreQuery, where('averageRating', '<=', filters.maxRating))
-    }
-
-    // Apply sorting
-    let orderByField = 'name'
-    if (sortBy === 'rating') orderByField = 'averageRating'
-    if (sortBy === 'reviews') orderByField = 'totalReviews'
-
-    firestoreQuery = query(
-      firestoreQuery,
-      orderBy(orderByField, sortOrder === 'desc' ? 'desc' : 'asc'),
-      limit(searchLimit)
-    )
-
-    // Execute query
-    const querySnapshot = await getDocs(firestoreQuery)
+    console.log('🔍 Main search endpoint called')
     
-    // Transform data
-    let results = querySnapshot.docs.map(doc => {
-      const data = doc.data()
-      return {
-        id: doc.id,
-        name: data.name || 'Nombre no disponible',
-        email: data.email || '',
-        university: data.university || 'Universidad no especificada',
-        school: data.school || '',
-        department: data.department || 'Departamento no especificado',
-        campus: data.campus || 'Campus no especificado',
-        averageRating: data.averageRating || 0,
-        totalReviews: data.totalReviews || 0,
-        wouldTakeAgainPercent: data.wouldTakeAgainPercent || 0,
-        averageDifficulty: data.averageDifficulty || 0,
-        topTags: data.topTags || [],
-        isVerified: data.isVerified || false,
-        source: data.source || 'unknown',
-        createdAt: data.createdAt,
-        lastScraped: data.lastScraped
-      }
-    })
+    const body = await request.json()
+    console.log('📝 Request body:', body)
+    
+    const { query: searchQuery, filters, limit: searchLimit = 50 } = body
 
-    // Apply text search filter (client-side for now)
-    if (searchQuery && searchQuery.trim()) {
-      const searchTerm = searchQuery.toLowerCase().trim()
-      results = results.filter(prof => 
-        prof.name.toLowerCase().includes(searchTerm) ||
-        prof.department.toLowerCase().includes(searchTerm) ||
-        prof.university.toLowerCase().includes(searchTerm) ||
-        prof.email.toLowerCase().includes(searchTerm)
+    // Test fetching mock data
+    const baseUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}`
+    console.log('🌐 Base URL:', baseUrl)
+    
+    const mockResponse = await fetch(`${baseUrl}/api/professors/mock`)
+    console.log('📡 Mock response status:', mockResponse.status)
+    
+    if (!mockResponse.ok) {
+      throw new Error(`Mock API returned ${mockResponse.status}`)
+    }
+    
+    const mockData = await mockResponse.json()
+    console.log('📊 Mock data loaded:', mockData.results?.length || 0, 'professors')
+    
+    // Normalize search query
+    const normalizedQuery = normalizeText(searchQuery)
+    console.log('🔍 Search query:', normalizedQuery)
+    
+    let results = mockData.results || []
+    
+    if (normalizedQuery) {
+      results = results.filter((prof: any) => {
+        // Normalize all fields before comparison
+        const normalizedName = normalizeText(prof.name)
+        const normalizedUniversity = normalizeText(prof.university)
+        const normalizedDepartment = normalizeText(prof.department)
+        
+        const matches = normalizedUniversity.includes(normalizedQuery) ||
+                       normalizedName.includes(normalizedQuery) ||
+                       normalizedDepartment.includes(normalizedQuery)
+        
+        if (matches) {
+          console.log('✅ Match found:', prof.name, prof.university)
+        }
+        
+        return matches
+      })
+    }
+    
+    console.log('🎯 Total matches:', results.length)
+    
+    // Apply additional filters with normalized text
+    if (filters?.university) {
+      const normalizedFilterUniversity = normalizeText(filters.university)
+      results = results.filter((prof: any) => 
+        normalizeText(prof.university).includes(normalizedFilterUniversity)
       )
     }
 
-    return NextResponse.json({
-      success: true,
-      results,
-      total: results.length,
-      query: searchQuery,
-      filters
+    if (filters?.department) {
+      const normalizedFilterDepartment = normalizeText(filters.department)
+      results = results.filter((prof: any) => 
+        normalizeText(prof.department).includes(normalizedFilterDepartment)
+      )
+    }
+
+    if (filters?.minRating && filters.minRating > 0) {
+      results = results.filter((prof: any) => 
+        (prof.averageRating || 0) >= filters.minRating!
+      )
+    }
+
+    if (filters?.maxRating && filters.maxRating < 5) {
+      results = results.filter((prof: any) => 
+        (prof.averageRating || 0) <= filters.maxRating!
+      )
+    }
+
+    // Sort results
+    results.sort((a: any, b: any) => {
+      const nameA = normalizeText(a.name || '')
+      const nameB = normalizeText(b.name || '')
+      return nameA.localeCompare(nameB)
     })
 
+    // Limit results
+    results = results.slice(0, searchLimit)
+    
+    return NextResponse.json({
+      success: true,
+      query: searchQuery,
+      results,
+      total: results.length,
+      filters,
+      source: 'mock'
+    })
+    
   } catch (error) {
-    console.error('Error searching professors:', error)
-    return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Failed to search professors',
-        results: [],
-        total: 0
-      },
-      { status: 500 }
-    )
+    console.error('❌ Main search error:', error)
+    return NextResponse.json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      results: [],
+      total: 0
+    }, { status: 500 })
   }
 }
 
-// Also support GET for simple queries
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const searchQuery = searchParams.get('q') || ''
@@ -130,8 +139,10 @@ export async function GET(request: NextRequest) {
     limit: parseInt(limitParam)
   }
 
+  // Create a mock request for the POST method
   const mockRequest = {
-    json: async () => body
+    json: async () => body,
+    nextUrl: request.nextUrl
   } as NextRequest
 
   return POST(mockRequest)

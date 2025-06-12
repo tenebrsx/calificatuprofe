@@ -3,16 +3,27 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
-import { MagnifyingGlassIcon, XMarkIcon, ClockIcon, StarIcon } from '@heroicons/react/24/outline'
+import { 
+  MagnifyingGlassIcon, 
+  XMarkIcon,
+  UserIcon,
+  BuildingOfficeIcon,
+  AcademicCapIcon,
+  ClockIcon,
+  StarIcon,
+  FireIcon
+} from '@heroicons/react/24/outline'
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/solid'
+import AddProfessorButton from '@/components/AddProfessorButton'
 
 interface SearchResult {
   id: string
-  type: 'professor' | 'university' | 'department'
+  type: 'professor' | 'university'
   name: string
   subtitle: string
   rating?: number
   tags?: string[]
+  relevanceScore?: number
 }
 
 interface SearchFilters {
@@ -23,19 +34,23 @@ interface SearchFilters {
   tags: string[]
 }
 
-const UNIVERSITIES = ['UASD', 'INTEC', 'PUCMM', 'UNPHU', 'UTESA', 'O&M', 'APEC', 'UNICARIBE']
+interface University {
+  id: string
+  name: string
+  shortName: string
+}
+
+interface SubjectCounts {
+  ingenieria: number
+  medicina: number
+  derecho: number
+  administracion: number
+  matematicas: number
+  literatura: number
+}
+
 const DEPARTMENTS = ['Ingeniería', 'Medicina', 'Derecho', 'Administración', 'Psicología', 'Arquitectura', 'Contabilidad']
 const POPULAR_TAGS = ['Excelente', 'Difícil', 'Fácil', 'Puntual', 'Exigente', 'Flexible', 'Claro', 'Justo']
-
-const MOCK_SUGGESTIONS: SearchResult[] = [
-  { id: 'juan-perez', type: 'professor', name: 'Dr. Roberto Jiménez', subtitle: 'Ingeniería • INTEC', rating: 4.9, tags: ['Excelente', 'Claro'] },
-  { id: 'carmen-valdez', type: 'professor', name: 'Dra. Carmen Valdez', subtitle: 'Medicina • PUCMM', rating: 4.8, tags: ['Inspirador', 'Disponible'] },
-  { id: 'luis-herrera', type: 'professor', name: 'Prof. Luis Herrera', subtitle: 'Derecho • UASD', rating: 4.7, tags: ['Organizado', 'Justo'] },
-  { id: 'intec', type: 'university', name: 'INTEC', subtitle: 'Instituto Tecnológico de Santo Domingo' },
-  { id: 'pucmm', type: 'university', name: 'PUCMM', subtitle: 'Pontificia Universidad Católica Madre y Maestra' },
-  { id: 'ingenieria', type: 'department', name: 'Ingeniería', subtitle: 'INTEC • 150+ profesores' },
-  { id: 'medicina', type: 'department', name: 'Medicina', subtitle: 'PUCMM • 95+ profesores' }
-]
 
 export default function EnhancedSearch() {
   const [query, setQuery] = useState('')
@@ -45,6 +60,8 @@ export default function EnhancedSearch() {
   const [recentSearches, setRecentSearches] = useState<string[]>([])
   const [popularSearches, setPopularSearches] = useState<string[]>([])
   const [loadingPopular, setLoadingPopular] = useState(true)
+  const [loadingResults, setLoadingResults] = useState(false)
+  const [universities, setUniversities] = useState<University[]>([])
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 })
   const [filters, setFilters] = useState<SearchFilters>({
     universities: [],
@@ -58,22 +75,26 @@ export default function EnhancedSearch() {
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
-  // Update dropdown position dynamically - centered
+  // Update dropdown position dynamically
   const updateDropdownPosition = () => {
     if (searchRef.current) {
       const rect = searchRef.current.getBoundingClientRect()
-      const dropdownWidth = Math.max(rect.width, 320) // Minimum 320px width
-      const leftPosition = rect.left + window.scrollX + (rect.width - dropdownWidth) / 2
+      const dropdownWidth = Math.max(rect.width, 400) // Minimum 400px width
+      const leftPosition = rect.left + window.scrollX
+      
+      // Ensure dropdown doesn't go off screen
+      const maxLeft = window.innerWidth - dropdownWidth - 16
+      const finalLeft = Math.max(16, Math.min(leftPosition, maxLeft))
       
       setDropdownPosition({
         top: rect.bottom + window.scrollY + 8,
-        left: Math.max(16, leftPosition), // Ensure 16px margin from viewport edge
+        left: finalLeft,
         width: dropdownWidth
       })
     }
   }
 
-  // Load recent searches from localStorage and fetch popular searches
+  // Load universities and initial data
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('recentSearches')
@@ -82,12 +103,26 @@ export default function EnhancedSearch() {
       }
     }
     
-    // Fetch popular searches from API
+    // Fetch universities and popular searches
+    fetchUniversities()
     fetchPopularSearches()
   }, [])
 
+  const fetchUniversities = async () => {
+    try {
+      const response = await fetch('/api/universities')
+      if (response.ok) {
+        const data = await response.json()
+        setUniversities(data.universities || [])
+      }
+    } catch (error) {
+      console.error('Error fetching universities:', error)
+    }
+  }
+
   const fetchPopularSearches = async () => {
     try {
+      setLoadingPopular(true)
       const response = await fetch('/api/search/popular')
       if (response.ok) {
         const data = await response.json()
@@ -117,6 +152,175 @@ export default function EnhancedSearch() {
       console.error('Error tracking search:', error)
     }
   }
+
+  // Normalize text for better Spanish search (remove accents, etc.)
+  const normalizeText = (text: string): string => {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // Remove diacritics/accents
+      .trim()
+  }
+
+  // Calculate relevance score for non-professor results
+  const calculateUniversityRelevance = (university: University, query: string): number => {
+    const searchTerm = normalizeText(query)
+    const name = normalizeText(university.name)
+    const shortName = normalizeText(university.shortName)
+    
+    let score = 0
+    
+    // Exact matches get highest priority
+    if (shortName === searchTerm || name === searchTerm) {
+      score += 100
+    }
+    // Short name starts with query (very high priority for university codes)
+    else if (shortName.startsWith(searchTerm)) {
+      score += 90
+    }
+    // Name starts with query
+    else if (name.startsWith(searchTerm)) {
+      score += 80
+    }
+    // Short name contains query
+    else if (shortName.includes(searchTerm)) {
+      score += 70
+    }
+    // Name contains query
+    else if (name.includes(searchTerm)) {
+      score += 60
+    }
+    
+    // Boost shorter names (more likely to be relevant)
+    if (shortName.length <= 6) {
+      score += 10
+    }
+    
+    return score
+  }
+
+  const calculateDepartmentRelevance = (department: string, query: string): number => {
+    const searchTerm = normalizeText(query)
+    const deptName = normalizeText(department)
+    
+    let score = 0
+    
+    // Exact match gets highest priority
+    if (deptName === searchTerm) {
+      score += 100
+    }
+    // Starts with query
+    else if (deptName.startsWith(searchTerm)) {
+      score += 80
+    }
+    // Contains query
+    else if (deptName.includes(searchTerm)) {
+      score += 60
+    }
+    
+    // Boost common/popular departments (normalized names)
+    const popularDepts = ['ingenieria', 'medicina', 'derecho', 'administracion', 'matematicas', 'arquitectura']
+    if (popularDepts.includes(deptName)) {
+      score += 15
+    }
+    
+    return score
+  }
+
+  // Filter function to remove irrelevant results
+  const isUniversityRelevant = (university: University, query: string): boolean => {
+    const score = calculateUniversityRelevance(university, query)
+    return score >= 40 // Lowered threshold for better results
+  }
+
+  const isDepartmentRelevant = (department: string, query: string): boolean => {
+    const score = calculateDepartmentRelevance(department, query)
+    return score >= 40 // Lowered threshold for better results
+  }
+
+  // Search for real professors and universities
+  const performSearch = async (searchQuery: string) => {
+    if (!searchQuery || searchQuery.length < 2) {
+      setResults([])
+      setLoadingResults(false)
+      return
+    }
+
+    setLoadingResults(true)
+    
+    try {
+      // Search for professors
+      const professorResponse = await fetch('/api/professors/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: searchQuery,
+          filters: {},
+          limit: 20
+        })
+      })
+
+      let professorResults: SearchResult[] = []
+      if (professorResponse.ok) {
+        const professorData = await professorResponse.json()
+        professorResults = (professorData.results || []).map((prof: any) => ({
+          id: prof.id,
+          type: 'professor' as const,
+          name: prof.name,
+          subtitle: `${prof.department} • ${prof.university}`,
+          rating: prof.averageRating,
+          tags: prof.topTags,
+          relevanceScore: prof.relevanceScore
+        }))
+      }
+
+      // Search for universities
+      const universityResults: SearchResult[] = universities
+        .filter(uni => isUniversityRelevant(uni, searchQuery))
+        .map(uni => ({
+          id: uni.id,
+          type: 'university' as const,
+          name: uni.shortName,
+          subtitle: uni.name,
+          relevanceScore: calculateUniversityRelevance(uni, searchQuery)
+        }))
+        .sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0))
+        .slice(0, 10)
+
+      // Combine and sort all results by relevance
+      const allResults = [...professorResults, ...universityResults]
+        .sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0))
+        .slice(0, 30) // Limit total results
+
+      setResults(allResults)
+      
+    } catch (error) {
+      console.error('Search error:', error)
+      setResults([])
+    } finally {
+      setLoadingResults(false)
+    }
+  }
+
+  // Debounced search
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (query.length >= 2) {
+        performSearch(query)
+      } else {
+        setResults([])
+      }
+    }, 300)
+
+    return () => clearTimeout(timeoutId)
+  }, [query, universities])
+
+  // Update dropdown position when opened
+  useEffect(() => {
+    if (isOpen) {
+      updateDropdownPosition()
+    }
+  }, [isOpen])
 
   // Handle clicks outside, scroll, and resize events
   useEffect(() => {
@@ -162,78 +366,66 @@ export default function EnhancedSearch() {
     }
   }, [isOpen])
 
-  // Search functionality
-  useEffect(() => {
-    if (query.length > 0) {
-      const filtered = MOCK_SUGGESTIONS.filter(item =>
-        item.name.toLowerCase().includes(query.toLowerCase()) ||
-        item.subtitle.toLowerCase().includes(query.toLowerCase())
-      )
-      setResults(filtered)
-      setIsOpen(true)
-      updateDropdownPosition()
-    } else {
-      setResults([])
-      if (!showFilters) {
-        setIsOpen(true)
-        updateDropdownPosition()
-      }
-    }
-  }, [query, showFilters])
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setQuery(value)
+    setIsOpen(true)
+    updateDropdownPosition()
+  }
 
-  const handleSearch = (searchQuery: string) => {
-    if (!searchQuery.trim()) return
+  // Handle search submission
+  const handleSearch = (searchQuery?: string) => {
+    const finalQuery = searchQuery || query
+    if (!finalQuery.trim()) return
 
-    // Track this search in popular searches
-    trackSearch(searchQuery.trim())
-
-    const newRecent = [searchQuery, ...recentSearches.filter(s => s !== searchQuery)].slice(0, 5)
-    setRecentSearches(newRecent)
+    // Track the search
+    trackSearch(finalQuery)
+    
+    // Save to recent searches
+    const newRecentSearches = [finalQuery, ...recentSearches.filter(s => s !== finalQuery)].slice(0, 5)
+    setRecentSearches(newRecentSearches)
     if (typeof window !== 'undefined') {
-      localStorage.setItem('recentSearches', JSON.stringify(newRecent))
+      localStorage.setItem('recentSearches', JSON.stringify(newRecentSearches))
     }
 
-    router.push(`/buscar?q=${encodeURIComponent(searchQuery)}`)
+    // Navigate to search results
+    router.push(`/buscar?q=${encodeURIComponent(finalQuery)}`)
     setIsOpen(false)
     setQuery('')
   }
 
+  // Handle result click
   const handleResultClick = (result: SearchResult) => {
-    console.log('🔍 Search result clicked:', result.name, result.type)
-    const searchQuery = result.name
-    
-    // Navigate based on result type
     if (result.type === 'professor') {
-      // Use the mock professor ID to navigate to the professor page
-      console.log('➡️ Navigating to professor:', `/profesor/${result.id}`)
       router.push(`/profesor/${result.id}`)
     } else if (result.type === 'university') {
-      // For universities, navigate to institution page
-      console.log('➡️ Navigating to university:', `/institucion/${result.name.toLowerCase()}`)
-      router.push(`/institucion/${result.name.toLowerCase()}`)
-    } else if (result.type === 'department') {
-      // For departments/subjects, navigate to the new materia page
-      const subjectSlug = result.name.toLowerCase()
-        .replace(/\s+/g, '')
-        .replace(/ía/g, 'ia') // Convert ñ and accents
-        .replace(/ó/g, 'o')
-      console.log('➡️ Navigating to materia:', `/materia/${subjectSlug}`)
-      router.push(`/materia/${subjectSlug}`)
+      router.push(`/institucion/${result.id}`)
     }
+    setIsOpen(false)
+    setQuery('')
+  }
 
-    // Track this search and add to recent searches
-    trackSearch(searchQuery)
-    const newRecent = [searchQuery, ...recentSearches.filter(s => s !== searchQuery)].slice(0, 5)
-    setRecentSearches(newRecent)
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('recentSearches', JSON.stringify(newRecent))
-    }
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion: string) => {
+    setQuery(suggestion)
+    handleSearch(suggestion)
+  }
 
-    // Close dropdown after a small delay to ensure navigation completes
-    setTimeout(() => {
+  // Handle focus
+  const handleFocus = () => {
+    setIsOpen(true)
+    updateDropdownPosition()
+  }
+
+  // Handle key navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleSearch()
+    } else if (e.key === 'Escape') {
       setIsOpen(false)
-      setQuery('')
-    }, 100)
+    }
   }
 
   const clearRecentSearches = () => {
@@ -268,19 +460,6 @@ export default function EnhancedSearch() {
     })
   }
 
-  const getResultIcon = (type: string) => {
-    switch (type) {
-      case 'professor':
-        return '👨‍🏫'
-      case 'university':
-        return '🏛️'
-      case 'department':
-        return '📚'
-      default:
-        return '📄'
-    }
-  }
-
   // Portal dropdown with maximum z-index positioning
   const DropdownPortal = ({ children }: { children: React.ReactNode }) => {
     if (typeof window === 'undefined') return null
@@ -297,7 +476,6 @@ export default function EnhancedSearch() {
           minWidth: '20rem',
           pointerEvents: 'auto'
         }}
-
       >
         {children}
       </div>,
@@ -314,21 +492,10 @@ export default function EnhancedSearch() {
             ref={inputRef}
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => {
-              setIsOpen(true)
-              updateDropdownPosition()
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleSearch(query)
-              }
-              if (e.key === 'Escape') {
-                setIsOpen(false)
-                setShowFilters(false)
-              }
-            }}
-            placeholder="Buscar profesores, universidades o departamentos..."
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            onKeyDown={handleKeyDown}
+            placeholder="Buscar profesores, universidades o materias..."
             className="w-full pl-12 pr-20 py-4 text-lg border-2 border-gray-300 rounded-2xl focus:border-gray-900 focus:outline-none transition-colors bg-white shadow-sm"
             style={{ fontSize: '16px' }}
           />
@@ -362,162 +529,98 @@ export default function EnhancedSearch() {
       </div>
 
       {/* Portal dropdown renders outside DOM tree with maximum z-index */}
-      {(isOpen || showFilters) && (
+      {isOpen && (
         <DropdownPortal>
           <div className="bg-white border border-gray-200 rounded-xl shadow-2xl max-h-96 overflow-y-auto">
-            {/* Advanced Filters */}
-            {showFilters && (
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-heading font-semibold text-gray-900">Filtros avanzados</h3>
-                  <button
-                    onClick={resetFilters}
-                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-                  >
-                    Limpiar filtros
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Universidades</label>
-                    <div className="space-y-2 max-h-32 overflow-y-auto">
-                      {UNIVERSITIES.map(uni => (
-                        <label key={uni} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={filters.universities.includes(uni)}
-                            onChange={() => toggleFilter('universities', uni)}
-                            className="rounded border-gray-300 text-gray-900 focus:ring-gray-900"
-                          />
-                          <span className="ml-2 text-sm text-gray-700">{uni}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Departamentos</label>
-                    <div className="space-y-2 max-h-32 overflow-y-auto">
-                      {DEPARTMENTS.map(dept => (
-                        <label key={dept} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={filters.departments.includes(dept)}
-                            onChange={() => toggleFilter('departments', dept)}
-                            className="rounded border-gray-300 text-gray-900 focus:ring-gray-900"
-                          />
-                          <span className="ml-2 text-sm text-gray-700">{dept}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Calificación mínima: {filters.minRating.toFixed(1)}
-                    </label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="5"
-                      step="0.1"
-                      value={filters.minRating}
-                      onChange={(e) => setFilters(prev => ({ ...prev, minRating: parseFloat(e.target.value) }))}
-                      className="w-full"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Dificultad máxima: {filters.maxDifficulty.toFixed(1)}
-                    </label>
-                    <input
-                      type="range"
-                      min="1"
-                      max="5"
-                      step="0.1"
-                      value={filters.maxDifficulty}
-                      onChange={(e) => setFilters(prev => ({ ...prev, maxDifficulty: parseFloat(e.target.value) }))}
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Etiquetas</label>
-                  <div className="flex flex-wrap gap-2">
-                    {POPULAR_TAGS.map(tag => (
-                      <button
-                        key={tag}
-                        onClick={() => toggleFilter('tags', tag)}
-                        className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                          filters.tags.includes(tag)
-                            ? 'bg-rating-average text-gray-900'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
-                      >
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Search Results */}
-            {!showFilters && (
+            {query.length >= 2 ? (
+              // Search Results
               <>
-                {query && results.length > 0 && (
-                  <div className="p-4">
-                    <h4 className="text-sm font-medium text-gray-700 mb-3">Resultados</h4>
-                    <div className="space-y-2">
+                {loadingResults ? (
+                  <div className="p-4 text-center text-gray-500">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto"></div>
+                    <p className="mt-2 text-sm">Buscando...</p>
+                  </div>
+                ) : results.length > 0 ? (
+                  <div className="p-2">
+                    <div className="space-y-1">
                       {results.map((result) => (
-                        <div
-                          key={result.id}
+                        <button
+                          key={`${result.type}-${result.id}`}
                           onClick={() => handleResultClick(result)}
-                          className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors text-left cursor-pointer"
-                          role="button"
-                          tabIndex={0}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault()
-                              handleResultClick(result)
-                            }
-                          }}
+                          className="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors"
                         >
-                          <span className="text-2xl">{getResultIcon(result.type)}</span>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2">
-                              <span className="font-medium text-gray-900">{result.name}</span>
-                              {result.rating && (
-                                <div className="flex items-center gap-1">
-                                  <StarIcon className="h-4 w-4 text-rating-average" />
-                                  <span className="text-sm font-medium metric-number">{result.rating}</span>
-                                </div>
+                          <div className="flex items-center space-x-3">
+                            <div className="flex-shrink-0">
+                              {result.type === 'professor' && (
+                                <UserIcon className="h-5 w-5 text-green-500" />
+                              )}
+                              {result.type === 'university' && (
+                                <BuildingOfficeIcon className="h-5 w-5 text-blue-500" />
                               )}
                             </div>
-                            <p className="text-sm text-gray-600">{result.subtitle}</p>
-                            {result.tags && (
-                              <div className="flex gap-1 mt-1">
-                                {result.tags.slice(0, 2).map(tag => (
-                                  <span key={tag} className="px-2 py-0.5 bg-rating-average/30 text-xs rounded-full">
-                                    {tag}
-                                  </span>
-                                ))}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between">
+                                <div className="flex-1 min-w-0">
+                                  <div className="font-medium text-gray-900 truncate">{result.name}</div>
+                                  <div className="text-sm text-gray-600 truncate">{result.subtitle}</div>
+                                  {result.tags && result.tags.length > 0 && (
+                                    <div className="flex flex-wrap gap-1 mt-1">
+                                      {result.tags.slice(0, 3).map((tag, index) => (
+                                        <span
+                                          key={index}
+                                          className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
+                                        >
+                                          {tag}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="flex items-center space-x-2 ml-3">
+                                  {result.rating && result.rating > 0 && (
+                                    <div className="flex items-center">
+                                      <span className="text-xs font-medium text-yellow-600">
+                                        {result.rating.toFixed(1)}
+                                      </span>
+                                      <StarIcon className="h-3 w-3 text-yellow-400 ml-1" />
+                                    </div>
+                                  )}
+                                  <div className="text-xs text-gray-400 capitalize">
+                                    {result.type === 'professor' ? 'Profesor' : 'Universidad'}
+                                  </div>
+                                </div>
                               </div>
-                            )}
+                            </div>
                           </div>
-                        </div>
+                        </button>
                       ))}
                     </div>
                   </div>
+                ) : (
+                  <div className="p-6 text-center text-gray-500">
+                    <MagnifyingGlassIcon className="h-12 w-12 mx-auto mb-3 text-gray-300" />
+                    <p className="text-lg font-medium text-gray-700 mb-1">No se encontraron resultados para "{query}"</p>
+                    <p className="text-sm text-gray-500 mb-4">¿No encuentras al profesor que buscas?</p>
+                    <AddProfessorButton 
+                      searchQuery={query}
+                      size="md"
+                      variant="primary"
+                      className="mb-2"
+                    />
+                    <p className="text-xs text-gray-400 mt-3">También puedes intentar con términos diferentes</p>
+                  </div>
                 )}
-
-                {!query && recentSearches.length > 0 && (
-                  <div className="p-4 border-t border-gray-100">
+              </>
+            ) : (
+              // Suggestions when no query
+              <>
+                {recentSearches.length > 0 && (
+                  <div className="p-4 border-b border-gray-100">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-medium text-gray-700">Búsquedas recientes</h4>
+                      <div className="flex items-center">
+                        <ClockIcon className="h-4 w-4 mr-2 text-gray-500" />
+                        <h4 className="text-sm font-medium text-gray-700">Búsquedas recientes</h4>
+                      </div>
                       <button
                         onClick={clearRecentSearches}
                         className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
@@ -528,68 +631,113 @@ export default function EnhancedSearch() {
                     <div className="space-y-1">
                       {recentSearches.map((search, index) => (
                         <button
-                          key={index}
-                          onClick={() => handleSearch(search)}
-                          className="w-full flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors text-left"
+                          key={`recent-${index}`}
+                          onClick={() => handleSuggestionClick(search)}
+                          className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-2"
                         >
-                          <ClockIcon className="h-4 w-4 text-gray-400" />
-                          <span className="text-gray-700">{search}</span>
+                          <span className="text-xs text-gray-400">•</span>
+                          <div className="text-sm text-gray-700">{search}</div>
                         </button>
                       ))}
                     </div>
                   </div>
                 )}
-
-                {!query && (
-                  <div className={`p-4 ${recentSearches.length > 0 ? 'border-t border-gray-100' : ''}`}>
-                    <div className="flex items-center justify-between mb-3">
+                
+                <div className="p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center">
+                      <FireIcon className="h-4 w-4 mr-2 text-red-500" />
                       <h4 className="text-sm font-medium text-gray-700">Búsquedas populares</h4>
-                      {!loadingPopular && (
-                        <button
-                          onClick={fetchPopularSearches}
-                          className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
-                          title="Actualizar búsquedas populares"
-                        >
-                          🔄
-                        </button>
-                      )}
                     </div>
-                    {loadingPopular ? (
-                      <div className="flex flex-wrap gap-2">
-                        {[1, 2, 3, 4, 5, 6].map(i => (
-                          <div key={i} className="h-8 bg-gray-200 rounded-full animate-pulse" style={{width: `${60 + i * 10}px`}}></div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="flex flex-wrap gap-2">
-                        {popularSearches.slice(0, 6).map((term, index) => (
-                          <button
-                            key={`${term}-${index}`}
-                            onClick={() => handleSearch(term)}
-                            className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors flex items-center gap-1"
-                          >
-                            <span className="text-xs text-red-500">•</span>
-                            {term}
-                          </button>
-                        ))}
-                        {popularSearches.length === 0 && (
-                          <p className="text-sm text-gray-500 italic">No hay búsquedas populares disponibles</p>
-                        )}
-                      </div>
+                    {!loadingPopular && (
+                      <button
+                        onClick={fetchPopularSearches}
+                        className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+                        title="Actualizar búsquedas populares"
+                      >
+                        🔄
+                      </button>
                     )}
                   </div>
-                )}
-
-                {query && results.length === 0 && (
-                  <div className="p-8 text-center">
-                    <MagnifyingGlassIcon className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                    <p className="text-gray-600 mb-2">No se encontraron resultados para "{query}"</p>
-                    <p className="text-sm text-gray-500">
-                      Intenta con términos diferentes o usa filtros para refinar tu búsqueda
-                    </p>
-                  </div>
-                )}
+                  {loadingPopular ? (
+                    <div className="space-y-2 px-3">
+                      {[1, 2, 3, 4, 5].map(i => (
+                        <div key={i} className="h-6 bg-gray-200 rounded animate-pulse"></div>
+                      ))}
+                    </div>
+                  ) : popularSearches.length > 0 ? (
+                    popularSearches.slice(0, 5).map((search, index) => (
+                      <button
+                        key={`popular-${index}`}
+                        onClick={() => handleSuggestionClick(search)}
+                        className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-2"
+                      >
+                        <span className="text-xs text-red-500">•</span>
+                        <div className="text-sm text-gray-700">{search}</div>
+                      </button>
+                    ))
+                  ) : (
+                    <div className="px-3 py-2 text-sm text-gray-500 italic">
+                      No hay búsquedas populares disponibles
+                    </div>
+                  )}
+                </div>
               </>
+            )}
+
+            {/* Filters Section */}
+            {showFilters && (
+              <div className="border-t border-gray-200 p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-gray-900">Filtros</h3>
+                  <button
+                    onClick={resetFilters}
+                    className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                  >
+                    Limpiar filtros
+                  </button>
+                </div>
+                
+                {/* Universities Filter */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Universidades</label>
+                  <div className="flex flex-wrap gap-2">
+                    {universities.slice(0, 6).map((uni) => (
+                      <button
+                        key={uni.id}
+                        onClick={() => toggleFilter('universities', uni.shortName)}
+                        className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                          filters.universities.includes(uni.shortName)
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        {uni.shortName}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Departments Filter */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Departamentos</label>
+                  <div className="flex flex-wrap gap-2">
+                    {DEPARTMENTS.slice(0, 6).map((dept) => (
+                      <button
+                        key={dept}
+                        onClick={() => toggleFilter('departments', dept)}
+                        className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                          filters.departments.includes(dept)
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        {dept}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </DropdownPortal>

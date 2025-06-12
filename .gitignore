@@ -1,9 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-node_modules/
+/node_modules/
 /.pnp
-.pnp.*
+.pnp.js
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -11,14 +11,14 @@ node_modules/
 !.yarn/versions
 
 # testing
-coverage/
+/coverage/
 
 # next.js
 /.next/
-out/
+/out/
 
 # production
-build/
+/build/
 
 # misc
 .DS_Store
@@ -31,7 +31,8 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env*.local
+.env
 
 # vercel
 .vercel
@@ -89,3 +90,39 @@ Thumbs.db
 DEPLOYMENT_GUIDE.md
 DESIGN_ROADMAP.md
 *.md.backup
+
+# Dependency directories
+jspm_packages/
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Temporary folders
+tmp/
+temp/
+
+# Project specific
+/data/*.json
+/scripts/test*.ts
+/scripts/run*.ts
+/scripts/add*.ts
+/scripts/import*.ts
+*.md
+!README.md
+/clean-website-copy/
+/deploy-clean/
+consolidate_departments.js
+*.backup

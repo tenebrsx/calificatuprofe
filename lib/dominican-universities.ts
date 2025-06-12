@@ -113,14 +113,6 @@ export const DOMINICAN_UNIVERSITIES: University[] = [
     description: 'Catholic university with comprehensive academic programs'
   },
   {
-    id: 'charles_bekeev',
-    name: 'Charles Bekeev International University',
-    shortName: 'Charles Bekeev',
-    location: 'Santo Domingo',
-    type: 'private',
-    description: 'International university with global perspective'
-  },
-  {
     id: 'unad',
     name: 'Universidad Adventista Dominicana',
     shortName: 'UNAD',
@@ -271,16 +263,8 @@ export const DOMINICAN_UNIVERSITIES: University[] = [
     type: 'public',
     website: 'https://www.isfodosu.edu.do',
     description: 'Higher institute for teacher training with multiple campuses'
-  },
-  {
-    id: 'stevens_int',
-    name: 'Stevens Institute of Technology International',
-    shortName: 'Stevens International',
-    location: 'Santo Domingo',
-    type: 'private',
-    description: 'International branch of Stevens Institute of Technology'
-  },
-  {
+      },
+    {
     id: 'itla',
     name: 'Instituto Tecnológico de las Américas',
     shortName: 'ITLA',

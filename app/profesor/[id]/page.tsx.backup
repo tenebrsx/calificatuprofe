@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import { HandThumbUpIcon, HandThumbDownIcon, FlagIcon } from '@heroicons/react/24/outline'
 import StickyProfessorHeader from '@/components/Professor/StickyProfessorHeader'
 import RatingForm from '@/components/Rating/RatingForm'
+import AddSubjectPrompt from '@/components/AddSubjectPrompt'
 
 interface Professor {
   id: string
@@ -18,6 +19,7 @@ interface Professor {
   difficultyRating: number
   wouldTakeAgainPercent: number
   tags: string[]
+  subjects?: string[] // Specific subjects/courses the professor teaches
 }
 
 interface Rating {
@@ -39,15 +41,16 @@ interface Rating {
   tags: string[]
 }
 
-const getRatingColor = (rating: number, totalReviews: number) => {
-  if (totalReviews === 0) return 'bg-gray-400 text-white'  // Grey for no reviews
+const getRatingColor = (rating: number, totalReviews: number = 0) => {
+  if (totalReviews === 0) return 'bg-gray-500 text-white'  // Grey for no reviews
   if (rating >= 0 && rating <= 2.9) return 'bg-red-500 text-white'  // Red for 0-2.9
   if (rating >= 3.0 && rating <= 4.0) return 'bg-yellow-500 text-gray-900'  // Yellow for 3.0-4.0
   if (rating >= 4.1) return 'bg-green-500 text-white'  // Green for 4.1+
   return 'bg-yellow-500 text-gray-900'  // Default fallback
 }
 
-const getRatingBgColor = (rating: number) => {
+const getRatingBgColor = (rating: number, totalReviews: number = 0) => {
+  if (totalReviews === 0) return 'bg-gray-500 text-white'  // Grey for no reviews
   if (rating >= 0 && rating <= 2.9) return 'bg-red-500 text-white'  // Red for 0-2.9
   if (rating >= 3.0 && rating <= 4.0) return 'bg-yellow-500 text-gray-900'  // Yellow for 3.0-4.0
   if (rating >= 4.1) return 'bg-green-500 text-white'  // Green for 4.1+
@@ -79,71 +82,26 @@ export default function ProfessorPage() {
   }, [])
 
   useEffect(() => {
-    const fetchProfessor = async () => {
-      try {
-        // Fetch professor from our mock API
-        const response = await fetch('/api/professors/mock')
-        if (response.ok) {
-          const data = await response.json()
-          const foundProfessor = data.results.find((prof: any) => prof.id === professorId)
-          
-          if (foundProfessor) {
-            // Transform to match expected format
-            const professorData = {
-              id: foundProfessor.id,
-              name: foundProfessor.name,
-              department: foundProfessor.department,
-              institution: foundProfessor.university,
-              averageRating: foundProfessor.averageRating,
-              totalRatings: foundProfessor.totalReviews,
-              difficultyRating: foundProfessor.averageDifficulty,
-              wouldTakeAgainPercent: foundProfessor.wouldTakeAgainPercent,
-              tags: foundProfessor.topTags.length > 0 ? foundProfessor.topTags : [
-                'CLARO AL EXPLICAR',
-                'EXÁMENES JUSTOS',
-                'INSPIRADOR',
-                'DISPONIBLE PARA AYUDAR',
-                'TAREAS ÚTILES',
-                'PARTICIPA EN CLASE',
-                'CALIFICACIÓN ESTRICTA'
-              ]
-            }
-            setProfessor(professorData)
-          } else {
-            // Fallback if professor not found
-            const mockProfessor = {
-              id: professorId,
-              name: `Dr. Profesor ${professorId}`,
-              department: 'Departamento General',
-              institution: 'PUCMM',
-              averageRating: 0,
-              totalRatings: 0,
-              difficultyRating: 0,
-              wouldTakeAgainPercent: 0,
-              tags: ['SIN CALIFICACIONES']
-            }
-            setProfessor(mockProfessor)
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching professor:', error)
-        // Fallback to basic data
-        const mockProfessor = {
-          id: professorId,
-          name: `Dr. Profesor ${professorId}`,
-          department: 'Departamento General',
-          institution: 'PUCMM',
-          averageRating: 0,
-          totalRatings: 0,
-          difficultyRating: 0,
-          wouldTakeAgainPercent: 0,
-          tags: ['SIN CALIFICACIONES']
-        }
-        setProfessor(mockProfessor)
-      }
+    // Mock data with updated color scheme
+    const mockProfessor = {
+      id: professorId,
+      name: 'Dr. Juan Pérez',
+      department: 'Ingeniería',
+      institution: 'INTEC',
+      averageRating: 4.5,
+      totalRatings: 25,
+      difficultyRating: 3.8,
+      wouldTakeAgainPercent: 85,
+      tags: [
+        'CLARO AL EXPLICAR',
+        'EXÁMENES JUSTOS',
+        'INSPIRADOR',
+        'DISPONIBLE PARA AYUDAR',
+        'TAREAS ÚTILES',
+        'PARTICIPA EN CLASE',
+        'CALIFICACIÓN ESTRICTA'
+      ]
     }
-
-    fetchProfessor()
 
     const mockRatings = [
       {
@@ -202,10 +160,63 @@ export default function ProfessorPage() {
       }
     ]
 
+    const fetchProfessor = async () => {
+      try {
+        // Fetch professor from our mock API
+        const response = await fetch('/api/professors/mock')
+        if (response.ok) {
+          const data = await response.json()
+          const foundProfessor = data.results.find((prof: any) => prof.id === professorId)
+          
+          if (foundProfessor) {
+            // Transform to match expected format
+            const professorData = {
+              id: foundProfessor.id,
+              name: foundProfessor.name,
+              department: foundProfessor.department,
+              institution: foundProfessor.university,
+              averageRating: foundProfessor.averageRating,
+              totalRatings: foundProfessor.totalReviews,
+              difficultyRating: foundProfessor.averageDifficulty,
+              wouldTakeAgainPercent: foundProfessor.wouldTakeAgainPercent,
+              tags: foundProfessor.topTags.length > 0 ? foundProfessor.topTags : [
+                'CLARO AL EXPLICAR',
+                'EXÁMENES JUSTOS',
+                'INSPIRADOR',
+                'DISPONIBLE PARA AYUDAR',
+                'TAREAS ÚTILES',
+                'PARTICIPA EN CLASE',
+                'CALIFICACIÓN ESTRICTA'
+              ]
+            }
+            setProfessor(professorData)
+          } else {
+            // Use mock professor for demo
+            setProfessor(mockProfessor)
+          }
+        } else {
+          // Use mock professor for demo
+          setProfessor(mockProfessor)
+        }
+      } catch (error) {
+        console.error('Error fetching professor:', error)
+        // Use mock professor for demo
+        setProfessor(mockProfessor)
+      }
+    }
+
+    fetchProfessor()
+    
     setTimeout(() => {
-      setRatings(mockRatings)
+      // Only set mock ratings if professor has reviews (totalRatings > 0)
+      // Otherwise show no reviews
+      if (professor && professor.totalRatings > 0) {
+        setRatings(mockRatings)
+      } else {
+        setRatings([])
+      }
       setLoading(false)
-    }, 1000)
+    }, 1500)
   }, [professorId])
 
   const handleLike = async (ratingId: string) => {
@@ -347,6 +358,21 @@ export default function ProfessorPage() {
             </div>
           </div>
 
+          {/* Add Subject Prompt - Show when professor has no specific subjects */}
+          {(!professor.subjects || professor.subjects.length === 0) && (
+            <AddSubjectPrompt 
+              professorId={professor.id}
+              professorName={professor.name}
+              onSubjectAdded={(subject) => {
+                // Optionally update the professor's subjects locally
+                setProfessor(prev => prev ? {
+                  ...prev,
+                  subjects: [...(prev.subjects || []), subject]
+                } : null)
+              }}
+            />
+          )}
+
           {/* Key Stats Grid - Simplified to 3 metrics */}
           <div className="grid grid-cols-3 gap-8 p-8 bg-gray-50 rounded-2xl mb-8 shadow-sm">
           <div className="text-center">
@@ -359,11 +385,13 @@ export default function ProfessorPage() {
           </div>
           <div className="text-center">
               <div className={`text-5xl font-bold mb-2 font-heading ${
+                professor.totalRatings === 0 ? 'text-gray-600' :
                 professor.averageRating >= 4.1 ? 'text-green-600' :
                 professor.averageRating >= 3.0 ? 'text-yellow-600' :
                 'text-red-600'
               }`}>
-                {professor.averageRating >= 4.1 ? 'Excelente' :
+                {professor.totalRatings === 0 ? 'Sin reseñas' :
+                 professor.averageRating >= 4.1 ? 'Excelente' :
                  professor.averageRating >= 3.0 ? 'Bueno' :
                  'Regular'}
               </div>
@@ -445,10 +473,10 @@ export default function ProfessorPage() {
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Profesores similares</h3>
               <div className="space-y-3">
-                {[
-                  { name: 'Dr. María Santos', rating: 4.8, department: 'Ingeniería', id: '2' },
-                  { name: 'Prof. Carlos López', rating: 4.6, department: 'Ingeniería', id: '3' },
-                  { name: 'Dra. Ana Méndez', rating: 4.5, department: 'Ingeniería', id: '4' }
+                {professor && [
+                  { name: `Dr. ${professor.department === 'Arquitectura' ? 'Pedro García' : 'María Santos'}`, rating: 4.8, department: professor.department, id: professor.id === '1' ? '2' : '1' },
+                  { name: `Prof. ${professor.department === 'Arquitectura' ? 'Diana Nicodemo' : 'Carlos López'}`, rating: 4.6, department: professor.department, id: professor.id === '2' ? '3' : '2' },
+                  { name: `Dra. ${professor.department === 'Arquitectura' ? 'Angela Soto' : 'Ana Méndez'}`, rating: 4.5, department: professor.department, id: professor.id === '3' ? '4' : '3' }
                 ].map((similarProf) => (
                   <Link
                     key={similarProf.id}
@@ -483,7 +511,26 @@ export default function ProfessorPage() {
             <div className="mb-12">
               <h3 className="text-xl text-gray-700 mb-6">Calificaciones recientes</h3>
           <div className="space-y-6">
-            {ratings.map((rating) => (
+            {ratings.length === 0 ? (
+              <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
+                <div className="text-gray-400 mb-4">
+                  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Sin reseñas aún</h4>
+                <p className="text-gray-600 mb-4">
+                  Este profesor aún no tiene calificaciones de estudiantes.
+                </p>
+                <button
+                  onClick={() => setShowRatingForm(true)}
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Sé el primero en calificar
+                </button>
+              </div>
+            ) : (
+              ratings.map((rating) => (
                   <div key={rating.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
                     {/* Review Header */}
                     <div className="flex items-start justify-between mb-4">
@@ -542,7 +589,8 @@ export default function ProfessorPage() {
                       </div>
                     </div>
                   </div>
-                ))}
+                ))
+              )}
                   </div>
                 </div>
 

@@ -1,0 +1,338 @@
+[
+  {
+    "id": "uasd",
+    "name": "Universidad Autónoma de Santo Domingo",
+    "shortName": "UASD",
+    "baseUrl": "https://www.uasd.edu.do",
+    "location": "Santo Domingo",
+    "type": "public",
+    "priority": 1,
+    "sources": [
+      {
+        "type": "faculty_directory",
+        "url": "https://www.uasd.edu.do/index.php/facultades",
+        "method": "static",
+        "selectors": {
+          "facultyLinks": "a[href*='facultad']",
+          "professorCards": ".profesor, .docente, .faculty-member",
+          "name": ".nombre, .name, h3, h4",
+          "department": ".departamento, .dept, .area",
+          "email": "a[href^='mailto:']",
+          "title": ".titulo, .cargo, .position"
+        }
+      },
+      {
+        "type": "department_pages",
+        "urls": [
+          "https://www.uasd.edu.do/index.php/facultades/ingenieria-y-arquitectura",
+          "https://www.uasd.edu.do/index.php/facultades/ciencias-de-la-salud",
+          "https://www.uasd.edu.do/index.php/facultades/ciencias-economicas-y-sociales"
+        ],
+        "method": "static",
+        "selectors": {
+          "professorCards": ".docente, .profesor, .staff-member",
+          "name": "h3, h4, .nombre",
+          "department": ".departamento, .area",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@uasd.edu.do",
+      "{first}{last}@uasd.edu.do",
+      "{first}@uasd.edu.do"
+    ],
+    "delays": {
+      "min": 2000,
+      "max": 4000
+    }
+  },
+  {
+    "id": "pucmm",
+    "name": "Pontificia Universidad Católica Madre y Maestra",
+    "shortName": "PUCMM",
+    "baseUrl": "https://www.pucmm.edu.do",
+    "location": "Santo Domingo",
+    "type": "private",
+    "priority": 1,
+    "sources": [
+      {
+        "type": "faculty_directory",
+        "url": "https://www.pucmm.edu.do/cdp/contacto",
+        "method": "static",
+        "selectors": {
+          "professorCards": ".faculty-card, .profesor, .academic-staff, p",
+          "name": "strong, .name, .nombre, h3",
+          "department": ".department, .escuela, .area",
+          "email": "a[href^='mailto:']",
+          "title": ".title, .cargo"
+        }
+      },
+      {
+        "type": "school_pages",
+        "urls": [
+          "http://humanidades.pucmm.edu.do/facultad/equipo",
+          "http://humanidades.pucmm.edu.do/humanidades/escuela/equipo-csta"
+        ],
+        "method": "static",
+        "selectors": {
+          "professorCards": ".faculty, .docente, li, p",
+          "name": "h3, h4, .nombre, strong",
+          "department": ".departamento, .escuela",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@pucmm.edu.do",
+      "{first}{last}@pucmm.edu.do",
+      "{first}@pucmm.edu.do"
+    ],
+    "delays": {
+      "min": 1500,
+      "max": 3000
+    }
+  },
+  {
+    "id": "intec",
+    "name": "Instituto Tecnológico de Santo Domingo",
+    "shortName": "INTEC",
+    "baseUrl": "https://www.intec.edu.do",
+    "location": "Santo Domingo",
+    "type": "private",
+    "priority": 1,
+    "sources": [
+      {
+        "type": "faculty_directory",
+        "url": "https://profesorado.intec.edu.do/profesorado-pleno",
+        "method": "static",
+        "selectors": {
+          "professorCards": "h4, .profesor, .faculty-member, .docente, .staff-card",
+          "name": "h4, .name, .nombre, .title",
+          "department": ".area, .departamento, .department, .faculty, p",
+          "email": "a[href^='mailto:']",
+          "title": ".titulo, .position, .cargo"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@intec.edu.do",
+      "{first}{last}@intec.edu.do",
+      "{first}@intec.edu.do"
+    ],
+    "delays": {
+      "min": 1000,
+      "max": 2500
+    }
+  },
+  {
+    "id": "unphu",
+    "name": "Universidad Nacional Pedro Henríquez Ureña",
+    "shortName": "UNPHU",
+    "baseUrl": "https://www.unphu.edu.do",
+    "location": "Santo Domingo",
+    "type": "private",
+    "priority": 2,
+    "sources": [
+      {
+        "type": "faculty_search",
+        "url": "https://www.unphu.edu.do/profesores",
+        "method": "static",
+        "selectors": {
+          "professorCards": ".profesor, .faculty-card",
+          "name": ".nombre, h3",
+          "department": ".escuela, .area",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@unphu.edu.do",
+      "{first}{last}@unphu.edu.do"
+    ],
+    "delays": {
+      "min": 2000,
+      "max": 4000
+    }
+  },
+  {
+    "id": "unibe",
+    "name": "Universidad Iberoamericana",
+    "shortName": "UNIBE",
+    "baseUrl": "https://www.unibe.edu.do",
+    "location": "Santo Domingo",
+    "type": "private",
+    "priority": 2,
+    "sources": [
+      {
+        "type": "faculty_directory",
+        "url": "https://www.unibe.edu.do/nosotros/cuerpo-docente",
+        "method": "static",
+        "selectors": {
+          "professorCards": ".docente, .faculty",
+          "name": ".nombre, h3",
+          "department": ".facultad, .area",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@unibe.edu.do",
+      "{first}{last}@unibe.edu.do"
+    ],
+    "delays": {
+      "min": 1500,
+      "max": 3000
+    }
+  },
+  {
+    "id": "utesa",
+    "name": "Universidad Tecnológica de Santiago",
+    "shortName": "UTESA",
+    "baseUrl": "https://www.utesa.edu",
+    "location": "Santiago",
+    "type": "private",
+    "priority": 2,
+    "sources": [
+      {
+        "type": "faculty_directory",
+        "url": "https://www.utesa.edu/profesores",
+        "method": "static",
+        "selectors": {
+          "professorCards": ".profesor, .docente",
+          "name": ".nombre, h3",
+          "department": ".departamento, .area",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@utesa.edu",
+      "{first}{last}@utesa.edu"
+    ],
+    "delays": {
+      "min": 2000,
+      "max": 4000
+    }
+  },
+  {
+    "id": "unicaribe",
+    "name": "Universidad del Caribe",
+    "shortName": "UNICARIBE",
+    "baseUrl": "https://www.unicaribe.edu.do",
+    "location": "Santo Domingo",
+    "type": "private",
+    "priority": 3,
+    "sources": [
+      {
+        "type": "faculty_search",
+        "url": "https://www.unicaribe.edu.do/profesores",
+        "method": "static",
+        "selectors": {
+          "professorCards": ".profesor, .faculty",
+          "name": ".nombre, h3",
+          "department": ".area",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@unicaribe.edu.do",
+      "{first}{last}@unicaribe.edu.do"
+    ],
+    "delays": {
+      "min": 2500,
+      "max": 5000
+    }
+  },
+  {
+    "id": "unapec",
+    "name": "Universidad APEC",
+    "shortName": "UNAPEC",
+    "baseUrl": "https://www.unapec.edu.do",
+    "location": "Santo Domingo",
+    "type": "private",
+    "priority": 3,
+    "sources": [
+      {
+        "type": "faculty_directory",
+        "url": "https://www.unapec.edu.do/profesores",
+        "method": "static",
+        "selectors": {
+          "professorCards": ".docente, .profesor",
+          "name": ".nombre, h3",
+          "department": ".escuela, .area",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@unapec.edu.do",
+      "{first}{last}@unapec.edu.do"
+    ],
+    "delays": {
+      "min": 2000,
+      "max": 4000
+    }
+  },
+  {
+    "id": "om",
+    "name": "Universidad Dominicana O&M",
+    "shortName": "O&M",
+    "baseUrl": "https://www.om.edu.do",
+    "location": "Santo Domingo",
+    "type": "private",
+    "priority": 3,
+    "sources": [
+      {
+        "type": "faculty_search",
+        "url": "https://www.om.edu.do/profesores",
+        "method": "static",
+        "selectors": {
+          "professorCards": ".profesor, .docente",
+          "name": ".nombre, h3",
+          "department": ".area",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@om.edu.do",
+      "{first}{last}@om.edu.do"
+    ],
+    "delays": {
+      "min": 2500,
+      "max": 5000
+    }
+  },
+  {
+    "id": "ucne",
+    "name": "Universidad Católica Nordestana",
+    "shortName": "UCNE",
+    "baseUrl": "https://www.ucne.edu",
+    "location": "San Francisco de Macorís",
+    "type": "private",
+    "priority": 3,
+    "sources": [
+      {
+        "type": "faculty_directory",
+        "url": "https://www.ucne.edu/profesores",
+        "method": "static",
+        "selectors": {
+          "professorCards": ".profesor, .docente",
+          "name": ".nombre, h3",
+          "department": ".area",
+          "email": "a[href^='mailto:']"
+        }
+      }
+    ],
+    "emailPatterns": [
+      "{first}.{last}@ucne.edu",
+      "{first}{last}@ucne.edu"
+    ],
+    "delays": {
+      "min": 3000,
+      "max": 6000
+    }
+  }
+] 

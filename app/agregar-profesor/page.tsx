@@ -17,7 +17,7 @@ const DOMINICAN_UNIVERSITIES = [
 const COMMON_DEPARTMENTS = [
   'Ingeniería de Sistemas', 'Ingeniería Civil', 'Ingeniería Industrial', 'Ingeniería Eléctrica',
   'Medicina', 'Odontología', 'Enfermería', 'Psicología', 'Derecho', 'Administración de Empresas',
-  'Contabilidad', 'Marketing', 'Economía', 'Arquitectura', 'Comunicación Social', 'Educación',
+  'Contabilidad', 'Marketing', 'Economía', 'Arquitectura y Urbanismo', 'Comunicación Social', 'Educación',
   'Ciencias Sociales', 'Matemáticas', 'Física', 'Química', 'Biología', 'Historia', 'Filosofía',
   'Lenguas Modernas', 'Arte', 'Música', 'Diseño Gráfico', 'Turismo', 'Gastronomía'
 ]
@@ -38,7 +38,7 @@ export default function AddProfessorPage() {
   const searchParams = useSearchParams()
   
   const [formData, setFormData] = useState<ProfessorFormData>({
-    name: '',
+    name: searchParams.get('search') || '',
     email: '',
     institution: searchParams.get('institution') || '',
     department: searchParams.get('department') || '',
@@ -136,7 +136,7 @@ export default function AddProfessorPage() {
         setSubmitStatus('success')
         // Reset form
         setFormData({
-          name: '',
+          name: searchParams.get('search') || '',
           email: '',
           institution: searchParams.get('institution') || '',
           department: searchParams.get('department') || '',
@@ -205,6 +205,27 @@ export default function AddProfessorPage() {
               </div>
             </div>
           </div>
+
+          {/* Search Query Info */}
+          {searchParams.get('search') && (
+            <div className="bg-blue-50 border-l-4 border-blue-400 p-4 m-6">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-blue-700">
+                    Hemos pre-llenado el nombre con tu búsqueda: <strong>"{searchParams.get('search')}"</strong>
+                  </p>
+                  <p className="text-blue-600 text-sm mt-1">
+                    Puedes modificarlo si es necesario y completar el resto de la información.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Success Message */}
           {submitStatus === 'success' && (
@@ -303,7 +324,7 @@ export default function AddProfessorPage() {
               
               {/* Dropdown */}
               {showDepartmentDropdown && filteredDepartments.length > 0 && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                   {filteredDepartments.map((dept, index) => (
                     <button
                       key={dept}
@@ -312,7 +333,11 @@ export default function AddProfessorPage() {
                         handleInputChange('department', dept)
                         setShowDepartmentDropdown(false)
                       }}
-                      className="w-full text-left px-3 py-2 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none first:rounded-t-lg last:rounded-b-lg"
+                      className={`w-full text-left px-3 py-2 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none transition-colors ${
+                        index === 0 ? 'rounded-t-lg' : ''
+                      } ${
+                        index === filteredDepartments.length - 1 ? 'rounded-b-lg' : ''
+                      }`}
                     >
                       <span className="text-gray-900">{dept}</span>
                     </button>

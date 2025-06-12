@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import { useState } from 'react'
+import AddProfessorButton from '@/components/AddProfessorButton'
 
 export default function Navbar() {
   const { data: session } = useSession()
@@ -33,6 +34,11 @@ export default function Navbar() {
             </Link>
             {session ? (
               <>
+                <AddProfessorButton 
+                  size="sm"
+                  variant="primary"
+                  className="mr-2"
+                />
                 <span className="text-gray-700">
                   {session.user?.name || session.user?.email}
                 </span>
@@ -107,6 +113,14 @@ export default function Navbar() {
             </Link>
             {session ? (
               <>
+                <div className="px-3 py-2">
+                  <AddProfessorButton 
+                    size="sm"
+                    variant="primary"
+                    fullWidth={true}
+                    className="mb-3"
+                  />
+                </div>
                 <span className="block px-3 py-2 text-gray-700">
                   {session.user?.name || session.user?.email}
                 </span>

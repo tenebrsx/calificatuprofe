@@ -18,6 +18,12 @@ interface UserProfile {
   }
 }
 
+interface University {
+  id: string
+  name: string
+  shortName: string
+}
+
 export default function ProfilePage() {
   const { data: session, update } = useSession()
   const [loading, setLoading] = useState(true)
@@ -25,6 +31,7 @@ export default function ProfilePage() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isEditing, setIsEditing] = useState(false)
+  const [universities, setUniversities] = useState<University[]>([])
   const [profile, setProfile] = useState<UserProfile>({
     name: '',
     email: '',
@@ -34,6 +41,22 @@ export default function ProfilePage() {
     bio: '',
     socialLinks: {}
   })
+
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      try {
+        const response = await fetch('/api/universities')
+        if (response.ok) {
+          const data = await response.json()
+          setUniversities(data.universities || [])
+        }
+      } catch (error) {
+        console.error('Error fetching universities:', error)
+      }
+    }
+
+    fetchUniversities()
+  }, [])
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -164,7 +187,7 @@ export default function ProfilePage() {
               <div className="flex items-center space-x-4">
                 <div className="relative w-20 h-20">
                   <Image
-                    src={profile.image || '/default-avatar.png'}
+                    src={profile.image || '/default-avatar.svg'}
                     alt={profile.name}
                     fill
                     className="rounded-full object-cover"
@@ -206,18 +229,13 @@ export default function ProfilePage() {
                       onChange={(e) => setProfile(prev => ({ ...prev, institution: e.target.value }))}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     >
-                      <option value="">Preferir no especificar (recomendado para anonimato)</option>
-                      <option value="INTEC">INTEC</option>
-                      <option value="PUCMM">PUCMM</option>
-                      <option value="UASD">UASD</option>
-                      <option value="UNPHU">UNPHU</option>
-                      <option value="UNIBE">UNIBE</option>
-                      <option value="UTESA">UTESA</option>
-                      <option value="UCNE">UCNE</option>
-                      <option value="O&M">O&M</option>
-                      <option value="APEC">APEC</option>
-                      <option value="UNICARIBE">UNICARIBE</option>
-                      <option value="OTRA">Otra universidad</option>
+                      <option value="">Preferir no especificar</option>
+                      {universities.map((university) => (
+                        <option key={university.id} value={university.shortName}>
+                          {university.shortName}
+                        </option>
+                      ))}
+                      <option value="Otra universidad">Otra universidad</option>
                     </select>
                   ) : (
                     <p className="mt-1 text-sm text-gray-900">

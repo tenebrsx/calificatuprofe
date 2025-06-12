@@ -54,25 +54,47 @@ export default function InstitutionPage() {
     const loadInstitutionData = async () => {
       setLoading(true)
       
-      // Fetch real professors from our API
+      // Fetch professors from mock API (which has all the data)
       try {
         const response = await fetch('/api/professors/mock')
         if (response.ok) {
           const data = await response.json()
-          // Filter professors by institution
+          
+          // Filter professors by institution - match university field
           const institutionProfessors = data.results.filter((prof: any) => {
-            const profInstitution = prof.university?.toLowerCase()
-            return profInstitution === institutionId
+            const profUniversity = prof.university?.toLowerCase().trim()
+            const targetId = institutionId?.toLowerCase().trim()
+            
+            // Handle different university name variations
+            if (targetId === 'intec') {
+              return profUniversity?.includes('intec') || profUniversity?.includes('instituto tecnológico')
+            } else if (targetId === 'pucmm') {
+              return profUniversity?.includes('pucmm') || profUniversity?.includes('católica madre')
+            } else if (targetId === 'uasd') {
+              return profUniversity?.includes('uasd') || profUniversity?.includes('autónoma')
+            } else if (targetId === 'unphu') {
+              return profUniversity?.includes('unphu') || profUniversity?.includes('pedro henríquez')
+            } else if (targetId === 'utesa') {
+              return profUniversity?.includes('utesa') || profUniversity?.includes('tecnológica santiago')
+            } else if (targetId === 'unicaribe') {
+              return profUniversity?.includes('unicaribe') || profUniversity?.includes('caribe')
+            } else if (targetId === 'oym' || targetId === 'o&m') {
+              return profUniversity?.includes('o&m') || profUniversity?.includes('organización')
+            } else if (targetId === 'apec') {
+              return profUniversity?.includes('apec')
+            }
+            
+            return profUniversity === targetId
           })
           
           // Transform professor data
           const transformedProfessors = institutionProfessors.map((prof: any) => ({
             id: prof.id,
             name: prof.name,
-            department: prof.department,
-            rating: prof.averageRating,
-            totalRatings: prof.totalReviews,
-            tags: prof.topTags.length > 0 ? prof.topTags : ['SIN RESEÑAS']
+            department: prof.department || 'Sin departamento',
+            rating: prof.averageRating || 0,
+            totalRatings: prof.totalReviews || 0,
+            tags: prof.tags && prof.tags.length > 0 ? prof.tags : ['SIN RESEÑAS']
           }))
           
           setProfessors(transformedProfessors)
@@ -99,239 +121,146 @@ export default function InstitutionPage() {
           }))
           
           setDepartments(realDepartments)
+          
+          // Mock institution data based on ID
+          const institutionData: Record<string, Institution> = {
+            intec: {
+              id: 'intec',
+              name: 'INTEC',
+              fullName: 'Instituto Tecnológico de Santo Domingo',
+              location: 'Santo Domingo, República Dominicana',
+              founded: '1972',
+              type: 'Privada',
+              description: 'Universidad privada de excelencia académica con enfoque en ciencias, tecnología e innovación.',
+              website: 'https://www.intec.edu.do',
+              totalProfessors: transformedProfessors.length,
+              averageRating: 0,
+              departmentCount: realDepartments.length
+            },
+            uasd: {
+              id: 'uasd',
+              name: 'UASD',
+              fullName: 'Universidad Autónoma de Santo Domingo',
+              location: 'Santo Domingo, República Dominicana',
+              founded: '1538',
+              type: 'Pública',
+              description: 'La primera universidad de América, con una rica tradición académica y amplia oferta educativa.',
+              website: 'https://www.uasd.edu.do',
+              totalProfessors: transformedProfessors.length,
+              averageRating: 0,
+              departmentCount: realDepartments.length
+            },
+            pucmm: {
+              id: 'pucmm',
+              name: 'PUCMM',
+              fullName: 'Pontificia Universidad Católica Madre y Maestra',
+              location: 'Santo Domingo, República Dominicana',
+              founded: '1962',
+              type: 'Privada',
+              description: 'Universidad católica comprometida con la excelencia académica y la formación integral.',
+              website: 'https://www.pucmm.edu.do',
+              totalProfessors: transformedProfessors.length,
+              averageRating: 0,
+              departmentCount: realDepartments.length
+            },
+            unphu: {
+              id: 'unphu',
+              name: 'UNPHU',
+              fullName: 'Universidad Nacional Pedro Henríquez Ureña',
+              location: 'Santo Domingo, República Dominicana',
+              founded: '1966',
+              type: 'Privada',
+              description: 'Universidad privada con enfoque en ciencias de la salud y formación humanística integral.',
+              website: 'https://www.unphu.edu.do',
+              totalProfessors: transformedProfessors.length,
+              averageRating: 0,
+              departmentCount: realDepartments.length
+            },
+            utesa: {
+              id: 'utesa',
+              name: 'UTESA',
+              fullName: 'Universidad Tecnológica de Santiago',
+              location: 'Santiago, República Dominicana',
+              founded: '1974',
+              type: 'Privada',
+              description: 'Universidad tecnológica con programas innovadores y formación práctica.',
+              website: 'https://www.utesa.edu',
+              totalProfessors: transformedProfessors.length,
+              averageRating: 0,
+              departmentCount: realDepartments.length
+            },
+            unicaribe: {
+              id: 'unicaribe',
+              name: 'UNICARIBE',
+              fullName: 'Universidad del Caribe',
+              location: 'Santo Domingo, República Dominicana',
+              founded: '1995',
+              type: 'Privada',
+              description: 'Universidad moderna con enfoque en la innovación educativa y tecnológica.',
+              website: 'https://www.unicaribe.edu.do',
+              totalProfessors: transformedProfessors.length,
+              averageRating: 0,
+              departmentCount: realDepartments.length
+            },
+            'oym': {
+              id: 'oym',
+              name: 'O&M',
+              fullName: 'Universidad Organización & Método',
+              location: 'Santo Domingo, República Dominicana',
+              founded: '1966',
+              type: 'Privada',
+              description: 'Universidad pionera en administración de empresas y ciencias económicas.',
+              website: 'https://www.oym.edu.do',
+              totalProfessors: transformedProfessors.length,
+              averageRating: 0,
+              departmentCount: realDepartments.length
+            },
+            apec: {
+              id: 'apec',
+              name: 'APEC',
+              fullName: 'Universidad APEC',
+              location: 'Santo Domingo, República Dominicana',
+              founded: '1965',
+              type: 'Privada',
+              description: 'Universidad líder en educación superior con programas de alta calidad académica.',
+              website: 'https://www.unapec.edu.do',
+              totalProfessors: transformedProfessors.length,
+              averageRating: 0,
+              departmentCount: realDepartments.length
+            }
+          }
+          
+          const currentInstitution = institutionData[institutionId] || institutionData['intec']
+          
+          // Calculate average rating from real professors
+          const ratingsWithValues = transformedProfessors.filter((p: Professor) => p.rating > 0)
+          if (ratingsWithValues.length > 0) {
+            currentInstitution.averageRating = ratingsWithValues.reduce((sum: number, p: Professor) => sum + p.rating, 0) / ratingsWithValues.length
+          }
+          
+          setInstitution(currentInstitution)
         }
       } catch (error) {
         console.error('Error fetching professors:', error)
       }
       
-      // Mock institution data based on ID
-      const institutionData: Record<string, Institution> = {
-        intec: {
-          id: 'intec',
-          name: 'INTEC',
-          fullName: 'Instituto Tecnológico de Santo Domingo',
-          location: 'Santo Domingo, República Dominicana',
-          founded: '1972',
-          type: 'Privada',
-          description: 'Universidad privada de excelencia académica con enfoque en ciencias, tecnología e innovación.',
-          website: 'https://www.intec.edu.do',
-          totalProfessors: 0, // Will be updated with real data
-          averageRating: 0,
-          departmentCount: 6
-        },
-        uasd: {
-          id: 'uasd',
-          name: 'UASD',
-          fullName: 'Universidad Autónoma de Santo Domingo',
-          location: 'Santo Domingo, República Dominicana',
-          founded: '1538',
-          type: 'Pública',
-          description: 'La primera universidad de América, con una rica tradición académica y amplia oferta educativa.',
-          website: 'https://www.uasd.edu.do',
-          totalProfessors: 0,
-          averageRating: 4.1,
-          departmentCount: 12
-        },
-        pucmm: {
-          id: 'pucmm',
-          name: 'PUCMM',
-          fullName: 'Pontificia Universidad Católica Madre y Maestra',
-          location: 'Santiago, República Dominicana',
-          founded: '1962',
-          type: 'Privada',
-          description: 'Universidad católica comprometida con la excelencia académica y la formación integral.',
-          website: 'https://www.pucmm.edu.do',
-          totalProfessors: 94,
-          averageRating: 4.4,
-          departmentCount: 8
-        },
-        unphu: {
-          id: 'unphu',
-          name: 'UNPHU',
-          fullName: 'Universidad Nacional Pedro Henríquez Ureña',
-          location: 'Santo Domingo, República Dominicana',
-          founded: '1966',
-          type: 'Privada',
-          description: 'Universidad privada con enfoque en ciencias de la salud y formación humanística integral.',
-          website: 'https://www.unphu.edu.do',
-          totalProfessors: 0, // No real data available yet
-          averageRating: 0,
-          departmentCount: 0
-        },
-        utesa: {
-          id: 'utesa',
-          name: 'UTESA',
-          fullName: 'Universidad Tecnológica de Santiago',
-          location: 'Santiago, República Dominicana',
-          founded: '1974',
-          type: 'Privada',
-          description: 'Universidad tecnológica con programas innovadores y formación práctica.',
-          website: 'https://www.utesa.edu',
-          totalProfessors: 0, // No real data available yet
-          averageRating: 0,
-          departmentCount: 0
-        },
-        unicaribe: {
-          id: 'unicaribe',
-          name: 'UNICARIBE',
-          fullName: 'Universidad del Caribe',
-          location: 'Santo Domingo, República Dominicana',
-          founded: '1995',
-          type: 'Privada',
-          description: 'Universidad moderna con enfoque en la innovación educativa y tecnológica.',
-          website: 'https://www.unicaribe.edu.do',
-          totalProfessors: 0, // No real data available yet
-          averageRating: 0,
-          departmentCount: 0
-        },
-        'o&m': {
-          id: 'o&m',
-          name: 'O&M',
-          fullName: 'Universidad Organización & Método',
-          location: 'Santo Domingo, República Dominicana',
-          founded: '1966',
-          type: 'Privada',
-          description: 'Universidad pionera en administración de empresas y ciencias económicas.',
-          website: 'https://www.oym.edu.do',
-          totalProfessors: 0, // No real data available yet
-          averageRating: 0,
-          departmentCount: 0
-        },
-        apec: {
-          id: 'apec',
-          name: 'APEC',
-          fullName: 'Universidad APEC',
-          location: 'Santo Domingo, República Dominicana',
-          founded: '1965',
-          type: 'Privada',
-          description: 'Universidad de alta calidad académica con programas de pregrado y postgrado.',
-          website: 'https://www.unapec.edu.do',
-          totalProfessors: 0, // No real data available yet
-          averageRating: 0,
-          departmentCount: 0
-        }
-      }
-
-      // Institution-specific departments - only use fake data as fallback if no real data
-      const departmentsByInstitution: Record<string, Department[]> = {
-        // All institutions will use real calculated data from professors if available
-        intec: [],
-        uasd: [],
-        pucmm: [], // PUCMM will get real data from professors
-        unphu: [],
-        utesa: [],
-        unicaribe: [],
-        'o&m': [],
-        apec: []
-      }
-
-      // Institution-specific professors
-      const professorsByInstitution: Record<string, Professor[]> = {
-        intec: [
-          { id: '1', name: 'Dr. Juan Pérez', department: 'Ingeniería', rating: 4.8, totalRatings: 156, tags: ['CLARO AL EXPLICAR', 'DISPONIBLE', 'EXÁMENES JUSTOS'] },
-          { id: '2', name: 'Dra. Ana Méndez', department: 'Ingeniería', rating: 4.5, totalRatings: 78, tags: ['EXÁMENES JUSTOS', 'DISPONIBLE', 'RESPETADO'] },
-          { id: '3', name: 'Prof. Carlos Rodríguez', department: 'Ciencias Básicas', rating: 4.4, totalRatings: 92, tags: ['CLASES TEÓRICAS', 'INSPIRADOR', 'TRABAJOS GRUPO'] },
-          { id: '4', name: 'Dra. Elena Vargas', department: 'Arquitectura', rating: 4.6, totalRatings: 67, tags: ['CREATIVIDAD', 'PROYECTOS REALES', 'DISPONIBLE'] },
-          { id: '5', name: 'Prof. Miguel Santos', department: 'Administración', rating: 4.3, totalRatings: 89, tags: ['CASOS PRÁCTICOS', 'FLEXIBLE', 'NETWORKING'] },
-          { id: '6', name: 'Dr. Luis García', department: 'Medicina', rating: 4.7, totalRatings: 134, tags: ['EXPERIENCIA CLÍNICA', 'MOTIVADOR', 'CLARO AL EXPLICAR'] }
-        ],
-        pucmm: [
-          { id: '7', name: 'Dr. Juan Pérez', department: 'Ingeniería', rating: 4.8, totalRatings: 156, tags: ['CLARO AL EXPLICAR', 'DISPONIBLE', 'EXÁMENES JUSTOS'] },
-          { id: '8', name: 'Dra. María Santos', department: 'Medicina', rating: 4.7, totalRatings: 89, tags: ['INSPIRADOR', 'TAREAS ÚTILES', 'SE PREOCUPA'] },
-          { id: '9', name: 'Prof. Carlos López', department: 'Administración', rating: 4.6, totalRatings: 134, tags: ['CLARO AL EXPLICAR', 'FLEXIBLE', 'TRABAJOS GRUPO'] },
-          { id: '10', name: 'Dr. Ana Méndez', department: 'Ingeniería', rating: 4.5, totalRatings: 78, tags: ['EXÁMENES JUSTOS', 'DISPONIBLE', 'RESPETADO'] },
-          { id: '11', name: 'Prof. Luis García', department: 'Medicina', rating: 4.4, totalRatings: 92, tags: ['CLASES TEÓRICAS', 'TAREA PESADA', 'INSPIRADOR'] },
-          { id: '12', name: 'Dra. Carmen Jiménez', department: 'Administración', rating: 4.3, totalRatings: 67, tags: ['PARTICIPA CLASE', 'FLEXIBLE', 'PUNTAJE EXTRA'] },
-          { id: '13', name: 'Dr. Roberto Silva', department: 'Derecho', rating: 4.2, totalRatings: 45, tags: ['EXÁMENES JUSTOS', 'CLARO AL EXPLICAR', 'RESPETADO'] },
-          { id: '14', name: 'Prof. Elena Vargas', department: 'Arquitectura', rating: 4.1, totalRatings: 38, tags: ['INSPIRADOR', 'TRABAJOS GRUPO', 'DISPONIBLE'] }
-        ],
-        uasd: [
-          { id: '15', name: 'Dr. Pedro Martínez', department: 'Medicina', rating: 4.6, totalRatings: 187, tags: ['EXPERIENCIA', 'CASOS REALES', 'DEDICADO'] },
-          { id: '16', name: 'Dra. Isabel Fernández', department: 'Derecho', rating: 4.4, totalRatings: 156, tags: ['JURISPRUDENCIA', 'PRÁCTICA', 'RESPETADA'] },
-          { id: '17', name: 'Prof. Antonio Ramírez', department: 'Ingeniería', rating: 4.3, totalRatings: 134, tags: ['PROYECTOS', 'INNOVADOR', 'EXIGENTE'] },
-          { id: '18', name: 'Dra. Carmen Vega', department: 'Administración', rating: 4.2, totalRatings: 98, tags: ['CASOS EMPRESARIALES', 'MODERNA', 'PRÁCTICA'] },
-          { id: '19', name: 'Prof. Rafael Torres', department: 'Humanidades', rating: 4.5, totalRatings: 76, tags: ['CULTURA', 'REFLEXIVO', 'INSPIRADOR'] },
-          { id: '20', name: 'Dr. Lucía Morales', department: 'Psicología', rating: 4.4, totalRatings: 112, tags: ['EMPÁTICA', 'CASOS CLÍNICOS', 'COMPRENSIVA'] }
-        ],
-        unphu: [
-          { id: '21', name: 'Dr. Eduardo Pérez', department: 'Medicina', rating: 4.8, totalRatings: 198, tags: ['CLÍNICA AVANZADA', 'INVESTIGADOR', 'MENTOR'] },
-          { id: '22', name: 'Dra. Patricia González', department: 'Odontología', rating: 4.6, totalRatings: 143, tags: ['TÉCNICAS MODERNAS', 'PACIENTE', 'PRÁCTICA'] },
-          { id: '23', name: 'Prof. Marcos Díaz', department: 'Farmacia', rating: 4.4, totalRatings: 87, tags: ['QUÍMICA APLICADA', 'LABORATORIO', 'DETALLISTA'] },
-          { id: '24', name: 'Dra. Ana Herrera', department: 'Enfermería', rating: 4.5, totalRatings: 121, tags: ['CUIDADO HUMANIZADO', 'PRÁCTICA', 'DEDICADA'] },
-          { id: '25', name: 'Prof. José Castillo', department: 'Psicología', rating: 4.3, totalRatings: 76, tags: ['TERAPIA COGNITIVA', 'COMPRENSIVO', 'ACTUAL'] }
-        ],
-        utesa: [
-          { id: '26', name: 'Dr. Roberto Jiménez', department: 'Ingeniería', rating: 4.5, totalRatings: 134, tags: ['TECNOLOGÍA', 'INNOVACIÓN', 'PRÁCTICO'] },
-          { id: '27', name: 'Prof. María Castillo', department: 'Administración', rating: 4.2, totalRatings: 98, tags: ['EMPRENDIMIENTO', 'CASOS LOCALES', 'MOTIVADORA'] },
-          { id: '28', name: 'Dra. Sofía Mendoza', department: 'Derecho', rating: 4.1, totalRatings: 67, tags: ['DERECHO COMERCIAL', 'ACTUALIZADA', 'CLARA'] },
-          { id: '29', name: 'Prof. Fernando Ruiz', department: 'Comunicación', rating: 4.3, totalRatings: 54, tags: ['MEDIOS DIGITALES', 'CREATIVO', 'MODERNO'] }
-        ],
-        unicaribe: [
-          { id: '30', name: 'Prof. Diana López', department: 'Administración', rating: 4.1, totalRatings: 76, tags: ['GESTIÓN MODERNA', 'FLEXIBLE', 'CASOS ACTUALES'] },
-          { id: '31', name: 'Dr. Carlos Méndez', department: 'Ingeniería', rating: 4.0, totalRatings: 54, tags: ['SISTEMAS', 'PROGRAMACIÓN', 'PACIENTE'] },
-          { id: '32', name: 'Dra. Elena Pichardo', department: 'Psicología', rating: 4.2, totalRatings: 89, tags: ['TERAPIA FAMILIAR', 'EMPÁTICA', 'PRÁCTICA'] }
-        ],
-        'o&m': [
-          { id: '33', name: 'Prof. Ricardo Vargas', department: 'Administración', rating: 4.3, totalRatings: 123, tags: ['GESTIÓN ESTRATÉGICA', 'LIDERAZGO', 'EXPERIENCIA'] },
-          { id: '34', name: 'Dra. Mariana Santos', department: 'Economía', rating: 4.1, totalRatings: 87, tags: ['MACROECONOMÍA', 'ANALÍTICA', 'ACTUALIZADA'] },
-          { id: '35', name: 'Prof. Javier Morales', department: 'Derecho', rating: 4.0, totalRatings: 65, tags: ['DERECHO EMPRESARIAL', 'PRÁCTICO', 'CLARO'] }
-        ],
-        apec: [
-          { id: '36', name: 'Dr. Fernando Peña', department: 'Administración', rating: 4.4, totalRatings: 156, tags: ['MBA', 'CONSULTORÍA', 'CASOS INTERNACIONALES'] },
-          { id: '37', name: 'Prof. Gabriela Núñez', department: 'Ingeniería', rating: 4.2, totalRatings: 98, tags: ['SISTEMAS DE INFORMACIÓN', 'INNOVADORA', 'PROYECTOS'] },
-          { id: '38', name: 'Dra. Patricia Herrera', department: 'Medicina', rating: 4.6, totalRatings: 43, tags: ['ESPECIALISTA', 'INVESTIGACIÓN', 'CLÍNICA'] }
-        ]
-      }
-
-      // Get institution data
-      const currentInstitution = institutionData[institutionId.toLowerCase()]
-      
-      if (!currentInstitution) {
-        // If institution not found, redirect to institutions page
-        router.push('/instituciones')
-        return
-      }
-      
-      // Update institution professor count with real data if we have professors
-      if (professors.length > 0) {
-        currentInstitution.totalProfessors = professors.length
-        // Also update department count from real data  
-        currentInstitution.departmentCount = departments.length
-        // Update average rating if we have professors with ratings
-        const professorsWithRatings = professors.filter((prof: Professor) => prof.rating > 0)
-        if (professorsWithRatings.length > 0) {
-          currentInstitution.averageRating = professorsWithRatings.reduce((sum: number, prof: Professor) => sum + prof.rating, 0) / professorsWithRatings.length
-        }
-      }
-      
-      setInstitution(currentInstitution)
-      
-      // Only set fake departments if we didn't get real ones from professors
-      if (departments.length === 0) {
-        const institutionDepartments = departmentsByInstitution[institutionId.toLowerCase()] || []
-        setDepartments(institutionDepartments)
-      }
-      
-      // Only set fake professors if we didn't get real ones
-      if (professors.length === 0) {
-        const institutionProfessors = professorsByInstitution[institutionId.toLowerCase()] || []
-        setProfessors(institutionProfessors)
-        setFilteredProfessors(institutionProfessors)
-      }
       setLoading(false)
     }
 
-    loadInstitutionData()
+    if (institutionId) {
+      loadInstitutionData()
+    }
   }, [institutionId])
 
   // Filter and sort professors
   useEffect(() => {
     let filtered = professors
 
-    // Filter by department
     if (selectedDepartment !== 'all') {
-      const deptName = departments.find(d => d.id === selectedDepartment)?.name
-      filtered = filtered.filter(prof => prof.department === deptName)
+      const selectedDept = departments.find(d => d.id === selectedDepartment)
+      if (selectedDept) {
+        filtered = professors.filter(p => p.department === selectedDept.name)
+      }
     }
 
     // Sort professors
@@ -360,23 +289,25 @@ export default function InstitutionPage() {
   }
 
   const getRatingColor = (rating: number) => {
-    if (rating >= 4.1) return 'text-green-600'
-    if (rating >= 3.0) return 'text-yellow-600'
+    if (rating >= 4.5) return 'text-green-600'
+    if (rating >= 4.0) return 'text-blue-600'
+    if (rating >= 3.5) return 'text-yellow-600'
     return 'text-red-600'
   }
 
   const getRatingBg = (rating: number) => {
-    if (rating >= 4.1) return 'bg-green-500 text-white'
-    if (rating >= 3.0) return 'bg-yellow-500 text-gray-900'
-    return 'bg-red-500 text-white'
+    if (rating >= 4.5) return 'bg-green-500'
+    if (rating >= 4.0) return 'bg-blue-500'
+    if (rating >= 3.5) return 'bg-yellow-500'
+    return 'bg-red-500'
   }
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando información de la institución...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Cargando información de la universidad...</p>
         </div>
       </div>
     )
@@ -386,8 +317,9 @@ export default function InstitutionPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Institución no encontrada</h2>
-          <Link href="/" className="text-blue-600 hover:text-blue-700">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Universidad no encontrada</h1>
+          <p className="text-gray-600 mb-4">La universidad que buscas no está disponible.</p>
+          <Link href="/" className="text-blue-600 hover:text-blue-700 font-medium">
             Volver al inicio
           </Link>
         </div>
@@ -455,7 +387,7 @@ export default function InstitutionPage() {
             </div>
             <div>
               <div className={`text-3xl font-bold mb-2 metric-number ${getRatingColor(institution.averageRating)}`}>
-                {institution.averageRating}
+                {institution.averageRating > 0 ? institution.averageRating.toFixed(1) : '0'}
               </div>
               <div className="text-gray-600">Calificación promedio</div>
             </div>
@@ -471,35 +403,39 @@ export default function InstitutionPage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Departments Section */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 font-heading">Departamentos</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {departments.map((dept) => (
-              <button
-                key={dept.id}
-                onClick={() => handleDepartmentClick(dept.id)}
-                className={`p-6 rounded-xl border-2 transition-colors text-left ${
-                  selectedDepartment === dept.id
-                    ? 'border-blue-500 bg-blue-50'
-                    : 'border-gray-200 bg-white hover:border-gray-300'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900 font-heading">
-                    {dept.name}
-                  </h3>
-                  <div className={`px-3 py-1 rounded-full text-sm font-medium ${getRatingBg(dept.averageRating)} text-white`}>
-                    {dept.averageRating.toFixed(1)}
+        {/* Departments Section - Only show if there are departments */}
+        {departments.length > 0 && (
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 font-heading">Departamentos</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {departments.map((dept) => (
+                <button
+                  key={dept.id}
+                  onClick={() => handleDepartmentClick(dept.id)}
+                  className={`p-6 rounded-xl border-2 transition-colors text-left ${
+                    selectedDepartment === dept.id
+                      ? 'border-blue-500 bg-blue-50'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-lg font-semibold text-gray-900 font-heading">
+                      {dept.name}
+                    </h3>
+                    {dept.averageRating > 0 && (
+                      <div className={`px-3 py-1 rounded-full text-sm font-medium ${getRatingBg(dept.averageRating)} text-white`}>
+                        {dept.averageRating.toFixed(1)}
+                      </div>
+                    )}
                   </div>
-                </div>
-                <p className="text-gray-600">
-                  {dept.professorCount} profesores
-                </p>
-              </button>
-            ))}
+                  <p className="text-gray-600">
+                    {dept.professorCount} profesores
+                  </p>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Professors Section */}
         <div>
@@ -507,30 +443,32 @@ export default function InstitutionPage() {
             <h2 className="text-2xl font-bold text-gray-900 font-heading">
               Profesores destacados
             </h2>
-            <div className="flex items-center gap-4">
-              {/* Department Filter */}
-              <select
-                value={selectedDepartment}
-                onChange={(e) => setSelectedDepartment(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="all">Todos los departamentos</option>
-                {departments.map(dept => (
-                  <option key={dept.id} value={dept.id}>{dept.name}</option>
-                ))}
-              </select>
+            {departments.length > 0 && (
+              <div className="flex items-center gap-4">
+                {/* Department Filter */}
+                <select
+                  value={selectedDepartment}
+                  onChange={(e) => setSelectedDepartment(e.target.value)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="all">Todos los departamentos</option>
+                  {departments.map(dept => (
+                    <option key={dept.id} value={dept.id}>{dept.name}</option>
+                  ))}
+                </select>
 
-              {/* Sort Options */}
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="rating">Mejor calificación</option>
-                <option value="name">Nombre</option>
-                <option value="reviews">Más reseñas</option>
-              </select>
-            </div>
+                {/* Sort Options */}
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as any)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="rating">Mejor calificación</option>
+                  <option value="name">Nombre</option>
+                  <option value="reviews">Más reseñas</option>
+                </select>
+              </div>
+            )}
           </div>
 
           {/* Professors Grid */}
@@ -550,9 +488,11 @@ export default function InstitutionPage() {
                       <p className="text-gray-600">{professor.department}</p>
                       <p className="text-sm text-gray-500">{professor.totalRatings} calificaciones</p>
                     </div>
-                    <div className={`w-12 h-12 rounded-full ${getRatingBg(professor.rating)} flex items-center justify-center text-white font-bold`}>
-                      {professor.rating.toFixed(1)}
-                    </div>
+                    {professor.rating > 0 && (
+                      <div className={`w-12 h-12 rounded-full ${getRatingBg(professor.rating)} flex items-center justify-center text-white font-bold`}>
+                        {professor.rating.toFixed(1)}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-wrap gap-2">
@@ -609,14 +549,16 @@ export default function InstitutionPage() {
               />
             )}
             
-            <div className="text-center">
-              <Link
-                href={`/profesores?institucion=${institutionId}`}
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Ver todos los profesores ({institution.totalProfessors})
-              </Link>
-            </div>
+            {institution.totalProfessors > 0 && (
+              <div className="text-center">
+                <Link
+                  href={`/profesores?institucion=${institutionId}`}
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Ver todos los profesores ({institution.totalProfessors})
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import Link from 'next/link'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 interface Professor {
   id: string
@@ -81,7 +82,24 @@ export default function SearchPage() {
         Search Results for "{searchQuery}"
       </h1>
       {professors.length === 0 ? (
-        <p>No professors found matching your search.</p>
+        <div className="text-center py-12">
+          <div className="mb-6">
+            <MagnifyingGlassIcon className="h-16 w-16 mx-auto text-gray-300 mb-4" />
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No se encontraron profesores</h3>
+            <p className="text-gray-500 mb-6">No encontramos profesores que coincidan con "{searchQuery}"</p>
+          </div>
+          <div className="space-y-4">
+            <Link
+              href="/agregar-profesor"
+              className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Agregar Profesor
+            </Link>
+            <p className="text-sm text-gray-500">
+              ¿Conoces a este profesor? ¡Ayuda a otros estudiantes agregándolo!
+            </p>
+          </div>
+        </div>
       ) : (
         <div className="space-y-4">
           {professors.map((professor) => (
@@ -105,6 +123,17 @@ export default function SearchPage() {
               </div>
             </Link>
           ))}
+        </div>
+      )}
+      {professors.length > 0 && (
+        <div className="mt-8 text-center">
+          <p className="text-gray-500 mb-6">¿No encuentras al profesor que buscas?</p>
+          <Link
+            href="/agregar-profesor"
+            className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Agregar Profesor
+          </Link>
         </div>
       )}
     </div>

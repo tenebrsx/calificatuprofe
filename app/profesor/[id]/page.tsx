@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import { HandThumbUpIcon, HandThumbDownIcon, FlagIcon } from '@heroicons/react/24/outline'
 import StickyProfessorHeader from '@/components/Professor/StickyProfessorHeader'
 import RatingForm from '@/components/Rating/RatingForm'
+import AddSubjectPrompt from '@/components/AddSubjectPrompt'
 
 interface Professor {
   id: string
@@ -18,6 +19,7 @@ interface Professor {
   difficultyRating: number
   wouldTakeAgainPercent: number
   tags: string[]
+  subjects?: string[] // Specific subjects/courses the professor teaches
 }
 
 interface Rating {
@@ -356,6 +358,41 @@ export default function ProfessorPage() {
             </div>
           </div>
 
+          {/* Add Subject Prompt - Show only when professor has very general department but no specific subjects */}
+          {(() => {
+            // List of very general departments that need specific subjects
+            const generalDepartments = [
+              'Ingeniería', 
+              'Medicina', 
+              'Administración', 
+              'Administración de Empresas',
+              'Derecho', 
+              'Educación', 
+              'Psicología',
+              'Economía',
+              'Ciencias',
+              'Humanidades',
+              'Arte'
+            ]
+            
+            // Only show if professor has a general department AND no specific subjects
+            const hasGeneralDepartment = generalDepartments.includes(professor.department)
+            const hasNoSpecificSubjects = !professor.subjects || professor.subjects.length === 0
+            
+            return hasGeneralDepartment && hasNoSpecificSubjects
+          })() && (
+            <AddSubjectPrompt 
+              professorId={professor.id}
+              professorName={professor.name}
+              onSubjectAdded={(subject) => {
+                // Optionally update the professor's subjects locally
+                setProfessor(prev => prev ? {
+                  ...prev,
+                  subjects: [...(prev.subjects || []), subject]
+                } : null)
+              }}
+            />
+          )} 
           {/* Key Stats Grid - Simplified to 3 metrics */}
           <div className="grid grid-cols-3 gap-8 p-8 bg-gray-50 rounded-2xl mb-8 shadow-sm">
           <div className="text-center">

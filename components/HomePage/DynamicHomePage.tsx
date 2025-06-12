@@ -26,20 +26,28 @@ interface Professor {
   tags: string[]
 }
 
-const subjectCategories = [
-  { name: "Ingeniería", icon: BeakerIcon, count: "180+ profesores", color: "bg-blue-100 text-blue-700", description: "Donde las noches sin dormir son normales" },
-  { name: "Medicina", icon: HeartIcon, count: "95+ profesores", color: "bg-red-100 text-red-700", description: "Memoriza o muere" },
-  { name: "Derecho", icon: ScaleIcon, count: "120+ profesores", color: "bg-purple-100 text-purple-700", description: "Argumenta hasta ganar" },
-  { name: "Administración", icon: UserGroupIcon, count: "85+ profesores", color: "bg-green-100 text-green-700", description: "El arte de liderar el caos" },
-  { name: "Matemáticas", icon: CalculatorIcon, count: "65+ profesores", color: "bg-yellow-100 text-yellow-700", description: "Números que no mienten" },
-  { name: "Literatura", icon: BookOpenIcon, count: "45+ profesores", color: "bg-pink-100 text-pink-700", description: "Donde las palabras cobran vida" }
-]
+interface SubjectCounts {
+  ingenieria: number
+  medicina: number
+  derecho: number
+  administracion: number
+  matematicas: number
+  literatura: number
+}
 
 // Removed scroll animations as requested
 
 export default function DynamicHomePage() {
   const [recentReviews, setRecentReviews] = useState<Review[]>([])
   const [featuredProfessors, setFeaturedProfessors] = useState<Professor[]>([])
+  const [subjectCounts, setSubjectCounts] = useState<SubjectCounts>({
+    ingenieria: 0,
+    medicina: 0,
+    derecho: 0,
+    administracion: 0,
+    matematicas: 0,
+    literatura: 0
+  })
   const [loading, setLoading] = useState(true)
   
   // Removed animation hooks
@@ -47,12 +55,15 @@ export default function DynamicHomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch recent reviews and featured professors in parallel with timeout
-        const [reviewsRes, professorsRes] = await Promise.all([
+        // Fetch recent reviews, featured professors, and subject counts in parallel with timeout
+        const [reviewsRes, professorsRes, countsRes] = await Promise.all([
           fetch('/api/reviews/recent', {
             signal: AbortSignal.timeout(5000) // 5 second timeout
           }),
           fetch('/api/professors/featured', {
+            signal: AbortSignal.timeout(5000) // 5 second timeout
+          }),
+          fetch('/api/professors/subject-counts', {
             signal: AbortSignal.timeout(5000) // 5 second timeout
           })
         ])
@@ -66,6 +77,13 @@ export default function DynamicHomePage() {
           const professorsData = await professorsRes.json()
           setFeaturedProfessors(professorsData)
         }
+
+        if (countsRes.ok) {
+          const countsData = await countsRes.json()
+          if (countsData.success) {
+            setSubjectCounts(countsData.counts)
+          }
+        }
       } catch (error) {
         console.error('Error fetching homepage data:', error)
         // Set loading to false even on error so page shows
@@ -76,6 +94,52 @@ export default function DynamicHomePage() {
 
     fetchData()
   }, [])
+
+  // Dynamic subject categories with real counts
+  const subjectCategories = [
+    { 
+      name: "Ingeniería", 
+      icon: BeakerIcon, 
+      count: `${subjectCounts.ingenieria}+ profesores`, 
+      color: "bg-blue-100 text-blue-700", 
+      description: "Donde las noches sin dormir son normales" 
+    },
+    { 
+      name: "Medicina", 
+      icon: HeartIcon, 
+      count: `${subjectCounts.medicina}+ profesores`, 
+      color: "bg-red-100 text-red-700", 
+      description: "Memoriza o muere" 
+    },
+    { 
+      name: "Derecho", 
+      icon: ScaleIcon, 
+      count: `${subjectCounts.derecho}+ profesores`, 
+      color: "bg-purple-100 text-purple-700", 
+      description: "Argumenta hasta ganar" 
+    },
+    { 
+      name: "Administración", 
+      icon: UserGroupIcon, 
+      count: `${subjectCounts.administracion}+ profesores`, 
+      color: "bg-green-100 text-green-700", 
+      description: "El arte de liderar el caos" 
+    },
+    { 
+      name: "Matemáticas", 
+      icon: CalculatorIcon, 
+      count: `${subjectCounts.matematicas}+ profesores`, 
+      color: "bg-yellow-100 text-yellow-700", 
+      description: "Números que no mienten" 
+    },
+    { 
+      name: "Literatura", 
+      icon: BookOpenIcon, 
+      count: `${subjectCounts.literatura}+ profesores`, 
+      color: "bg-pink-100 text-pink-700", 
+      description: "Donde las palabras cobran vida" 
+    }
+  ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -146,17 +210,6 @@ export default function DynamicHomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Reseñas recientes</h2>
             <p className="text-lg text-gray-600 mb-4">Lo que otros estudiantes están diciendo</p>
-            
-            {/* Legal Protection Notice */}
-            <div className="max-w-3xl mx-auto p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <p className="text-yellow-800 text-sm">
-                ⚠️ <strong>Aviso:</strong> Estas son opiniones estudiantiles, no hechos verificados. 
-                Los usuarios son responsables de su contenido. 
-                <Link href="/terminos" className="underline hover:text-yellow-900 ml-1">
-                  Ver términos completos
-                </Link>
-              </p>
-            </div>
           </div>
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -278,7 +331,7 @@ export default function DynamicHomePage() {
         </div>
       </div>
 
-      {/* Animated Call to Action */}
+      {/* Animated Call to Action - REMOVED WHITE LINE BY ENSURING NO MARGIN/PADDING GAPS */}
       <div className="relative bg-[#1C4ED8] py-12 overflow-hidden wave-section">
         {/* Elegant Flowing Background Pattern */}
         <div className="absolute inset-0 opacity-6">
@@ -324,7 +377,7 @@ export default function DynamicHomePage() {
             <div>
               <h2 className="text-4xl font-bold text-white mb-4">¿Sobreviviste este semestre?</h2>
               <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-                <strong>Es hora de la venganza académica.</strong> Comparte tu experiencia y salva a futuros estudiantes del sufrimiento innecesario.
+                Comparte tu experiencia y salva a futuros estudiantes del sufrimiento innecesario.
               </p>
             </div>
             
@@ -343,8 +396,6 @@ export default function DynamicHomePage() {
           </div>
         </div>
       </div>
-
-
     </div>
   )
 } 
