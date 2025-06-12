@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-[#1C4ED8] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -17,9 +17,13 @@ export default function Footer() {
               La plataforma líder para que estudiantes dominicanos compartan opiniones 
               académicas sobre profesores universitarios.
             </p>
-            <div className="p-3 bg-yellow-900 border border-yellow-700 rounded-lg">
-              <p className="text-yellow-200 text-sm">
-                ⚠️ <strong>Aviso:</strong> Las reseñas son opiniones estudiantiles, no hechos verificados.
+            <div className="p-3 bg-yellow-100 border border-yellow-300 rounded-lg">
+              <p className="text-yellow-800 text-sm">
+                ⚠️ <strong>Aviso:</strong> Las reseñas son opiniones estudiantiles, no hechos verificados. 
+                Los usuarios son responsables de su contenido. 
+                <Link href="/terminos" className="underline hover:no-underline">
+                  Ver términos completos
+                </Link>
               </p>
             </div>
           </div>
@@ -54,7 +58,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Contacto</h3>
-            <ul className="space-y-2 text-gray-300">
+            <ul className="space-y-2 text-white/80">
               <li>
                 <strong>Legal:</strong><br/>
                 <a href="mailto:legal@calificatuprofe.com" className="hover:text-white transition-colors">
@@ -77,18 +81,18 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8">
+        <div className="border-t border-blue-700 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-gray-400 text-sm mb-4 md:mb-0">
+            <div className="text-white/80 text-sm mb-4 md:mb-0">
               © 2024 CalificaTuProfe. Todos los derechos reservados.
             </div>
-            <div className="text-gray-400 text-sm">
+            <div className="text-white/80 text-sm">
               Hecho con ❤️ para estudiantes dominicanos
             </div>
           </div>
           
-          <div className="mt-4 p-4 bg-gray-800 rounded-lg">
-            <p className="text-gray-300 text-xs text-center">
+          <div className="mt-4 p-4 bg-blue-800 rounded-lg">
+            <p className="text-white/90 text-xs text-center">
               <strong>Descargo de Responsabilidad:</strong> CalificaTuProfe es una plataforma de opiniones estudiantiles. 
               No verificamos la veracidad de las reseñas. Los usuarios son completamente responsables de su contenido. 
               Este sitio opera bajo las leyes de República Dominicana.

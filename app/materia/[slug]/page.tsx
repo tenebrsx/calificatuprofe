@@ -127,14 +127,30 @@ export default function SubjectPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      const subjectProfessors = MOCK_PROFESSORS_BY_SUBJECT[slug] || []
-      setProfessors(subjectProfessors)
-      setLoading(false)
-    }, 300)
+    const fetchProfessors = async () => {
+      try {
+        setLoading(true)
+        // Try to fetch real professors from API
+        const response = await fetch(`/api/professors/by-subject?subject=${slug}`)
+        if (response.ok) {
+          const data = await response.json()
+          setProfessors(data.professors || [])
+        } else {
+          // Fallback to mock data if API fails
+          const subjectProfessors = MOCK_PROFESSORS_BY_SUBJECT[slug] || []
+          setProfessors(subjectProfessors)
+        }
+      } catch (error) {
+        console.error('Error fetching professors:', error)
+        // Fallback to mock data
+        const subjectProfessors = MOCK_PROFESSORS_BY_SUBJECT[slug] || []
+        setProfessors(subjectProfessors)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-    return () => clearTimeout(timer)
+    fetchProfessors()
   }, [slug])
 
   const subjectName = SUBJECT_NAMES[slug] || slug
