@@ -1,14 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { UserPlusIcon, CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { UserPlusIcon, CheckCircleIcon, ExclamationTriangleIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
 const DOMINICAN_UNIVERSITIES = [
-  'PUCMM', 'INTEC', 'UNPHU', 'UNAPEC', 'UTESA', 'UNIBE', 'UASD', 'UNICARIBE',
-  'UCSD', 'APEC', 'UFHEC', 'UNEV', 'UNAD', 'UNNATEC', 'UNIREMINGTON'
+  'PUCMM', 'INTEC', 'UASD', 'UNPHU', 'UTESA', 'UNIBE', 'UNICARIBE', 'UNAPEC', 
+  'UCSD', 'APEC', 'UFHEC', 'UNEV', 'UNAD', 'UNNATEC', 'UNIREMINGTON', 'UCE',
+  'FLACSO', 'UAFAM', 'GIHESS', 'ISD', 'ICE', 'IPL', 'ISFODOSU', 'UAPA',
+  'UNEFA', 'UNICA', 'UNIBE', 'UNNATEC', 'UNIREMINGTON', 'UNEV', 'UNAD',
+  'BARNA', 'CHARLES BEKEEV', 'UOD', 'O&M'
 ]
 
 const COMMON_DEPARTMENTS = [
@@ -47,12 +50,41 @@ export default function AddProfessorPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errors, setErrors] = useState<Record<string, string>>({})
+  
+  // Autocomplete state
+  const [showDepartmentDropdown, setShowDepartmentDropdown] = useState(false)
+  const [filteredDepartments, setFilteredDepartments] = useState<string[]>([])
+  const departmentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/auth/signin?callbackUrl=/agregar-profesor')
     }
   }, [status, router])
+
+  // Handle click outside for department dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (departmentRef.current && !departmentRef.current.contains(event.target as Node)) {
+        setShowDepartmentDropdown(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  // Filter departments based on input
+  useEffect(() => {
+    if (formData.department) {
+      const filtered = COMMON_DEPARTMENTS.filter(dept =>
+        dept.toLowerCase().includes(formData.department.toLowerCase())
+      ).slice(0, 8) // Limit to 8 suggestions
+      setFilteredDepartments(filtered)
+    } else {
+      setFilteredDepartments(COMMON_DEPARTMENTS.slice(0, 8))
+    }
+  }, [formData.department])
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {}
@@ -239,27 +271,55 @@ export default function AddProfessorPage() {
               {errors.institution && <p className="text-red-500 text-sm mt-1">{errors.institution}</p>}
             </div>
 
-            {/* Department */}
-            <div>
+            {/* Department with Autocomplete */}
+            <div ref={departmentRef} className="relative">
               <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-2">
                 Departamento/Carrera *
               </label>
-              <input
-                type="text"
-                id="department"
-                value={formData.department}
-                onChange={(e) => handleInputChange('department', e.target.value)}
-                list="departments"
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                  errors.department ? 'border-red-300' : 'border-gray-300'
-                }`}
-                placeholder="Ej: Ingeniería de Sistemas, Medicina, Derecho"
-              />
-              <datalist id="departments">
-                {COMMON_DEPARTMENTS.map(dept => (
-                  <option key={dept} value={dept} />
-                ))}
-              </datalist>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="department"
+                  value={formData.department}
+                  onChange={(e) => {
+                    handleInputChange('department', e.target.value)
+                    setShowDepartmentDropdown(true)
+                  }}
+                  onFocus={() => setShowDepartmentDropdown(true)}
+                  className={`w-full px-3 py-2 pr-10 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                    errors.department ? 'border-red-300' : 'border-gray-300'
+                  }`}
+                  placeholder="Ej: Ingeniería de Sistemas, Medicina, Derecho"
+                  autoComplete="off"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowDepartmentDropdown(!showDepartmentDropdown)}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3"
+                >
+                  <ChevronDownIcon className={`h-4 w-4 text-gray-400 transition-transform ${showDepartmentDropdown ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+              
+              {/* Dropdown */}
+              {showDepartmentDropdown && filteredDepartments.length > 0 && (
+                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                  {filteredDepartments.map((dept, index) => (
+                    <button
+                      key={dept}
+                      type="button"
+                      onClick={() => {
+                        handleInputChange('department', dept)
+                        setShowDepartmentDropdown(false)
+                      }}
+                      className="w-full text-left px-3 py-2 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none first:rounded-t-lg last:rounded-b-lg"
+                    >
+                      <span className="text-gray-900">{dept}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+              
               {errors.department && <p className="text-red-500 text-sm mt-1">{errors.department}</p>}
             </div>
 

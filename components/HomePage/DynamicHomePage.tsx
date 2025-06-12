@@ -96,12 +96,12 @@ export default function DynamicHomePage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20 relative">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 no-underline">
-              <span className="text-[#1C4ED8] no-underline">Piensa antes</span> de{' '}
-              <span className="text-gray-900">inscribirte</span>
+              Encuentra el{' '}
+              <span className="text-[#1C4ED8] no-underline">profesor perfecto</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-              <strong>El arrepentimiento es permanente.</strong> Lee reseñas reales de estudiantes dominicanos antes de elegir profesor.
-            </p>
+                          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Descubre profesores destacados, lee reseñas auténticas y toma las mejores decisiones académicas en República Dominicana
+              </p>
             
             {/* Enhanced Search Component */}
             <div className="max-w-2xl mx-auto relative z-[100]">
