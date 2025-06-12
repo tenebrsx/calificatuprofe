@@ -11,6 +11,7 @@ import {
   AcademicCapIcon,
   StarIcon
 } from '@heroicons/react/24/outline'
+import AddProfessorPrompt from '@/components/AddProfessorPrompt'
 
 interface Professor {
   id: string
@@ -417,23 +418,33 @@ export default function ProfessorsPage() {
             ))}
           </div>
         ) : filteredResults.length === 0 ? (
-          <div className="text-center py-12">
-            <AcademicCapIcon className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No se encontraron profesores</h3>
-            <p className="text-gray-600 mb-4">
-              {filters.search || hasActiveFilters 
-                ? 'Intenta ajustar tus filtros de búsqueda' 
-                : 'No hay profesores disponibles en este momento'
-              }
-            </p>
-            {hasActiveFilters && (
-              <button
-                onClick={clearFilters}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Limpiar filtros
-              </button>
-            )}
+          <div className="space-y-8">
+            <div className="text-center py-12">
+              <AcademicCapIcon className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">No se encontraron profesores</h3>
+              <p className="text-gray-600 mb-4">
+                {filters.search || hasActiveFilters 
+                  ? 'Intenta ajustar tus filtros de búsqueda' 
+                  : 'No hay profesores disponibles en este momento'
+                }
+              </p>
+              {hasActiveFilters && (
+                <button
+                  onClick={clearFilters}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Limpiar filtros
+                </button>
+              )}
+            </div>
+            
+            {/* Add Professor Prompt for empty search results */}
+            <AddProfessorPrompt 
+              context="search"
+              institution={filters.institution}
+              department={filters.department}
+              className="max-w-2xl mx-auto"
+            />
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -479,12 +490,21 @@ export default function ProfessorsPage() {
           </div>
         )}
 
-        {/* Pagination could go here */}
+        {/* Add Professor Prompt and Pagination */}
         {filteredResults.length > 0 && (
-          <div className="text-center mt-12">
-            <p className="text-gray-600">
-              Mostrando {filteredResults.length} de {professors.length} profesores
-            </p>
+          <div className="space-y-8 mt-12">
+            <AddProfessorPrompt 
+              context="search"
+              institution={filters.institution}
+              department={filters.department}
+              className="max-w-2xl mx-auto"
+            />
+            
+            <div className="text-center">
+              <p className="text-gray-600">
+                Mostrando {filteredResults.length} de {professors.length} profesores
+              </p>
+            </div>
           </div>
         )}
       </div>

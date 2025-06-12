@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { StarIcon, AdjustmentsHorizontalIcon, FunnelIcon } from '@heroicons/react/24/solid'
 import { MapPinIcon, CalendarIcon, GlobeAltIcon } from '@heroicons/react/24/outline'
+import AddProfessorPrompt from '@/components/AddProfessorPrompt'
 
 interface Professor {
   id: string
@@ -573,30 +574,49 @@ export default function InstitutionPage() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-              <div className="text-gray-400 mb-4">
-                <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                </svg>
+            <div className="space-y-8">
+              <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
+                <div className="text-gray-400 mb-4">
+                  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">No hay profesores disponibles</h3>
+                <p className="text-gray-600 mb-4">
+                  Aún no hemos agregado profesores de esta institución a nuestra base de datos.
+                </p>
+                <p className="text-sm text-gray-500">
+                  Próximamente agregaremos más universidades dominicanas.
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No hay profesores disponibles</h3>
-              <p className="text-gray-600 mb-4">
-                Aún no hemos agregado profesores de esta institución a nuestra base de datos.
-              </p>
-              <p className="text-sm text-gray-500">
-                Próximamente agregaremos más universidades dominicanas.
-              </p>
+              
+              {/* Add Professor Prompt for empty institution */}
+              <AddProfessorPrompt 
+                context="institution"
+                institution={institution.name}
+                className="max-w-2xl mx-auto"
+              />
             </div>
           )}
 
-          {/* View All Button */}
-          <div className="text-center mt-8">
-            <Link
-              href={`/profesores?institucion=${institutionId}`}
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Ver todos los profesores ({institution.totalProfessors})
-            </Link>
+          {/* Add Professor Prompt and View All Button */}
+          <div className="space-y-8 mt-8">
+            {filteredProfessors.length > 0 && (
+              <AddProfessorPrompt 
+                context="institution"
+                institution={institution.name}
+                className="max-w-2xl mx-auto"
+              />
+            )}
+            
+            <div className="text-center">
+              <Link
+                href={`/profesores?institucion=${institutionId}`}
+                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Ver todos los profesores ({institution.totalProfessors})
+              </Link>
+            </div>
           </div>
         </div>
       </div>

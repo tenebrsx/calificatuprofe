@@ -27,12 +27,12 @@ interface Professor {
 }
 
 const subjectCategories = [
-  { name: "Ingeniería", icon: BeakerIcon, count: "180+ profesores", color: "bg-blue-100 text-blue-700" },
-  { name: "Medicina", icon: HeartIcon, count: "95+ profesores", color: "bg-red-100 text-red-700" },
-  { name: "Derecho", icon: ScaleIcon, count: "120+ profesores", color: "bg-purple-100 text-purple-700" },
-  { name: "Administración", icon: UserGroupIcon, count: "85+ profesores", color: "bg-green-100 text-green-700" },
-  { name: "Matemáticas", icon: CalculatorIcon, count: "65+ profesores", color: "bg-yellow-100 text-yellow-700" },
-  { name: "Literatura", icon: BookOpenIcon, count: "45+ profesores", color: "bg-pink-100 text-pink-700" }
+  { name: "Ingeniería", icon: BeakerIcon, count: "180+ profesores", color: "bg-blue-100 text-blue-700", description: "Donde las noches sin dormir son normales" },
+  { name: "Medicina", icon: HeartIcon, count: "95+ profesores", color: "bg-red-100 text-red-700", description: "Memoriza o muere" },
+  { name: "Derecho", icon: ScaleIcon, count: "120+ profesores", color: "bg-purple-100 text-purple-700", description: "Argumenta hasta ganar" },
+  { name: "Administración", icon: UserGroupIcon, count: "85+ profesores", color: "bg-green-100 text-green-700", description: "El arte de liderar el caos" },
+  { name: "Matemáticas", icon: CalculatorIcon, count: "65+ profesores", color: "bg-yellow-100 text-yellow-700", description: "Números que no mienten" },
+  { name: "Literatura", icon: BookOpenIcon, count: "45+ profesores", color: "bg-pink-100 text-pink-700", description: "Donde las palabras cobran vida" }
 ]
 
 // Removed scroll animations as requested
@@ -96,11 +96,11 @@ export default function DynamicHomePage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20 relative">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 no-underline">
-              Encuentra el{' '}
-              <span className="text-[#1C4ED8] no-underline">profesor perfecto</span>
+              <span className="text-[#1C4ED8] no-underline">Piensa antes</span> de{' '}
+              <span className="text-gray-900">inscribirte</span>
             </h1>
             <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-              Descubre profesores destacados, lee reseñas auténticas y toma las mejores decisiones académicas en República Dominicana
+              <strong>El arrepentimiento es permanente.</strong> Lee reseñas reales de estudiantes dominicanos antes de elegir profesor.
             </p>
             
             {/* Enhanced Search Component */}
@@ -123,13 +123,17 @@ export default function DynamicHomePage() {
               <Link
                 key={category.name}
                 href={`/materia/${category.name.toLowerCase().replace(/ía/g, 'ia').replace(/ó/g, 'o')}`}
-                className="group p-6 rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:shadow-lg text-center"
+                className="group p-6 rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:shadow-lg text-center relative overflow-hidden"
+                title={category.description}
               >
                 <div className={`w-12 h-12 mx-auto mb-3 rounded-lg ${category.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                   <category.icon className="h-6 w-6" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-1 text-sm">{category.name}</h3>
-                <p className="text-xs text-gray-500">{category.count}</p>
+                <p className="text-xs text-gray-500 mb-1">{category.count}</p>
+                <p className="text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200 italic">
+                  {category.description}
+                </p>
               </Link>
             ))}
           </div>
@@ -141,7 +145,18 @@ export default function DynamicHomePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Reseñas recientes</h2>
-            <p className="text-lg text-gray-600">Lo que otros estudiantes están diciendo</p>
+            <p className="text-lg text-gray-600 mb-4">Lo que otros estudiantes están diciendo</p>
+            
+            {/* Legal Protection Notice */}
+            <div className="max-w-3xl mx-auto p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-yellow-800 text-sm">
+                ⚠️ <strong>Aviso:</strong> Estas son opiniones estudiantiles, no hechos verificados. 
+                Los usuarios son responsables de su contenido. 
+                <Link href="/terminos" className="underline hover:text-yellow-900 ml-1">
+                  Ver términos completos
+                </Link>
+              </p>
+            </div>
           </div>
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -305,11 +320,11 @@ export default function DynamicHomePage() {
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20">
           <div className="pt-4">
-            {/* Static Title */}
+            {/* Rebellious Title */}
             <div>
-              <h2 className="text-4xl font-bold text-white mb-4">¿Ya tomaste clases este semestre?</h2>
+              <h2 className="text-4xl font-bold text-white mb-4">¿Sobreviviste este semestre?</h2>
               <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-                Ayuda a otros estudiantes compartiendo tu experiencia y construyamos juntos la mejor comunidad académica
+                <strong>Es hora de la venganza académica.</strong> Comparte tu experiencia y salva a futuros estudiantes del sufrimiento innecesario.
               </p>
             </div>
             
@@ -322,7 +337,7 @@ export default function DynamicHomePage() {
                 Calificar un profesor
               </Link>
               <p className="text-white/80 mt-4 text-lg">
-                Tu reseña es completamente anónima y ayuda a miles de estudiantes
+                <strong>100% anónimo.</strong> Tu reseña puede salvar el semestre de otros estudiantes.
               </p>
             </div>
           </div>
@@ -342,7 +357,7 @@ export default function DynamicHomePage() {
                 <span className="text-xl font-bold">CalificaTuProfe</span>
               </div>
               <p className="text-white/80 text-sm mb-4">
-                La plataforma de confianza para evaluar profesores en República Dominicana
+                <strong>"Calificamos todo lo demás. Era hora de calificar a los profesores."</strong>
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-white/80 hover:text-white transition-colors">
