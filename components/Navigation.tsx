@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
@@ -13,16 +13,96 @@ export default function Navigation() {
 
   const isActive = (path: string) => pathname === path
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
+  // Close mobile menu when clicking outside or scrolling
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const nav = document.querySelector('nav')
+      if (nav && !nav.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    const handleScroll = () => {
+      if (isOpen) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      window.removeEventListener('scroll', handleScroll)
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const nav = document.querySelector('nav')
+      if (nav && !nav.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
+  // Close menu on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isOpen) {
+        setIsOpen(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isOpen])
+
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 w-full">
       <div className="container-xl">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link 
+            href="/" 
+            className="flex items-center space-x-2"
+            onClick={() => setIsOpen(false)}
+          >
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">C</span>
             </div>
-            <div className="text-2xl font-bold text-gray-900">
+            <div className="text-xl sm:text-2xl font-bold text-gray-900">
               CalificaTuProfe
             </div>
           </Link>
@@ -87,9 +167,10 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+            className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 z-50"
+            aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
           >
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">{isOpen ? 'Cerrar menú' : 'Abrir menú'}</span>
             {isOpen ? (
               <X className="w-6 h-6" />
             ) : (
@@ -99,49 +180,62 @@ export default function Navigation() {
         </div>
       </div>
 
+      {/* Mobile menu overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" onClick={() => setIsOpen(false)} />
+      )}
+
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-white border-t border-gray-200 ${
-          isOpen ? 'block animate-slide-down' : 'hidden'
+        className={`md:hidden bg-white border-t border-gray-200 fixed top-16 left-0 right-0 z-40 transform transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
+        style={{ maxHeight: 'calc(100vh - 4rem)', overflowY: 'auto' }}
       >
-        <div className="pt-4 pb-3">
+        <div className="pt-4 pb-3 px-4">
           {session ? (
-            <div className="px-2 space-y-1">
-              <div className="px-3 py-2">
+            <div className="space-y-1">
+              <div className="px-3 py-2 border-b border-gray-200 mb-3">
                 <p className="text-base font-medium text-gray-800">{session.user?.name}</p>
                 <p className="text-sm font-medium text-gray-500">{session.user?.email}</p>
               </div>
               <Link
                 href="/perfil"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => setIsOpen(false)}
               >
                 Mi Perfil
               </Link>
               <Link
                 href="/mis-calificaciones"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => setIsOpen(false)}
               >
                 Mis Calificaciones
               </Link>
               <button
-                onClick={() => signOut()}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => {
+                  signOut()
+                  setIsOpen(false)
+                }}
+                className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
               >
                 Cerrar Sesión
               </button>
             </div>
           ) : (
-            <div className="px-2 space-y-2">
+            <div className="space-y-2">
               <Link
                 href="/auth/signin"
-                className="block w-full px-3 py-2 text-center rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                className="block w-full px-3 py-3 text-center rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 border border-gray-300"
+                onClick={() => setIsOpen(false)}
               >
                 Iniciar Sesión
               </Link>
               <Link
                 href="/auth/signup"
-                className="block w-full px-3 py-2 text-center rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700"
+                className="block w-full px-3 py-3 text-center rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700"
+                onClick={() => setIsOpen(false)}
               >
                 Crear cuenta
               </Link>

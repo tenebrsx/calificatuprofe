@@ -75,9 +75,13 @@ export const authOptions: AuthOptions = {
       // Allow localhost redirects for development
       const isLocalhost = baseUrl.includes('localhost')
       
+      // Handle Netlify domain
+      const isNetlify = baseUrl.includes('netlify.app') || baseUrl.includes('calificatuprofe.netlify.app')
+      
       if (url.startsWith("/")) return `${baseUrl}${url}`
       else if (new URL(url).origin === baseUrl) return url
       else if (isLocalhost && url.includes('localhost')) return url
+      else if (isNetlify && url.includes('netlify.app')) return url
       return baseUrl
     },
   },

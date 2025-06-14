@@ -142,22 +142,11 @@ export default function DynamicHomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white w-full overflow-x-hidden">
       {/* Enhanced Hero Section */}
-      <div className="bg-gradient-to-br from-blue-50 via-white to-blue-50 relative">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <svg className="w-full h-full" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1C4ED8" strokeWidth="1"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
+      <div className="bg-gradient-to-br from-blue-50 via-white to-blue-50 relative w-full">
         
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20 relative">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-12 sm:pb-20 relative w-full">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 no-underline">
               Encuentra el{' '}
@@ -384,13 +373,13 @@ export default function DynamicHomePage() {
             {/* Static Button */}
             <div>
               <Link
-                href="/calificar"
+                href="/auth/signup"
                 className="inline-flex items-center px-10 py-4 bg-white text-[#1C4ED8] font-bold rounded-xl hover:bg-blue-50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 shadow-xl"
               >
-                Calificar un profesor
+                Registrarse
               </Link>
               <p className="text-white/80 mt-4 text-lg">
-                <strong>100% anónimo.</strong> Tu reseña puede salvar el semestre de otros estudiantes.
+                <strong>Únete gratis</strong> y comparte tu experiencia para ayudar a otros estudiantes.
               </p>
             </div>
           </div>
