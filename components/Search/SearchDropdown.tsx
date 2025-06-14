@@ -299,7 +299,7 @@ export default function SearchDropdown({ placeholder = "Buscar profesor o univer
                               {highlightMatch(professor.department, searchTerm)} • {professor.institution}
                             </div>
                             <div className="text-xs text-gray-500">
-                              {professor.totalRatings} calificaciones
+                              {professor.totalRatings > 0 ? `${professor.totalRatings} calificaciones` : 'Sin calificaciones'}
                             </div>
                           </div>
                         </div>

@@ -186,7 +186,7 @@ export default function DynamicHomePage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Explora por materia</h2>
             <p className="text-lg text-gray-600">Encuentra profesores especializados en tu área de estudio</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {subjectCategories.map((category) => (
               <Link
                 key={category.name}
@@ -316,7 +316,7 @@ export default function DynamicHomePage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Universidades destacadas</h2>
             <p className="text-lg text-gray-600">Explora las instituciones más populares</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { name: 'INTEC', slug: 'intec' },
               { name: 'PUCMM', slug: 'pucmm' },

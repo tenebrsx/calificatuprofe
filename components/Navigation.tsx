@@ -188,7 +188,7 @@ export default function Navigation() {
       {/* Mobile menu */}
       {isOpen && (
         <div
-          className="md:hidden bg-white border-t border-gray-200 fixed top-16 left-0 right-0 z-40"
+          className="md:hidden bg-white border-t border-gray-200 fixed top-16 left-0 right-0 z-50 shadow-lg"
           style={{ maxHeight: 'calc(100vh - 4rem)', overflowY: 'auto' }}
         >
           <div className="pt-4 pb-3 px-4">
@@ -200,43 +200,64 @@ export default function Navigation() {
                 </div>
                 <Link
                   href="/perfil"
-                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsOpen(false)}
                 >
                   Mi Perfil
                 </Link>
                 <Link
                   href="/mis-calificaciones"
-                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   onClick={() => setIsOpen(false)}
                 >
                   Mis Calificaciones
+                </Link>
+                <Link
+                  href="/profesores"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Explorar Profesores
+                </Link>
+                <Link
+                  href="/agregar-profesor"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Agregar Profesor
                 </Link>
                 <button
                   onClick={() => {
                     signOut()
                     setIsOpen(false)
                   }}
-                  className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                  className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-red-600 hover:text-red-700 hover:bg-red-50"
                 >
                   Cerrar Sesión
                 </button>
               </div>
             ) : (
-              <div className="space-y-2">
+              <div className="space-y-1">
+                <Link
+                  href="/profesores"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Explorar Profesores
+                </Link>
                 <Link
                   href="/auth/signin"
-                  className="block w-full px-3 py-3 text-center rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 border border-gray-300"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                   onClick={() => setIsOpen(false)}
                 >
                   Iniciar Sesión
                 </Link>
                 <Link
                   href="/auth/signup"
-                  className="block w-full px-3 py-3 text-center rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
                   onClick={() => setIsOpen(false)}
                 >
-                  Crear cuenta
+                  Registrarse
                 </Link>
               </div>
             )}
