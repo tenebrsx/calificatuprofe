@@ -289,6 +289,7 @@ export default function InstitutionPage() {
   }
 
   const getRatingColor = (rating: number) => {
+    if (rating === 0) return 'text-gray-500'
     if (rating >= 4.5) return 'text-green-600'
     if (rating >= 4.0) return 'text-blue-600'
     if (rating >= 3.5) return 'text-yellow-600'
@@ -296,6 +297,7 @@ export default function InstitutionPage() {
   }
 
   const getRatingBg = (rating: number) => {
+    if (rating === 0) return 'bg-gray-500'
     if (rating >= 4.5) return 'bg-green-500'
     if (rating >= 4.0) return 'bg-blue-500'
     if (rating >= 3.5) return 'bg-yellow-500'
