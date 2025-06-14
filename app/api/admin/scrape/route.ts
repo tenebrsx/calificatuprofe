@@ -28,10 +28,10 @@ export async function GET(request: NextRequest) {
           error: 'Invalid action. Use: stats, universities'
         }, { status: 400 })
     }
-  } catch (error) {
+  } catch (error: unknown) {
     return NextResponse.json({
       success: false,
-      error: error.message
+      error: error instanceof Error ? error.message : 'Unknown error occurred'
     }, { status: 500 })
   }
 }
@@ -114,12 +114,12 @@ export async function POST(request: NextRequest) {
           error: 'Invalid action. Use: scrape-single, scrape-all, test-scraper'
         }, { status: 400 })
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('API Error:', error)
     return NextResponse.json({
       success: false,
-      error: error.message,
-      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      error: error instanceof Error ? error.message : 'Unknown error occurred',
+      details: process.env.NODE_ENV === 'development' && error instanceof Error ? error.stack : undefined
     }, { status: 500 })
   }
 } 

@@ -42,7 +42,7 @@ export default function AdminProfessorsPage() {
       })) as Professor[]
       
       setProfessors(professorData)
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error fetching professors:', error)
     } finally {
       setLoading(false)
@@ -61,7 +61,7 @@ export default function AdminProfessorsPage() {
           prof.id === professorId ? { ...prof, isVerified: true } : prof
         )
       )
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error verifying professor:', error)
     }
   }
@@ -72,7 +72,7 @@ export default function AdminProfessorsPage() {
     try {
       await deleteDoc(doc(db, 'professors', professorId))
       setProfessors(prev => prev.filter(prof => prof.id !== professorId))
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error deleting professor:', error)
     }
   }
@@ -92,8 +92,12 @@ export default function AdminProfessorsPage() {
       } else {
         alert(`❌ Error: ${result.error}`)
       }
-    } catch (error) {
-      alert(`❌ Error: ${error.message}`)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(`❌ Error: ${error.message}`)
+      } else {
+        alert(`❌ Error desconocido: ${String(error)}`)
+      }
     }
   }
 
@@ -105,8 +109,8 @@ export default function AdminProfessorsPage() {
     return true
   })
 
-  const universities = [...new Set(professors.map(p => p.university))]
-  const departments = [...new Set(professors.map(p => p.department))]
+  const universities = Array.from(new Set(professors.map(p => p.university)))
+  const departments = Array.from(new Set(professors.map(p => p.department)))
 
   if (loading) {
     return (

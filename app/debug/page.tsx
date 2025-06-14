@@ -53,10 +53,10 @@ export default function DebugPage() {
       } else {
         throw new Error('Firebase db is undefined')
       }
-    } catch (error) {
+    } catch (error: unknown) {
       updateTest(0, {
         status: 'error',
-        message: `Firebase error: ${error.message}`,
+        message: `Firebase error: ${error instanceof Error ? error.message : "Unknown error"}`,
         duration: Date.now() - startTime
       })
     }
@@ -80,10 +80,10 @@ export default function DebugPage() {
       } else {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
-    } catch (error) {
+    } catch (error: unknown) {
       updateTest(1, {
         status: 'error',
-        message: `Recent Reviews API error: ${error.message}`,
+        message: `Recent Reviews API error: ${error instanceof Error ? error.message : "Unknown error"}`,
         duration: Date.now() - startTime
       })
     }
@@ -107,10 +107,10 @@ export default function DebugPage() {
       } else {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
-    } catch (error) {
+    } catch (error: unknown) {
       updateTest(2, {
         status: 'error',
-        message: `Featured Professors API error: ${error.message}`,
+        message: `Featured Professors API error: ${error instanceof Error ? error.message : "Unknown error"}`,
         duration: Date.now() - startTime
       })
     }
@@ -134,10 +134,10 @@ export default function DebugPage() {
       } else {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
-    } catch (error) {
+    } catch (error: unknown) {
       updateTest(3, {
         status: 'error',
-        message: `Scraper API error: ${error.message}`,
+        message: `Scraper API error: ${error instanceof Error ? error.message : "Unknown error"}`,
         duration: Date.now() - startTime
       })
     }

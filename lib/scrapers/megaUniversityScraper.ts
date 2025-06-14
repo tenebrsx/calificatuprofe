@@ -322,7 +322,7 @@ export class MegaUniversityScraper {
     return professors
   }
 
-  private extractProfessorFromElement($: cheerio.CheerioAPI, element: cheerio.Element, university: string, sourceUrl: string): Professor | null {
+  private extractProfessorFromElement($: cheerio.CheerioAPI, element: any, university: string, sourceUrl: string): Professor | null {
     const $el = $(element)
     const text = $el.text().trim()
     

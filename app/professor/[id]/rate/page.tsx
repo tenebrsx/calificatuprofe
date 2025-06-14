@@ -51,7 +51,7 @@ export default function RateProfessorPage() {
       // Add new rating
       const ratingRef = await addDoc(collection(db, 'ratings'), {
         professorId,
-        userId: session.user.id,
+        userId: session.user?.email || 'anonymous',
         courseName: formData.courseName,
         rating: formData.rating,
         difficulty: formData.difficulty,

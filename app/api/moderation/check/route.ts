@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
 
     // Get user session for logging
     const session = await getServerSession()
-    const userId = session?.user?.id || 'anonymous'
+    const userId = session?.user?.email || 'anonymous'
 
     // Run toxicity detection
     const result = await toxicityDetector.moderateContent(text, userId)

@@ -119,7 +119,7 @@ export class INTECScraper {
     return hasIndicator && (hasContact || hasDepartment) && text.length < 1000
   }
 
-  private parseProfessorEntry($: cheerio.CheerioAPI, element: cheerio.Element, text: string): ProfessorData | null {
+  private parseProfessorEntry($: cheerio.CheerioAPI, element: any, text: string): ProfessorData | null {
     // Extract name - usually appears first or after a title
     const nameMatch = text.match(/(?:Dr\.?\s*|Prof\.?\s*|Dra\.?\s*|Ing\.?\s*)?([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){1,3})/);
     if (!nameMatch) return null

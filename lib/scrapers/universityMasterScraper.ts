@@ -279,7 +279,7 @@ function parseGenericProfessors(html: string, config: UniversityScraperConfig): 
   return professors;
 }
 
-function extractText($element: cheerio.Cheerio, selectors: string): string {
+function extractText($element: cheerio.Cheerio<any>, selectors: string): string {
   const selectorList = selectors.split(', ');
   for (const selector of selectorList) {
     const text = $element.find(selector).first().text().trim();

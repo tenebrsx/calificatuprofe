@@ -1,7 +1,7 @@
 import { ImprovedPUCMMScraper } from './improvedPucmmScraper'
-import { IntecScraper } from './intecScraper'
+import { INTECScraper } from './intecScraper'
 import { db } from '@/lib/firebase'
-import { collection, writeBatch, doc, getDocs, query, where } from 'firebase/firestore'
+import { collection, writeBatch, doc, getDocs, query, where, setDoc } from 'firebase/firestore'
 
 export interface University {
   id: string
@@ -91,7 +91,7 @@ export class ScraperManager {
   constructor() {
     // Register available scrapers
     this.scrapers.set('pucmm', ImprovedPUCMMScraper)
-    this.scrapers.set('intec', IntecScraper)
+    this.scrapers.set('intec', INTECScraper)
   }
 
   /**
@@ -132,11 +132,11 @@ export class ScraperManager {
 
       console.log(`✅ Scraping completed for ${universityId.toUpperCase()}: ${result.professors.length} professors`)
 
-    } catch (error) {
+    } catch (error: unknown) {
       job.status = 'failed'
-      job.errors.push(error.message)
+      job.errors.push(error instanceof Error ? error.message : "Unknown error")
       job.completedAt = new Date()
-      console.error(`❌ Scraping failed for ${universityId}:`, error.message)
+      console.error(`❌ Scraping failed for ${universityId}:`, error instanceof Error ? error.message : "Unknown error")
     }
 
     // Save job record
@@ -160,7 +160,7 @@ export class ScraperManager {
           
           // Wait between scrapers to be respectful
           await new Promise(resolve => setTimeout(resolve, 2000))
-        } catch (error) {
+        } catch (error: unknown) {
           console.error(`Failed to scrape ${university.shortName}:`, error)
         }
       } else {
@@ -215,7 +215,7 @@ export class ScraperManager {
         console.log('📋 No new professors to save (all already exist)')
       }
 
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('❌ Error saving professors to database:', error)
       throw error
     }
@@ -228,8 +228,8 @@ export class ScraperManager {
     try {
       const jobsRef = collection(db, 'scraping_jobs')
       const docRef = doc(jobsRef, job.id)
-      await docRef.set(job)
-    } catch (error) {
+      await setDoc(docRef, job)
+    } catch (error: unknown) {
       console.error('Error saving scraping job:', error)
     }
   }
@@ -277,9 +277,9 @@ export class ScraperManager {
         availableScrapers: Array.from(this.scrapers.keys()),
         supportedUniversities: DR_UNIVERSITIES.map(u => u.shortName)
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error getting scraping stats:', error)
-      return { error: error.message }
+      return { error: error instanceof Error ? error.message : "Unknown error" }
     }
   }
 
@@ -293,7 +293,7 @@ export class ScraperManager {
       try {
         console.log('🔄 Starting scheduled scraping...')
         await this.scrapeAllUniversities()
-      } catch (error) {
+      } catch (error: unknown) {
         console.error('❌ Scheduled scraping failed:', error)
       }
     }, intervalHours * 60 * 60 * 1000)

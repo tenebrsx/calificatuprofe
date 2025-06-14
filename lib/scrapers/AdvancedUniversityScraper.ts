@@ -571,7 +571,7 @@ export class AdvancedUniversityScraper {
     let totalErrors = 0
     let totalTime = 0
 
-    for (const [universityId, result] of this.results) {
+    for (const [universityId, result] of Array.from(this.results)) {
       totalProfessors += result.professors.length
       totalErrors += result.errors.length
       totalTime += result.stats.processingTime

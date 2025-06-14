@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { UserPlusIcon, CheckCircleIcon, ExclamationTriangleIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
@@ -32,16 +32,16 @@ interface ProfessorFormData {
   additionalInfo: string
 }
 
-export default function AddProfessorPage() {
+function AddProfessorPageContent() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
   
   const [formData, setFormData] = useState<ProfessorFormData>({
-    name: searchParams.get('search') || '',
+    name: searchParams?.get('search') || '',
     email: '',
-    institution: searchParams.get('institution') || '',
-    department: searchParams.get('department') || '',
+    institution: searchParams?.get('institution') || '',
+    department: searchParams?.get('department') || '',
     position: '',
     campus: '',
     additionalInfo: ''
@@ -136,10 +136,10 @@ export default function AddProfessorPage() {
         setSubmitStatus('success')
         // Reset form
         setFormData({
-          name: searchParams.get('search') || '',
+          name: searchParams?.get('search') || '',
           email: '',
-          institution: searchParams.get('institution') || '',
-          department: searchParams.get('department') || '',
+          institution: searchParams?.get('institution') || '',
+          department: searchParams?.get('department') || '',
           position: '',
           campus: '',
           additionalInfo: ''
@@ -199,15 +199,13 @@ export default function AddProfessorPage() {
               <UserPlusIcon className="h-8 w-8 text-white" />
               <div>
                 <h1 className="text-2xl font-bold text-white">Agregar Profesor</h1>
-                <p className="text-blue-100 mt-1">
-                  Ayuda a otros estudiantes agregando información de profesores
-                </p>
+                <p className="text-blue-100 mt-1">Ayuda a otros estudiantes compartiendo información</p>
               </div>
             </div>
           </div>
 
           {/* Search Query Info */}
-          {searchParams.get('search') && (
+          {searchParams?.get('search') && (
             <div className="bg-blue-50 border-l-4 border-blue-400 p-4 m-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -217,7 +215,7 @@ export default function AddProfessorPage() {
                 </div>
                 <div className="ml-3">
                   <p className="text-blue-700">
-                    Hemos pre-llenado el nombre con tu búsqueda: <strong>"{searchParams.get('search')}"</strong>
+                    Hemos pre-llenado el nombre con tu búsqueda: <strong>"{searchParams?.get('search')}"</strong>
                   </p>
                   <p className="text-blue-600 text-sm mt-1">
                     Puedes modificarlo si es necesario y completar el resto de la información.
@@ -230,11 +228,13 @@ export default function AddProfessorPage() {
           {/* Success Message */}
           {submitStatus === 'success' && (
             <div className="bg-green-50 border-l-4 border-green-400 p-4 m-6">
-              <div className="flex items-center">
-                <CheckCircleIcon className="h-5 w-5 text-green-400 mr-2" />
-                <p className="text-green-700">
-                  ¡Profesor agregado exitosamente! Será revisado por nuestro equipo antes de publicarse.
-                </p>
+              <div className="flex">
+                <CheckCircleIcon className="h-5 w-5 text-green-400" />
+                <div className="ml-3">
+                  <p className="text-sm text-green-700">
+                    ¡Profesor agregado exitosamente! Será revisado antes de publicarse.
+                  </p>
+                </div>
               </div>
             </div>
           )}
@@ -242,11 +242,13 @@ export default function AddProfessorPage() {
           {/* Error Message */}
           {submitStatus === 'error' && (
             <div className="bg-red-50 border-l-4 border-red-400 p-4 m-6">
-              <div className="flex items-center">
-                <ExclamationTriangleIcon className="h-5 w-5 text-red-400 mr-2" />
-                <p className="text-red-700">
-                  Hubo un error al agregar el profesor. Por favor intenta de nuevo.
-                </p>
+              <div className="flex">
+                <ExclamationTriangleIcon className="h-5 w-5 text-red-400" />
+                <div className="ml-3">
+                  <p className="text-sm text-red-700">
+                    Hubo un error al agregar el profesor. Por favor intenta de nuevo.
+                  </p>
+                </div>
               </div>
             </div>
           )}
@@ -263,92 +265,15 @@ export default function AddProfessorPage() {
                 id="name"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 ${
                   errors.name ? 'border-red-300' : 'border-gray-300'
                 }`}
-                placeholder="Ej: Dr. María González, Prof. Juan Pérez"
+                placeholder="Ej: Dr. Juan Pérez"
               />
-              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+              {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
             </div>
 
-            {/* Institution */}
-            <div>
-              <label htmlFor="institution" className="block text-sm font-medium text-gray-700 mb-2">
-                Universidad *
-              </label>
-              <select
-                id="institution"
-                value={formData.institution}
-                onChange={(e) => handleInputChange('institution', e.target.value)}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                  errors.institution ? 'border-red-300' : 'border-gray-300'
-                }`}
-              >
-                <option value="">Selecciona una universidad</option>
-                {DOMINICAN_UNIVERSITIES.map(uni => (
-                  <option key={uni} value={uni}>{uni}</option>
-                ))}
-              </select>
-              {errors.institution && <p className="text-red-500 text-sm mt-1">{errors.institution}</p>}
-            </div>
-
-            {/* Department with Autocomplete */}
-            <div ref={departmentRef} className="relative">
-              <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-2">
-                Departamento/Carrera *
-              </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  id="department"
-                  value={formData.department}
-                  onChange={(e) => {
-                    handleInputChange('department', e.target.value)
-                    setShowDepartmentDropdown(true)
-                  }}
-                  onFocus={() => setShowDepartmentDropdown(true)}
-                  className={`w-full px-3 py-2 pr-10 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    errors.department ? 'border-red-300' : 'border-gray-300'
-                  }`}
-                  placeholder="Ej: Ingeniería de Sistemas, Medicina, Derecho"
-                  autoComplete="off"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowDepartmentDropdown(!showDepartmentDropdown)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3"
-                >
-                  <ChevronDownIcon className={`h-4 w-4 text-gray-400 transition-transform ${showDepartmentDropdown ? 'rotate-180' : ''}`} />
-                </button>
-              </div>
-              
-              {/* Dropdown */}
-              {showDepartmentDropdown && filteredDepartments.length > 0 && (
-                <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                  {filteredDepartments.map((dept, index) => (
-                    <button
-                      key={dept}
-                      type="button"
-                      onClick={() => {
-                        handleInputChange('department', dept)
-                        setShowDepartmentDropdown(false)
-                      }}
-                      className={`w-full text-left px-3 py-2 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none transition-colors ${
-                        index === 0 ? 'rounded-t-lg' : ''
-                      } ${
-                        index === filteredDepartments.length - 1 ? 'rounded-b-lg' : ''
-                      }`}
-                    >
-                      <span className="text-gray-900">{dept}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-              
-              {errors.department && <p className="text-red-500 text-sm mt-1">{errors.department}</p>}
-            </div>
-
-            {/* Email (Optional) */}
+            {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email (Opcional)
@@ -358,26 +283,89 @@ export default function AddProfessorPage() {
                 id="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 ${
                   errors.email ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="profesor@universidad.edu.do"
               />
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+            </div>
+
+            {/* Institution */}
+            <div>
+              <label htmlFor="institution" className="block text-sm font-medium text-gray-700 mb-2">
+                Institución *
+              </label>
+              <select
+                id="institution"
+                value={formData.institution}
+                onChange={(e) => handleInputChange('institution', e.target.value)}
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 ${
+                  errors.institution ? 'border-red-300' : 'border-gray-300'
+                }`}
+              >
+                <option value="">Selecciona una institución</option>
+                {DOMINICAN_UNIVERSITIES.map(uni => (
+                  <option key={uni} value={uni}>{uni}</option>
+                ))}
+              </select>
+              {errors.institution && <p className="mt-1 text-sm text-red-600">{errors.institution}</p>}
+            </div>
+
+            {/* Department with Autocomplete */}
+            <div ref={departmentRef} className="relative">
+              <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-2">
+                Departamento/Carrera *
+              </label>
+              <input
+                type="text"
+                id="department"
+                value={formData.department}
+                onChange={(e) => {
+                  handleInputChange('department', e.target.value)
+                  setShowDepartmentDropdown(true)
+                }}
+                onFocus={() => setShowDepartmentDropdown(true)}
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 ${
+                  errors.department ? 'border-red-300' : 'border-gray-300'
+                }`}
+                placeholder="Ej: Ingeniería de Sistemas"
+                autoComplete="off"
+              />
+              {errors.department && <p className="mt-1 text-sm text-red-600">{errors.department}</p>}
+              
+              {/* Dropdown */}
+              {showDepartmentDropdown && filteredDepartments.length > 0 && (
+                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                  {filteredDepartments.map((dept, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => {
+                        handleInputChange('department', dept)
+                        setShowDepartmentDropdown(false)
+                      }}
+                      className="w-full text-left px-3 py-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none"
+                    >
+                      {dept}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Position */}
             <div>
               <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-2">
-                Cargo/Posición (Opcional)
+                Posición/Título (Opcional)
               </label>
               <input
                 type="text"
                 id="position"
                 value={formData.position}
                 onChange={(e) => handleInputChange('position', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Ej: Profesor Titular, Coordinador, Decano"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                placeholder="Ej: Profesor Titular, Catedrático, etc."
               />
             </div>
 
@@ -391,8 +379,8 @@ export default function AddProfessorPage() {
                 id="campus"
                 value={formData.campus}
                 onChange={(e) => handleInputChange('campus', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Ej: Santo Domingo, Santiago, La Vega"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                placeholder="Ej: Campus Principal, Campus Santiago, etc."
               />
             </div>
 
@@ -406,8 +394,8 @@ export default function AddProfessorPage() {
                 value={formData.additionalInfo}
                 onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Materias que enseña, especialización, etc."
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                placeholder="Materias que enseña, especialidades, etc."
               />
             </div>
 
@@ -419,32 +407,26 @@ export default function AddProfessorPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {isSubmitting ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Agregando...
-                  </>
-                ) : (
-                  <>
-                    <UserPlusIcon className="h-4 w-4 mr-2" />
-                    Agregar Profesor
-                  </>
-                )}
+                {isSubmitting ? 'Agregando...' : 'Agregar Profesor'}
               </button>
             </div>
           </form>
-
-          {/* Info Footer */}
-          <div className="bg-gray-50 px-6 py-4">
-            <p className="text-sm text-gray-600">
-              <strong>Nota:</strong> Todos los profesores agregados son revisados por nuestro equipo 
-              antes de ser publicados para mantener la calidad y veracidad de la información.
-            </p>
-          </div>
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AddProfessorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <AddProfessorPageContent />
+    </Suspense>
   )
 } 

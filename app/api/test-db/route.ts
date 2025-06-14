@@ -23,11 +23,11 @@ export async function GET() {
         sampleProfessors: professors.slice(0, 3)
       }
     })
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('❌ Database read failed:', error)
     return NextResponse.json({
       success: false,
-      error: error.message
+      error: error instanceof Error ? error.message : "Unknown error"
     }, { status: 500 })
   }
 }
@@ -62,11 +62,11 @@ export async function POST() {
         testData: testProfessor
       }
     })
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('❌ Database write failed:', error)
     return NextResponse.json({
       success: false,
-      error: error.message
+      error: error instanceof Error ? error.message : "Unknown error"
     }, { status: 500 })
   }
 } 

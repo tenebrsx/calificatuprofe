@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { StarIcon, AcademicCapIcon, ClockIcon, TrendingUpIcon } from '@heroicons/react/24/outline'
+import { StarIcon, AcademicCapIcon, ClockIcon, ArrowTrendingUpIcon } from '@heroicons/react/24/outline'
 import { SparklesIcon } from '@heroicons/react/24/solid'
 
 interface Professor {
@@ -245,7 +245,7 @@ export default function SmartRecommendations({
               {/* AI Reason */}
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
                 <div className="flex items-start space-x-2">
-                  <TrendingUpIcon className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                  <ArrowTrendingUpIcon className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
                   <p className="text-sm text-blue-800">{rec.reason}</p>
                 </div>
               </div>

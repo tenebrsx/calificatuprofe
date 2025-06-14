@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { 
@@ -128,7 +128,7 @@ const MOCK_PROFESSORS: Professor[] = [
 const DEPARTMENTS = ['Arquitectura', 'Ingeniería', 'Medicina', 'Administración', 'Derecho', 'Psicología', 'Ciencias Sociales', 'Humanidades']
 const INSTITUTIONS = ['PUCMM', 'UASD', 'INTEC', 'UNIBE', 'UTESA', 'UCNE', 'PUCSTA', 'UAPM']
 
-export default function ProfessorsPage() {
+function ProfessorsPageContent() {
   const searchParams = useSearchParams()
   const [professors, setProfessors] = useState<Professor[]>([])
   const [loading, setLoading] = useState(true)
@@ -201,7 +201,7 @@ export default function ProfessorsPage() {
         professor.institution.toLowerCase().includes(filters.search.toLowerCase())
       
       const matchesDepartment = !filters.department || professor.department === filters.department
-      const matchesInstitution = !filters.institution || professor.institution.toLowerCase() === filters.institution.toLowerCase()
+      const matchesInstitution = !filters.institution || professor.institution === filters.institution
       const matchesRating = professor.rating >= filters.minRating
       
       return matchesSearch && matchesDepartment && matchesInstitution && matchesRating
@@ -209,43 +209,37 @@ export default function ProfessorsPage() {
 
     // Sort results
     result.sort((a, b) => {
-      let comparison = 0
-      
+      const multiplier = filters.sortOrder === 'desc' ? -1 : 1
       switch (filters.sortBy) {
         case 'rating':
-          comparison = a.rating - b.rating
-          break
+          return (a.rating - b.rating) * multiplier
         case 'reviews':
-          comparison = a.totalRatings - b.totalRatings
-          break
+          return (a.totalRatings - b.totalRatings) * multiplier
         case 'name':
-          comparison = a.name.localeCompare(b.name)
-          break
+          return a.name.localeCompare(b.name) * multiplier
         case 'difficulty':
-          comparison = a.difficulty - b.difficulty
-          break
+          return (a.difficulty - b.difficulty) * multiplier
         default:
-          comparison = a.rating - b.rating
+          return 0
       }
-      
-      return filters.sortOrder === 'desc' ? -comparison : comparison
     })
 
     return result
   }, [professors, filters])
 
+  const filteredResults = filteredProfessors()
+  const hasActiveFilters = filters.search || filters.department || filters.institution || filters.minRating > 0
+
   const getRatingColor = (rating: number, totalReviews: number) => {
-    if (totalReviews === 0) return 'bg-gray-400'  // Grey for no reviews
-    if (rating >= 4.5) return 'bg-green-500'
-    if (rating >= 3.5) return 'bg-yellow-500'
-    if (rating >= 2.5) return 'bg-orange-500'
+    if (totalReviews < 5) return 'bg-gray-400'
+    if (rating >= 4.0) return 'bg-green-500'
+    if (rating >= 3.0) return 'bg-yellow-500'
     return 'bg-red-500'
   }
 
   const getDifficultyColor = (difficulty: number) => {
     if (difficulty >= 4.0) return 'text-red-600'
-    if (difficulty >= 3.0) return 'text-orange-600'
-    if (difficulty >= 2.0) return 'text-yellow-600'
+    if (difficulty >= 3.0) return 'text-yellow-600'
     return 'text-green-600'
   }
 
@@ -260,57 +254,50 @@ export default function ProfessorsPage() {
     })
   }
 
-  const hasActiveFilters = filters.department || filters.institution || filters.minRating > 0
-
-  const filteredResults = filteredProfessors()
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Profesores</h1>
-          <p className="text-gray-600">Encuentra y compara profesores de universidades dominicanas</p>
+          <p className="text-gray-600">
+            Encuentra y califica profesores de universidades dominicanas
+          </p>
         </div>
 
         {/* Search and Filters */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-          {/* Search Bar */}
-          <div className="relative mb-4">
-            <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <input
-              type="text"
-              value={filters.search}
-              onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-              placeholder="Buscar por nombre, departamento o universidad..."
-              className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
+          <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
+            {/* Search Input */}
+            <div className="flex-1 relative">
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Buscar profesores por nombre, departamento o universidad..."
+                value={filters.search}
+                onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-          {/* Filter Toggle */}
-          <div className="flex items-center justify-between">
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              <AdjustmentsHorizontalIcon className="h-5 w-5" />
-              Filtros
-              {hasActiveFilters && (
-                <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
-                  {[filters.department, filters.institution, filters.minRating > 0].filter(Boolean).length}
-                </span>
-              )}
-            </button>
+            {/* Filter Toggle */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors ${
+                  showFilters 
+                    ? 'bg-blue-50 border-blue-300 text-blue-700' 
+                    : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                <AdjustmentsHorizontalIcon className="h-5 w-5" />
+                Filtros
+              </button>
 
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">
-                {filteredResults.length} {filteredResults.length === 1 ? 'profesor' : 'profesores'}
-              </span>
-              
               {hasActiveFilters && (
                 <button
                   onClick={clearFilters}
-                  className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700"
+                  className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
                 >
                   <XMarkIcon className="h-4 w-4" />
                   Limpiar filtros
@@ -509,5 +496,17 @@ export default function ProfessorsPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function ProfessorsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <ProfessorsPageContent />
+    </Suspense>
   )
 } 

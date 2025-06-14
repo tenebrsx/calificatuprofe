@@ -8,7 +8,7 @@ import Link from 'next/link'
 interface AddProfessorPromptProps {
   institution?: string
   department?: string
-  context?: 'search' | 'institution' | 'department' | 'general'
+  context?: 'search' | 'institution' | 'department' | 'general' | 'search-no-results' | 'search-with-results' | 'institution-empty' | 'institution-with-professors'
   className?: string
 }
 

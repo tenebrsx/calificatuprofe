@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/firebase'
 import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
@@ -67,11 +70,11 @@ export async function GET(request: NextRequest) {
     }
 
     // Format the response to match the expected interface
-    const formattedProfessors = professors.map(prof => ({
+    const formattedProfessors = professors.map((prof: any) => ({
       id: prof.id,
-      name: prof.name,
-      university: prof.university,
-      department: prof.department,
+      name: prof.name || 'Unknown Professor',
+      university: prof.university || 'Unknown University',
+      department: prof.department || 'Unknown Department',
       rating: prof.averageRating || 0,
       totalReviews: prof.totalReviews || 0,
       tags: prof.tags || []

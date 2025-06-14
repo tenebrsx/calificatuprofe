@@ -63,8 +63,8 @@ export class ImprovedPUCMMScraper {
       
       console.log(`✅ Scraping completed. Found ${result.totalFound} professors.`)
       
-    } catch (error) {
-      const errorMsg = `Scraping error: ${error.message}`
+    } catch (error: unknown) {
+      const errorMsg = `Scraping error: ${error instanceof Error ? error.message : "Unknown error"}`
       result.errors.push(errorMsg)
       console.error('❌', errorMsg)
     }
@@ -86,8 +86,8 @@ export class ImprovedPUCMMScraper {
         if (professor && !result.professors.some(p => p.email === email)) {
           result.professors.push(professor)
         }
-      } catch (error) {
-        result.errors.push(`Error processing email ${email}: ${error.message}`)
+      } catch (error: unknown) {
+        result.errors.push(`Error processing email ${email}: ${error instanceof Error ? error.message : "Unknown error"}`)
       }
     })
   }
@@ -164,8 +164,8 @@ export class ImprovedPUCMMScraper {
             result.professors.push(prof)
           }
         })
-      } catch (error) {
-        result.errors.push(`Error parsing section: ${error.message}`)
+      } catch (error: unknown) {
+        result.errors.push(`Error parsing section: ${error instanceof Error ? error.message : "Unknown error"}`)
       }
     })
   }
@@ -186,8 +186,8 @@ export class ImprovedPUCMMScraper {
                 result.professors.push(prof)
               }
             })
-          } catch (error) {
-            result.errors.push(`Error parsing table row: ${error.message}`)
+          } catch (error: unknown) {
+            result.errors.push(`Error parsing table row: ${error instanceof Error ? error.message : "Unknown error"}`)
           }
         }
       })

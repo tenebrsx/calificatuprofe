@@ -363,11 +363,11 @@ export class ToxicityDetector {
       reasons.push(`Toxicidad alta detectada (${(toxicityScore * 100).toFixed(1)}%)`)
     }
 
-    if (data.attributeScores.SEVERE_TOXICITY?.summaryScore.value > 0.8) {
+    if (data.attributeScores.SEVERE_TOXICITY?.summaryScore?.value && data.attributeScores.SEVERE_TOXICITY.summaryScore.value > 0.8) {
       reasons.push('Toxicidad severa detectada')
     }
 
-    if (data.attributeScores.THREAT?.summaryScore.value > 0.7) {
+    if (data.attributeScores.THREAT?.summaryScore?.value && data.attributeScores.THREAT.summaryScore.value > 0.7) {
       reasons.push('Amenazas detectadas')
     }
 

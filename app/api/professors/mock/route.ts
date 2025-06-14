@@ -5870,7 +5870,7 @@ export async function POST(request: Request) {
   const searchParams = new URL(request.url).searchParams
   const university = searchParams.get('university')
   
-  let results = []
+  let results: any[] = []
   let message = ''
   
   if (!university) {
