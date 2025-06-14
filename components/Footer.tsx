@@ -17,15 +17,6 @@ export default function Footer() {
               La plataforma líder para que estudiantes dominicanos compartan opiniones 
               académicas sobre profesores universitarios.
             </p>
-            <div className="p-3 bg-yellow-100 border border-yellow-300 rounded-lg">
-              <p className="text-yellow-800 text-sm">
-                ⚠️ <strong>Aviso:</strong> Las reseñas son opiniones estudiantiles, no hechos verificados. 
-                Los usuarios son responsables de su contenido. 
-                <Link href="/terminos" className="underline hover:no-underline">
-                  Ver términos completos
-                </Link>
-              </p>
-            </div>
           </div>
 
           {/* Legal */}
@@ -89,14 +80,6 @@ export default function Footer() {
             <div className="text-white/80 text-sm">
               Hecho con ❤️ para estudiantes dominicanos
             </div>
-          </div>
-          
-          <div className="mt-4 p-4 bg-blue-800 rounded-lg">
-            <p className="text-white/90 text-xs text-center">
-              <strong>Descargo de Responsabilidad:</strong> CalificaTuProfe es una plataforma de opiniones estudiantiles. 
-              No verificamos la veracidad de las reseñas. Los usuarios son completamente responsables de su contenido. 
-              Este sitio opera bajo las leyes de República Dominicana.
-            </p>
           </div>
         </div>
       </div>

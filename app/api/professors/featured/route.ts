@@ -1,47 +1,42 @@
 import { NextResponse } from 'next/server'
-
-// Real PUCMM professors (first few from our mock data)
-const REAL_FEATURED_PROFESSORS = [
-  {
-    id: '1',
-    name: 'Dr. José Cruz',
-    university: 'PUCMM',
-    department: 'Arquitectura',
-    rating: 4.8,
-    totalReviews: 23,
-    tags: ['CLARO AL EXPLICAR', 'DISPONIBLE']
-  },
-  {
-    id: '2', 
-    name: 'Dr. Pedro García',
-    university: 'PUCMM',
-    department: 'Arquitectura',
-    rating: 4.7,
-    totalReviews: 18,
-    tags: ['INSPIRADOR', 'EXÁMENES JUSTOS']
-  },
-  {
-    id: '3',
-    name: 'Dra. Diana Nicodemo',
-    university: 'PUCMM', 
-    department: 'Arquitectura',
-    rating: 4.6,
-    totalReviews: 15,
-    tags: ['ORGANIZADA', 'FEEDBACK ÚTIL']
-  }
-]
+import { db } from '@/lib/firebase'
+import { collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore'
 
 export async function GET() {
   try {
-    // For now, return our real PUCMM professors
-    // Later this can be enhanced to fetch actual rated professors from the database
+    // Fetch professors with actual reviews and ratings from Firebase
+    const professorsRef = collection(db, 'professors')
+    const q = query(
+      professorsRef, 
+      where('totalReviews', '>', 0),
+      where('averageRating', '>', 0),
+      orderBy('averageRating', 'desc'),
+      orderBy('totalReviews', 'desc'),
+      limit(6)
+    )
     
-    return NextResponse.json(REAL_FEATURED_PROFESSORS)
+    const querySnapshot = await getDocs(q)
+    
+    const featuredProfessors = querySnapshot.docs.map(doc => {
+      const data = doc.data()
+      return {
+        id: doc.id,
+        name: data.name || 'Unknown Professor',
+        university: data.university || 'Unknown University',
+        department: data.department || 'Unknown Department',
+        rating: data.averageRating || 0,
+        totalReviews: data.totalReviews || 0,
+        tags: data.topTags || data.tags || []
+      }
+    })
+
+    // Only return professors with actual reviews
+    return NextResponse.json(featuredProfessors)
     
   } catch (error) {
     console.error('Error fetching featured professors:', error)
     
-    // Return real professors as fallback
-    return NextResponse.json(REAL_FEATURED_PROFESSORS)
+    // Return empty array on error - no mock data
+    return NextResponse.json([])
   }
 } 

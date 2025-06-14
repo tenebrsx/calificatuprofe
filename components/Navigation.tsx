@@ -186,63 +186,63 @@ export default function Navigation() {
       )}
 
       {/* Mobile menu */}
-      <div
-        className={`md:hidden bg-white border-t border-gray-200 fixed top-16 left-0 right-0 z-40 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-y-0' : '-translate-y-full'
-        }`}
-        style={{ maxHeight: 'calc(100vh - 4rem)', overflowY: 'auto' }}
-      >
-        <div className="pt-4 pb-3 px-4">
-          {session ? (
-            <div className="space-y-1">
-              <div className="px-3 py-2 border-b border-gray-200 mb-3">
-                <p className="text-base font-medium text-gray-800">{session.user?.name}</p>
-                <p className="text-sm font-medium text-gray-500">{session.user?.email}</p>
+      {isOpen && (
+        <div
+          className="md:hidden bg-white border-t border-gray-200 fixed top-16 left-0 right-0 z-40"
+          style={{ maxHeight: 'calc(100vh - 4rem)', overflowY: 'auto' }}
+        >
+          <div className="pt-4 pb-3 px-4">
+            {session ? (
+              <div className="space-y-1">
+                <div className="px-3 py-2 border-b border-gray-200 mb-3">
+                  <p className="text-base font-medium text-gray-800">{session.user?.name}</p>
+                  <p className="text-sm font-medium text-gray-500">{session.user?.email}</p>
+                </div>
+                <Link
+                  href="/perfil"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Mi Perfil
+                </Link>
+                <Link
+                  href="/mis-calificaciones"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Mis Calificaciones
+                </Link>
+                <button
+                  onClick={() => {
+                    signOut()
+                    setIsOpen(false)
+                  }}
+                  className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+                >
+                  Cerrar Sesión
+                </button>
               </div>
-              <Link
-                href="/perfil"
-                className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
-                onClick={() => setIsOpen(false)}
-              >
-                Mi Perfil
-              </Link>
-              <Link
-                href="/mis-calificaciones"
-                className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
-                onClick={() => setIsOpen(false)}
-              >
-                Mis Calificaciones
-              </Link>
-              <button
-                onClick={() => {
-                  signOut()
-                  setIsOpen(false)
-                }}
-                className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
-              >
-                Cerrar Sesión
-              </button>
-            </div>
-          ) : (
-            <div className="space-y-2">
-              <Link
-                href="/auth/signin"
-                className="block w-full px-3 py-3 text-center rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 border border-gray-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Iniciar Sesión
-              </Link>
-              <Link
-                href="/auth/signup"
-                className="block w-full px-3 py-3 text-center rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700"
-                onClick={() => setIsOpen(false)}
-              >
-                Crear cuenta
-              </Link>
-            </div>
-          )}
+            ) : (
+              <div className="space-y-2">
+                <Link
+                  href="/auth/signin"
+                  className="block w-full px-3 py-3 text-center rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 border border-gray-300"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Iniciar Sesión
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="block w-full px-3 py-3 text-center rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Crear cuenta
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   )
 } 

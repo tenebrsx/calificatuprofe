@@ -130,21 +130,22 @@ export default function SubjectPage() {
     const fetchProfessors = async () => {
       try {
         setLoading(true)
-        // Try to fetch real professors from API
+        // Fetch real professors from API
         const response = await fetch(`/api/professors/by-subject?subject=${slug}`)
         if (response.ok) {
           const data = await response.json()
-          setProfessors(data.professors || [])
+          // Only show professors with actual reviews
+          const professorsWithReviews = (data.professors || []).filter((prof: Professor) => 
+            prof.totalReviews > 0 && prof.rating > 0
+          )
+          setProfessors(professorsWithReviews)
         } else {
-          // Fallback to mock data if API fails
-          const subjectProfessors = MOCK_PROFESSORS_BY_SUBJECT[slug] || []
-          setProfessors(subjectProfessors)
+          setProfessors([])
         }
       } catch (error) {
         console.error('Error fetching professors:', error)
-        // Fallback to mock data
-        const subjectProfessors = MOCK_PROFESSORS_BY_SUBJECT[slug] || []
-        setProfessors(subjectProfessors)
+        // No fallback to mock data - just show empty state
+        setProfessors([])
       } finally {
         setLoading(false)
       }

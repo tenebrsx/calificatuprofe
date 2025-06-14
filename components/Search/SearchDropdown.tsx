@@ -349,23 +349,8 @@ export default function SearchDropdown({ placeholder = "Buscar profesor o univer
               </div>
             )
           ) : (
-            <div className="p-4">
-              <div className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 mb-2">
-                <FireIcon className="h-4 w-4 mr-2" />
-                Búsquedas populares
-              </div>
-              {popularSearches.map((search, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSearchTerm(search)}
-                  className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-md"
-                >
-                  <div className="flex items-center">
-                    <ClockIcon className="h-4 w-4 mr-2 text-gray-400" />
-                    {search}
-                  </div>
-                </button>
-              ))}
+            <div className="p-4 text-center text-gray-500">
+              <p className="text-sm">Comienza a escribir para buscar profesores y universidades</p>
             </div>
           )}
         </div>

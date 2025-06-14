@@ -59,6 +59,18 @@ export const authOptions: AuthOptions = {
     error: '/auth/error',
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "google") {
+        try {
+          console.log("Google sign-in successful:", user);
+          return true;
+        } catch (error) {
+          console.error("Error during Google sign-in:", error);
+          return false;
+        }
+      }
+      return true;
+    },
     async session({ session, token }) {
       if (session?.user && token?.sub) {
         (session.user as any).id = token.sub;
@@ -72,17 +84,24 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async redirect({ url, baseUrl }) {
-      // Allow localhost redirects for development
-      const isLocalhost = baseUrl.includes('localhost')
+      console.log("NextAuth redirect:", { url, baseUrl });
       
-      // Handle Netlify domain
-      const isNetlify = baseUrl.includes('netlify.app') || baseUrl.includes('calificatuprofe.netlify.app')
+      // If it's a relative URL, make it absolute
+      if (url.startsWith("/")) {
+        return `${baseUrl}${url}`;
+      }
       
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      else if (new URL(url).origin === baseUrl) return url
-      else if (isLocalhost && url.includes('localhost')) return url
-      else if (isNetlify && url.includes('netlify.app')) return url
-      return baseUrl
+      // If it's the same origin, allow it
+      try {
+        if (new URL(url).origin === baseUrl) {
+          return url;
+        }
+      } catch (e) {
+        // Invalid URL, default to baseUrl
+      }
+      
+      // Default to home page
+      return baseUrl;
     },
   },
 } 

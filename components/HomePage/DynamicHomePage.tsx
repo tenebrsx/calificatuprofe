@@ -49,6 +49,8 @@ export default function DynamicHomePage() {
     literatura: 0
   })
   const [loading, setLoading] = useState(true)
+  const [hasRealReviews, setHasRealReviews] = useState(false)
+  const [hasRealProfessors, setHasRealProfessors] = useState(false)
   
   // Removed animation hooks
 
@@ -70,12 +72,25 @@ export default function DynamicHomePage() {
 
         if (reviewsRes.ok) {
           const reviewsData = await reviewsRes.json()
-          setRecentReviews(reviewsData)
+          // Only show reviews section if there are real reviews (not mock data)
+          const realReviews = reviewsData.filter((review: Review) => 
+            review.id !== 1 && review.id !== 2 && review.id !== 3 && 
+            !review.professorName.includes('Dr. Ana García') &&
+            !review.professorName.includes('Prof. Carlos Mendez') &&
+            !review.professorName.includes('Dra. María Santos')
+          )
+          setRecentReviews(realReviews)
+          setHasRealReviews(realReviews.length > 0)
         }
 
         if (professorsRes.ok) {
           const professorsData = await professorsRes.json()
-          setFeaturedProfessors(professorsData)
+          // Only show featured professors if they have actual reviews/ratings
+          const professorsWithReviews = professorsData.filter((prof: Professor) => 
+            prof.totalReviews > 0 && prof.rating > 0
+          )
+          setFeaturedProfessors(professorsWithReviews)
+          setHasRealProfessors(professorsWithReviews.length > 0)
         }
 
         if (countsRes.ok) {
@@ -193,102 +208,106 @@ export default function DynamicHomePage() {
         </div>
       </div>
 
-      {/* Recent Reviews */}
-      <div className="bg-gray-50 py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Reseñas recientes</h2>
-            <p className="text-lg text-gray-600 mb-4">Lo que otros estudiantes están diciendo</p>
-          </div>
-          {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 animate-pulse">
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded mb-4 w-3/4"></div>
-                  <div className="h-3 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded mb-2 w-1/2"></div>
-                </div>
-              ))}
+      {/* Recent Reviews - Only show if there are real reviews */}
+      {hasRealReviews && (
+        <div className="bg-gray-50 py-16">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Reseñas recientes</h2>
+              <p className="text-lg text-gray-600 mb-4">Lo que otros estudiantes están diciendo</p>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {recentReviews.map((review) => (
-                <div key={review.id} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h4 className="font-semibold text-gray-900">{review.professorName}</h4>
-                      <p className="text-sm text-gray-600">{review.subject} • {review.university}</p>
-                    </div>
-                    <div className="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-lg">
-                      <StarIcon className="h-4 w-4 text-yellow-500" />
-                      <span className="text-sm font-medium text-yellow-700">{review.rating}</span>
-                    </div>
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 animate-pulse">
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded mb-4 w-3/4"></div>
+                    <div className="h-3 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded mb-2 w-1/2"></div>
                   </div>
-                  <p className="text-gray-700 text-sm mb-3 line-clamp-3">{review.comment}</p>
-                  <p className="text-xs text-gray-500">{review.timeAgo}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Featured Professors */}
-      <div className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Profesores destacados</h2>
-            <p className="text-lg text-gray-600">Los mejor calificados de la semana</p>
-          </div>
-          {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 border border-gray-200 animate-pulse">
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-2 w-3/4 mx-auto"></div>
-                    <div className="h-3 bg-gray-200 rounded mb-3 w-1/2 mx-auto"></div>
-                    <div className="h-3 bg-gray-200 rounded w-1/3 mx-auto"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {featuredProfessors.map((professor) => (
-                <Link
-                  key={professor.id}
-                  href={`/profesor/${professor.id}`}
-                  className="group bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-200"
-                >
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-[#1C4ED8] rounded-full flex items-center justify-center">
-                      <AcademicCapIcon className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-gray-900 mb-1">{professor.name}</h3>
-                    <p className="text-sm text-gray-600 mb-2">{professor.department} • {professor.university}</p>
-                    <div className="flex items-center justify-center gap-2 mb-3">
-                      <div className="flex items-center gap-1">
-                        <StarIcon className="h-4 w-4 text-yellow-400" />
-                        <span className="font-medium">{professor.rating}</span>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {recentReviews.map((review) => (
+                  <div key={review.id} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{review.professorName}</h4>
+                        <p className="text-sm text-gray-600">{review.subject} • {review.university}</p>
                       </div>
-                      <span className="text-sm text-gray-500">({professor.totalReviews} reseñas)</span>
+                      <div className="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-lg">
+                        <StarIcon className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm font-medium text-yellow-700">{review.rating}</span>
+                      </div>
                     </div>
-                    <div className="flex flex-wrap gap-1 justify-center">
-                      {professor.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">
-                          {tag}
-                        </span>
-                      ))}
+                    <p className="text-gray-700 text-sm mb-3 line-clamp-3">{review.comment}</p>
+                    <p className="text-xs text-gray-500">{review.timeAgo}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Featured Professors - Only show if there are professors with reviews */}
+      {hasRealProfessors && (
+        <div className="bg-white py-16">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Profesores destacados</h2>
+              <p className="text-lg text-gray-600">Los mejor calificados de la semana</p>
+            </div>
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 border border-gray-200 animate-pulse">
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full"></div>
+                      <div className="h-4 bg-gray-200 rounded mb-2 w-3/4 mx-auto"></div>
+                      <div className="h-3 bg-gray-200 rounded mb-3 w-1/2 mx-auto"></div>
+                      <div className="h-3 bg-gray-200 rounded w-1/3 mx-auto"></div>
                     </div>
                   </div>
-                </Link>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {featuredProfessors.map((professor) => (
+                  <Link
+                    key={professor.id}
+                    href={`/profesor/${professor.id}`}
+                    className="group bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-200"
+                  >
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-[#1C4ED8] rounded-full flex items-center justify-center">
+                        <AcademicCapIcon className="h-8 w-8 text-white" />
+                      </div>
+                      <h3 className="font-semibold text-gray-900 mb-1">{professor.name}</h3>
+                      <p className="text-sm text-gray-600 mb-2">{professor.department} • {professor.university}</p>
+                      <div className="flex items-center justify-center gap-2 mb-3">
+                        <div className="flex items-center gap-1">
+                          <StarIcon className="h-4 w-4 text-yellow-400" />
+                          <span className="font-medium">{professor.rating}</span>
+                        </div>
+                        <span className="text-sm text-gray-500">({professor.totalReviews} reseñas)</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1 justify-center">
+                        {professor.tags.slice(0, 2).map(tag => (
+                          <span key={tag} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Universidades Destacadas */}
       <div className="bg-[#F9FAFB] py-20">
