@@ -23,6 +23,17 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
   }
 
+  /* Specific overrides for homepage grids */
+  .subject-categories-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .universities-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
   /* Improve mobile navigation */
   nav {
     width: 100vw !important;

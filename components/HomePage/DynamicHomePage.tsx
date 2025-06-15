@@ -5,6 +5,67 @@ import Link from 'next/link'
 import { StarIcon, BookOpenIcon, UserGroupIcon, AcademicCapIcon, BeakerIcon, CalculatorIcon, ScaleIcon, HeartIcon } from '@heroicons/react/24/solid'
 import EnhancedSearch from '@/components/Search/EnhancedSearch'
 
+// Custom CSS for mobile grid layout - Maximum specificity
+const mobileGridStyles = `
+  /* Use maximum specificity to override any existing styles */
+  body div.subject-categories-grid,
+  html body div.subject-categories-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.75rem !important;
+    grid-auto-rows: auto !important;
+  }
+  
+  body div.universities-grid,
+  html body div.universities-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.5rem !important;
+    grid-auto-rows: auto !important;
+  }
+  
+  @media (min-width: 769px) {
+    body div.subject-categories-grid,
+    html body div.subject-categories-grid {
+      grid-template-columns: repeat(6, 1fr) !important;
+      gap: 1rem !important;
+    }
+  }
+  
+  /* Fix text sizing and prevent cutoff */
+  .subject-categories-grid .group h3 {
+    font-size: 0.7rem !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  .subject-categories-grid .group {
+    padding: 0.5rem !important;
+  }
+  
+  .subject-categories-grid .group div {
+    width: 2rem !important;
+    height: 2rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .subject-categories-grid .group div svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+  
+  .universities-grid a {
+    font-size: 0.65rem !important;
+    line-height: 1.1 !important;
+    padding: 0.5rem 0.125rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+`
 
 interface Review {
   id: string | number
@@ -52,7 +113,56 @@ export default function DynamicHomePage() {
   const [hasRealReviews, setHasRealReviews] = useState(false)
   const [hasRealProfessors, setHasRealProfessors] = useState(false)
   
-  // Removed animation hooks
+  // Force grid layout after component mounts
+  useEffect(() => {
+    const applyGridStyles = () => {
+      const subjectGrid = document.querySelector('.subject-categories-grid') as HTMLElement
+      const universitiesGrid = document.querySelector('.universities-grid') as HTMLElement
+      
+      if (subjectGrid) {
+        subjectGrid.style.display = 'grid'
+        subjectGrid.style.gridTemplateColumns = 'repeat(3, 1fr)'
+        subjectGrid.style.gap = '0.75rem'
+        
+        // Fix text sizing for subject categories
+        const subjectItems = subjectGrid.querySelectorAll('.group h3')
+        subjectItems.forEach((item: any) => {
+          item.style.fontSize = '0.7rem'
+          item.style.lineHeight = '1.1'
+          item.style.whiteSpace = 'nowrap'
+          item.style.overflow = 'hidden'
+          item.style.textOverflow = 'ellipsis'
+        })
+        
+        const subjectCards = subjectGrid.querySelectorAll('.group')
+        subjectCards.forEach((card: any) => {
+          card.style.padding = '0.5rem'
+        })
+      }
+      
+      if (universitiesGrid) {
+        universitiesGrid.style.display = 'grid'
+        universitiesGrid.style.gridTemplateColumns = 'repeat(4, 1fr)'
+        universitiesGrid.style.gap = '0.5rem'
+        
+        // Fix text sizing for universities
+        const universityLinks = universitiesGrid.querySelectorAll('a')
+        universityLinks.forEach((link: any) => {
+          link.style.fontSize = '0.65rem'
+          link.style.lineHeight = '1.1'
+          link.style.padding = '0.5rem 0.125rem'
+          link.style.whiteSpace = 'nowrap'
+          link.style.overflow = 'hidden'
+          link.style.textOverflow = 'ellipsis'
+        })
+      }
+    }
+    
+    // Apply styles after a short delay to ensure DOM is ready
+    const timer = setTimeout(applyGridStyles, 100)
+    
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -158,6 +268,9 @@ export default function DynamicHomePage() {
 
   return (
     <div className="min-h-screen bg-white w-full overflow-x-hidden">
+      {/* Inject custom CSS for mobile grid layout */}
+      <style dangerouslySetInnerHTML={{ __html: mobileGridStyles }} />
+      
       {/* Enhanced Hero Section */}
       <div className="bg-gradient-to-br from-blue-50 via-white to-blue-50 relative w-full">
         
@@ -186,20 +299,56 @@ export default function DynamicHomePage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Explora por materia</h2>
             <p className="text-lg text-gray-600">Encuentra profesores especializados en tu área de estudio</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div 
+            className="subject-categories-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '0.75rem'
+            }}
+          >
             {subjectCategories.map((category) => (
               <Link
                 key={category.name}
                 href={`/materia/${category.name.toLowerCase().replace(/ía/g, 'ia').replace(/ó/g, 'o')}`}
-                className="group p-6 rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:shadow-lg text-center relative overflow-hidden"
+                className="group rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:shadow-lg text-center relative overflow-hidden"
+                style={{
+                  padding: '0.5rem',
+                  minHeight: 'auto'
+                }}
                 title={category.description}
               >
-                <div className={`w-12 h-12 mx-auto mb-3 rounded-lg ${category.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                  <category.icon className="h-6 w-6" />
+                <div 
+                  className={`mx-auto mb-2 rounded-lg ${category.color} flex items-center justify-center group-hover:scale-110 transition-transform`}
+                  style={{
+                    width: '2rem',
+                    height: '2rem'
+                  }}
+                >
+                  <category.icon style={{ width: '1rem', height: '1rem' }} />
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-1 text-sm">{category.name}</h3>
-                <p className="text-xs text-gray-500 mb-1">{category.count}</p>
-                <p className="text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200 italic">
+                <h3 
+                  className="font-semibold text-gray-900 mb-1"
+                  style={{
+                    fontSize: '0.7rem',
+                    lineHeight: '1.1',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
+                  }}
+                >
+                  {category.name}
+                </h3>
+                <p 
+                  className="text-gray-500 mb-1"
+                  style={{
+                    fontSize: '0.65rem',
+                    lineHeight: '1.1'
+                  }}
+                >
+                  {category.count}
+                </p>
+                <p className="text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200 italic hidden sm:block">
                   {category.description}
                 </p>
               </Link>
@@ -316,7 +465,14 @@ export default function DynamicHomePage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Universidades destacadas</h2>
             <p className="text-lg text-gray-600">Explora las instituciones más populares</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div 
+            className="universities-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '0.5rem'
+            }}
+          >
             {[
               { name: 'INTEC', slug: 'intec' },
               { name: 'PUCMM', slug: 'pucmm' },
@@ -330,7 +486,15 @@ export default function DynamicHomePage() {
               <Link
                 key={university.name}
                 href={`/institucion/${university.slug}`}
-                className="block py-4 px-6 text-center font-bold text-gray-900 hover:text-[#1C4ED8] transition-colors duration-200 rounded-lg hover:bg-white/50"
+                className="block text-center font-bold text-gray-900 hover:text-[#1C4ED8] transition-colors duration-200 rounded-lg hover:bg-white/50"
+                style={{
+                  fontSize: '0.65rem',
+                  lineHeight: '1.1',
+                  padding: '0.5rem 0.125rem',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
               >
                 {university.name}
               </Link>

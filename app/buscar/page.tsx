@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { StarIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/solid'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import EnhancedSearch from '@/components/Search/EnhancedSearch'
+import AddProfessorButton from '@/components/AddProfessorButton'
 
 interface SearchResult {
   id: string
@@ -323,7 +324,7 @@ function SearchPageContent() {
                         : 'Intenta realizar una búsqueda específica.'
                       }
                     </p>
-                    <div className="flex gap-2 justify-center">
+                    <div className="flex gap-2 justify-center mb-6">
                       <button
                         onClick={() => setFilterType('all')}
                         className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
@@ -336,6 +337,14 @@ function SearchPageContent() {
                       >
                         Resetear filtros
                       </button>
+                    </div>
+                    <div className="border-t border-gray-200 pt-6">
+                      <p className="text-gray-500 mb-4">¿No encuentras al profesor que buscas?</p>
+                      <AddProfessorButton 
+                        searchQuery={query}
+                        size="md"
+                        variant="primary"
+                      />
                     </div>
                   </div>
                 )}

@@ -191,7 +191,7 @@ export default function Navigation() {
           className="md:hidden bg-white border-t border-gray-200 fixed top-16 left-0 right-0 z-50 shadow-lg"
           style={{ maxHeight: 'calc(100vh - 4rem)', overflowY: 'auto' }}
         >
-          <div className="pt-4 pb-3 px-4">
+          <div className="pt-2 pb-3 px-4">
             {session ? (
               <div className="space-y-1">
                 <div className="px-3 py-2 border-b border-gray-200 mb-3">

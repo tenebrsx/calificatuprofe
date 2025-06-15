@@ -87,7 +87,7 @@ export default function AddProfessorButton({
       ) : (
         <>
           {showIcon && <PlusIcon className="h-5 w-5 mr-2" />}
-          {session ? 'Agregar Profesor' : 'Iniciar Sesión para Agregar'}
+          {session ? 'Agregar Profesor' : 'Agregar Tu Profesor'}
         </>
       )}
     </button>

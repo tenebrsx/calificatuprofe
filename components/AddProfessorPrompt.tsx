@@ -145,7 +145,7 @@ export default function AddProfessorPrompt({
                   href="/auth/signin"
                   className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Iniciar Sesión para Agregar
+                  Agregar Tu Profesor
                 </Link>
                 <Link
                   href="/auth/signin"
