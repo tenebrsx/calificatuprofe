@@ -127,21 +127,29 @@ export const authOptions: AuthOptions = {
     async redirect({ url, baseUrl }) {
       console.log("NextAuth redirect:", { url, baseUrl });
       
-      // If it's a relative URL, make it absolute
+      // Handle callback URLs properly
       if (url.startsWith("/")) {
         return `${baseUrl}${url}`;
       }
       
-      // If it's the same origin, allow it
+      // Allow redirects to same origin
       try {
-        if (new URL(url).origin === baseUrl) {
+        const urlObj = new URL(url);
+        const baseUrlObj = new URL(baseUrl);
+        
+        if (urlObj.origin === baseUrlObj.origin) {
           return url;
         }
       } catch (e) {
-        // Invalid URL, default to baseUrl
+        console.error("Invalid URL in redirect:", e);
       }
       
-      // Default to home page
+      // For successful sign-ins, redirect to complete profile or home
+      if (url.includes('complete-profile')) {
+        return `${baseUrl}/auth/complete-profile`;
+      }
+      
+      // Default to home page for successful logins
       return baseUrl;
     },
   },

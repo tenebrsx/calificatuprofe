@@ -63,10 +63,12 @@ export default function CompleteProfilePage() {
           name: formData.name,
           institution: formData.institution,
           isStudent: formData.isStudent,
+          profileComplete: true,
         },
       })
 
-      router.push('/')
+      // Redirect to home with success message
+      router.push('/?profile=complete')
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Error al actualizar perfil')
     } finally {
