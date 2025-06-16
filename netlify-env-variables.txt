@@ -1,0 +1,40 @@
+NETLIFY ENVIRONMENT VARIABLES
+================================
+
+Copy these EXACT values to your Netlify environment variables:
+
+1. NEXTAUTH_URL
+   Value: https://calificatuprofe.netlify.app
+
+2. NEXTAUTH_SECRET
+   Value: [Generate a random 32-character string - you can use: openssl rand -base64 32]
+
+3. GOOGLE_CLIENT_ID
+   Value: [Your Google Client ID from Google Cloud Console]
+
+4. GOOGLE_CLIENT_SECRET
+   Value: [Your Google Client Secret from Google Cloud Console]
+
+5. NEXT_PUBLIC_FIREBASE_API_KEY
+   Value: AIzaSyBxABlwJHKhU7oFPnmwJCDpAL4zY8W6WzE
+
+6. NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+   Value: calificaprofe-4cf9c.firebaseapp.com
+
+7. NEXT_PUBLIC_FIREBASE_PROJECT_ID
+   Value: calificaprofe-4cf9c
+
+8. NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+   Value: calificaprofe-4cf9c.firebasestorage.app
+
+9. NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+   Value: 559754673852
+
+10. NEXT_PUBLIC_FIREBASE_APP_ID
+    Value: 1:559754673852:web:9dcfc83cad536370cb5ab9
+
+IMPORTANT NOTES:
+- Make sure NEXTAUTH_URL exactly matches your Netlify domain
+- Generate a new NEXTAUTH_SECRET (don't reuse localhost one)
+- Double-check Google Client ID and Secret are correct
+- After adding variables, redeploy your site 

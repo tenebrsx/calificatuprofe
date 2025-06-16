@@ -1,0 +1,160 @@
+/* Mobile viewport fixes */
+@media (max-width: 768px) {
+  /* Fix mobile viewport and prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw;
+    max-width: 100% !important;
+    position: relative;
+  }
+
+  /* Ensure all containers respect mobile viewport */
+  .container-xl,
+  .container {
+    max-width: 100vw !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Fix grid layouts on mobile */
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  }
+
+  /* Specific overrides for homepage grids */
+  .subject-categories-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .universities-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Improve mobile navigation */
+  nav {
+    width: 100vw !important;
+    max-width: 100% !important;
+  }
+
+  /* Fix mobile menu positioning */
+  .mobile-menu {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+  }
+
+  /* Prevent text from overflowing on mobile */
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Improve button spacing on mobile */
+  .btn {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  /* Fix hero section on mobile */
+  .hero-section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Fix search component on mobile */
+  .search-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Fix card layouts on mobile */
+  .card-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Fix university grid on mobile */
+  .university-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Fix subject categories on mobile */
+  .subject-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Improve touch targets */
+  button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Fix modal positioning on mobile */
+  .modal {
+    margin: 1rem !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+
+  /* Fix dropdown positioning */
+  .dropdown {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Tablet responsiveness */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container-xl {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .subject-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .university-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Large mobile devices */
+@media (min-width: 481px) and (max-width: 768px) {
+  .subject-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .container-xl,
+  .container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .btn {
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+  }
+} 
