@@ -128,11 +128,17 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async redirect({ url, baseUrl }) {
-      console.log("NextAuth redirect:", { url, baseUrl });
+      console.log("🔄 NextAuth redirect called:", { 
+        url, 
+        baseUrl, 
+        timestamp: new Date().toISOString() 
+      });
       
       // Handle relative URLs
       if (url.startsWith("/")) {
-        return `${baseUrl}${url}`;
+        const finalUrl = `${baseUrl}${url}`;
+        console.log("✅ Relative URL redirect:", finalUrl);
+        return finalUrl;
       }
       
       // Allow same origin redirects
@@ -141,14 +147,22 @@ export const authOptions: AuthOptions = {
         const baseUrlObj = new URL(baseUrl);
         
         if (urlObj.origin === baseUrlObj.origin) {
+          console.log("✅ Same origin redirect:", url);
           return url;
         }
+        
+        console.log("⚠️ Different origin detected:", {
+          urlOrigin: urlObj.origin,
+          baseUrlOrigin: baseUrlObj.origin
+        });
       } catch (e) {
-        console.error("Invalid URL in redirect:", e);
+        console.error("❌ Invalid URL in redirect:", e);
       }
       
       // Default redirect after successful authentication
-      return `${baseUrl}/`;
+      const defaultUrl = `${baseUrl}/`;
+      console.log("🏠 Default redirect to home:", defaultUrl);
+      return defaultUrl;
     },
   },
 } 
