@@ -66,10 +66,10 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile }) {
+      console.log("SignIn callback triggered:", { user: user?.email, provider: account?.provider });
+      
       if (account?.provider === "google") {
         try {
-          console.log(`Google sign-in successful:`, user);
-          
           // Check if user exists in Firestore
           const userDocRef = doc(db, 'users', user.id);
           const userDoc = await getDoc(userDocRef);
@@ -86,15 +86,18 @@ export const authOptions: AuthOptions = {
               isStudent: null,
               institution: null,
             });
-            console.log(`Created new user profile for Google user:`, user.id);
+            console.log(`New user created: ${user.id}`);
+          } else {
+            console.log(`Existing user signed in: ${user.id}`);
           }
           
           return true;
         } catch (error) {
-          console.error(`Error during Google sign-in:`, error);
-          return false;
+          console.error(`Google sign-in error:`, error);
+          return "/auth/error?error=DatabaseError";
         }
       }
+      
       return true;
     },
     async session({ session, token }) {
@@ -127,12 +130,12 @@ export const authOptions: AuthOptions = {
     async redirect({ url, baseUrl }) {
       console.log("NextAuth redirect:", { url, baseUrl });
       
-      // Handle callback URLs properly
+      // Handle relative URLs
       if (url.startsWith("/")) {
         return `${baseUrl}${url}`;
       }
       
-      // Allow redirects to same origin
+      // Allow same origin redirects
       try {
         const urlObj = new URL(url);
         const baseUrlObj = new URL(baseUrl);
@@ -144,13 +147,8 @@ export const authOptions: AuthOptions = {
         console.error("Invalid URL in redirect:", e);
       }
       
-      // For successful sign-ins, redirect to complete profile or home
-      if (url.includes('complete-profile')) {
-        return `${baseUrl}/auth/complete-profile`;
-      }
-      
-      // Default to home page for successful logins
-      return baseUrl;
+      // Default redirect after successful authentication
+      return `${baseUrl}/`;
     },
   },
 } 
