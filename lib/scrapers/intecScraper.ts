@@ -243,24 +243,29 @@ export class INTECScraper {
   }
 
   private getKnownINTECProfessors(): ProfessorData[] {
-    // Based on the experts page data we found
-    return [
+    // Import the comprehensive Ciencias Básicas y Ambientales professors data
+    const { INTEC_CIENCIAS_BASICAS_AMBIENTALES_PROFESSORS } = require('../../data/intec-ciencias-basicas-ambientales-professors')
+    
+    // Convert the imported data to the expected format
+    const cbaProfessors = INTEC_CIENCIAS_BASICAS_AMBIENTALES_PROFESSORS.map((prof: any) => ({
+      name: prof.name,
+      email: prof.email,
+      department: prof.department,
+      position: prof.position || 'Professor',
+      specialization: prof.specialization || prof.subjects?.join(', '),
+      university: 'INTEC' as const,
+      campus: prof.campus
+    }))
+
+    // Add other known professors from different departments
+    const otherProfessors = [
       {
         name: 'Aida González',
         email: 'aida.gonzalez@intec.edu.do',
         department: 'Ciencias Sociales y Humanidades',
         position: 'Research Professor',
         specialization: 'Library and Information Sciences, School Supervision',
-        university: 'INTEC',
-        campus: 'Santo Domingo'
-      },
-      {
-        name: 'Alejandro Santos',
-        email: 'alejandro.santos@intec.edu.do',
-        department: 'Ciencias Básicas y Ambientales',
-        position: 'Professor',
-        specialization: 'Water Engineering and Management',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       },
       {
@@ -269,7 +274,7 @@ export class INTECScraper {
         department: 'Ingeniería',
         position: 'Professor',
         specialization: 'Project Design, Management, and Administration',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       },
       {
@@ -278,7 +283,7 @@ export class INTECScraper {
         department: 'Ciencias de la Salud',
         position: 'Professor',
         specialization: 'Industrial and Technological Business Management, Bioethics',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       },
       {
@@ -287,7 +292,7 @@ export class INTECScraper {
         department: 'Economía y Negocios',
         position: 'Professor',
         specialization: 'Tax planning and management, Government auditing',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       },
       {
@@ -296,7 +301,7 @@ export class INTECScraper {
         department: 'Ingeniería',
         position: 'Coordinator and Professor',
         specialization: 'Sanitary and Environmental Engineering',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       },
       {
@@ -305,7 +310,7 @@ export class INTECScraper {
         department: 'Ingeniería',
         position: 'Professor',
         specialization: 'Senior Management, Services and Manufacturing',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       },
       {
@@ -314,7 +319,7 @@ export class INTECScraper {
         department: 'Ciencias Sociales y Humanidades',
         position: 'Coordinator',
         specialization: 'Film and Television, Business Administration',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       },
       {
@@ -323,7 +328,7 @@ export class INTECScraper {
         department: 'Ciencias de la Salud',
         position: 'Professor',
         specialization: 'Nutrition, Public Health and Epidemiology',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       },
       {
@@ -332,12 +337,12 @@ export class INTECScraper {
         department: 'Ingeniería',
         position: 'Professor',
         specialization: 'Production Management and Corporate Finance',
-        university: 'INTEC',
+        university: 'INTEC' as const,
         campus: 'Santo Domingo'
       }
-      // Add more professors as needed - this is just a sample
-      // The scraper will try to find more from the actual page
     ]
+
+    return [...cbaProfessors, ...otherProfessors]
   }
 
   private cleanName(name: string): string {

@@ -117,7 +117,32 @@ const SUBJECT_NAMES: Record<string, string> = {
   'derecho': 'Derecho',
   'administracion': 'Administración',
   'matematicas': 'Matemáticas',
-  'literatura': 'Literatura'
+  'fisica': 'Física',
+  'quimica': 'Química',
+  'biologia': 'Biología',
+  'ciencias-ambientales': 'Ciencias Ambientales',
+  'ciencias-marinas': 'Ciencias Marinas',
+  'educacion': 'Educación',
+  'nutricion': 'Nutrición',
+  'salud-publica': 'Salud Pública',
+  'literatura': 'Literatura',
+  'psicologia': 'Psicología',
+  'sociologia': 'Sociología',
+  'historia': 'Historia',
+  'linguistica': 'Lingüística',
+  'filosofia': 'Filosofía',
+  'comunicacion': 'Comunicación',
+  'economia': 'Economía',
+  'finanzas': 'Finanzas',
+  'gerencia': 'Gerencia',
+  'mercadeo': 'Mercadeo',
+  'ciencia-politica': 'Ciencia Política',
+  'recursos-humanos': 'Recursos Humanos',
+  'odontologia': 'Odontología',
+  'arquitectura': 'Arquitectura',
+  'artes': 'Artes',
+  'negocios-internacionales': 'Negocios Internacionales',
+  'comunicacion-publicitaria': 'Comunicación Publicitaria'
 }
 
 export default function SubjectPage() {

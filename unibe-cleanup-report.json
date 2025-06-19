@@ -1,0 +1,1313 @@
+{
+  "timestamp": "2025-06-18T23:12:26.507Z",
+  "original": {
+    "totalProfessors": 1084,
+    "duplicateEmails": 118,
+    "similarNames": 12
+  },
+  "cleanup": {
+    "duplicatesRemoved": 118,
+    "finalProfessors": 966,
+    "backupFile": "data/unibe-professors-backup-1750288346500.ts"
+  },
+  "removedEntries": [
+    {
+      "position": 947,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-948',\n    name: 'Sovero Davila, Francisco',\n    email: 'sovero.davila@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas Turísticas y Hoteleras',\n    subjects: ['turismo', 'administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas Turísticas y Hoteleras',\n    description: 'Profesor especializado en administración de empresas turísticas y hoteleras.'\n  },",
+        "id": "unibe-948",
+        "name": "Sovero Davila, Francisco",
+        "email": "sovero.davila@unibe.edu.do",
+        "subjects": "['turismo', 'administracion-empresas']",
+        "position": 946
+      }
+    },
+    {
+      "position": 948,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-949',\n    name: 'Zapata Taveras, Cristina',\n    email: 'zapata.taveras@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-949",
+        "name": "Zapata Taveras, Cristina",
+        "email": "zapata.taveras@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 947
+      }
+    },
+    {
+      "position": 949,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-950',\n    name: 'Martinez Rodriguez, Karla Yadira',\n    email: 'martinez.rodriguez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-950",
+        "name": "Martinez Rodriguez, Karla Yadira",
+        "email": "martinez.rodriguez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 948
+      }
+    },
+    {
+      "position": 951,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-952',\n    name: 'Cuevas Grullon, Leirie Grisel',\n    email: 'cuevas.grullon@unibe.edu.do',\n    department: 'Especialidad en Rehabilitación Bucal',\n    position: 'Profesor',\n    specialization: 'Especialidad en Rehabilitación Bucal',\n    subjects: ['general'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Especialidad en Rehabilitación Bucal',\n    description: 'Profesor especializado en especialidad en rehabilitación bucal.'\n  },",
+        "id": "unibe-952",
+        "name": "Cuevas Grullon, Leirie Grisel",
+        "email": "cuevas.grullon@unibe.edu.do",
+        "subjects": "['general']",
+        "position": 950
+      }
+    },
+    {
+      "position": 952,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-953',\n    name: 'Capellan Martorrel, Danny',\n    email: 'capellan.martorrel@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas Turísticas y Hoteleras',\n    subjects: ['turismo', 'administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas Turísticas y Hoteleras',\n    description: 'Profesor especializado en administración de empresas turísticas y hoteleras.'\n  },",
+        "id": "unibe-953",
+        "name": "Capellan Martorrel, Danny",
+        "email": "capellan.martorrel@unibe.edu.do",
+        "subjects": "['turismo', 'administracion-empresas']",
+        "position": 951
+      }
+    },
+    {
+      "position": 953,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-954',\n    name: 'Herrera Reyes, Hamlet',\n    email: 'herrera.reyes@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-954",
+        "name": "Herrera Reyes, Hamlet",
+        "email": "herrera.reyes@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 952
+      }
+    },
+    {
+      "position": 954,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-955',\n    name: 'Cepeda Marte, Jenny Lujan',\n    email: 'cepeda.marte@unibe.edu.do',\n    department: 'Decanato de Investigación Académica',\n    position: 'Profesor',\n    specialization: 'Decanato de Investigación Académica',\n    subjects: ['investigacion'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Decanato de Investigación Académica',\n    description: 'Profesor especializado en decanato de investigación académica.'\n  },",
+        "id": "unibe-955",
+        "name": "Cepeda Marte, Jenny Lujan",
+        "email": "cepeda.marte@unibe.edu.do",
+        "subjects": "['investigacion']",
+        "position": 953
+      }
+    },
+    {
+      "position": 955,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-956',\n    name: 'Pimentel Mendoza, Raisa del Carmen',\n    email: 'pimentel.mendoza@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-956",
+        "name": "Pimentel Mendoza, Raisa del Carmen",
+        "email": "pimentel.mendoza@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 954
+      }
+    },
+    {
+      "position": 956,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-957',\n    name: 'Hermon Helena, Hillary Marina',\n    email: 'hermon.helena@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Comunicación Publicitaria',\n    subjects: ['comunicacion', 'publicidad'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Comunicación Publicitaria',\n    description: 'Profesor especializado en comunicación publicitaria.'\n  },",
+        "id": "unibe-957",
+        "name": "Hermon Helena, Hillary Marina",
+        "email": "hermon.helena@unibe.edu.do",
+        "subjects": "['comunicacion', 'publicidad']",
+        "position": 955
+      }
+    },
+    {
+      "position": 957,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-958',\n    name: 'Abreu Vargas, Domingo Antonio',\n    email: 'abreu.vargas@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-958",
+        "name": "Abreu Vargas, Domingo Antonio",
+        "email": "abreu.vargas@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 956
+      }
+    },
+    {
+      "position": 958,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-959',\n    name: 'Rodriguez Gutierrez, Genne Maria',\n    email: 'rodriguez.gutierrez@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-959",
+        "name": "Rodriguez Gutierrez, Genne Maria",
+        "email": "rodriguez.gutierrez@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 957
+      }
+    },
+    {
+      "position": 791,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-792',\n    name: 'Santana Castro, Moises',\n    email: 'santana.castro@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-792",
+        "name": "Santana Castro, Moises",
+        "email": "santana.castro@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 790
+      }
+    },
+    {
+      "position": 959,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-960',\n    name: 'Santana Castro, Amada Isabel',\n    email: 'santana.castro@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-960",
+        "name": "Santana Castro, Amada Isabel",
+        "email": "santana.castro@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 958
+      }
+    },
+    {
+      "position": 960,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-961',\n    name: 'Gonzalez Barrios, Jose Alejandro',\n    email: 'gonzalez.barrios@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología Clínica',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología Clínica',\n    description: 'Profesor especializado en psicología clínica.'\n  },",
+        "id": "unibe-961",
+        "name": "Gonzalez Barrios, Jose Alejandro",
+        "email": "gonzalez.barrios@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 959
+      }
+    },
+    {
+      "position": 961,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-962',\n    name: 'Marmolejo Hernandez, Arlen',\n    email: 'marmolejo.hernandez@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-962",
+        "name": "Marmolejo Hernandez, Arlen",
+        "email": "marmolejo.hernandez@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 960
+      }
+    },
+    {
+      "position": 962,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-963',\n    name: 'Helena Garcia, Carelyn Josefina',\n    email: 'helena.garcia@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-963",
+        "name": "Helena Garcia, Carelyn Josefina",
+        "email": "helena.garcia@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 961
+      }
+    },
+    {
+      "position": 963,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-964',\n    name: 'Mack Mendez, Miguel Alberto',\n    email: 'mack.mendez@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas',\n    subjects: ['administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas',\n    description: 'Profesor especializado en administración de empresas.'\n  },",
+        "id": "unibe-964",
+        "name": "Mack Mendez, Miguel Alberto",
+        "email": "mack.mendez@unibe.edu.do",
+        "subjects": "['administracion-empresas']",
+        "position": 962
+      }
+    },
+    {
+      "position": 964,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-965',\n    name: 'Lerebours Gonzalez, Jose Rafael',\n    email: 'lerebours.gonzalez@unibe.edu.do',\n    department: 'Ingeniería Industrial',\n    position: 'Profesor',\n    specialization: 'Ingeniería Industrial',\n    subjects: ['ingenieria-industrial'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Industrial',\n    description: 'Profesor especializado en ingeniería industrial.'\n  },",
+        "id": "unibe-965",
+        "name": "Lerebours Gonzalez, Jose Rafael",
+        "email": "lerebours.gonzalez@unibe.edu.do",
+        "subjects": "['ingenieria-industrial']",
+        "position": 963
+      }
+    },
+    {
+      "position": 965,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-966',\n    name: 'Saviñon Reynoso, Eduardo Arturo',\n    email: 'savinon.reynoso@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas',\n    subjects: ['administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas',\n    description: 'Profesor especializado en administración de empresas.'\n  },",
+        "id": "unibe-966",
+        "name": "Saviñon Reynoso, Eduardo Arturo",
+        "email": "savinon.reynoso@unibe.edu.do",
+        "subjects": "['administracion-empresas']",
+        "position": 964
+      }
+    },
+    {
+      "position": 966,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-967',\n    name: 'Ramirez Baez, Elizabeth Shanon',\n    email: 'ramirez.baez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-967",
+        "name": "Ramirez Baez, Elizabeth Shanon",
+        "email": "ramirez.baez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 965
+      }
+    },
+    {
+      "position": 968,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-969',\n    name: 'Perez Perez, Lourdes Asuncion',\n    email: 'perez.perez@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología',\n    description: 'Profesor especializado en psicología.'\n  },",
+        "id": "unibe-969",
+        "name": "Perez Perez, Lourdes Asuncion",
+        "email": "perez.perez@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 967
+      }
+    },
+    {
+      "position": 970,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-971',\n    name: 'Arias Llorente, Melody Giselle',\n    email: 'arias.llorente@unibe.edu.do',\n    department: 'Decanato de Investigación Académica',\n    position: 'Profesor',\n    specialization: 'Decanato de Investigación Académica',\n    subjects: ['investigacion'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Decanato de Investigación Académica',\n    description: 'Profesor especializado en decanato de investigación académica.'\n  },",
+        "id": "unibe-971",
+        "name": "Arias Llorente, Melody Giselle",
+        "email": "arias.llorente@unibe.edu.do",
+        "subjects": "['investigacion']",
+        "position": 969
+      }
+    },
+    {
+      "position": 971,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-972',\n    name: 'Gonzalez Peña, Luvil',\n    email: 'gonzalez.pena@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-972",
+        "name": "Gonzalez Peña, Luvil",
+        "email": "gonzalez.pena@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 970
+      }
+    },
+    {
+      "position": 972,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-973',\n    name: 'Shal Mateo, Sasha Osdaly',\n    email: 'shal.mateo@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-973",
+        "name": "Shal Mateo, Sasha Osdaly",
+        "email": "shal.mateo@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 971
+      }
+    },
+    {
+      "position": 973,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-974',\n    name: 'Diaz Tolentino, Elvin Jose',\n    email: 'diaz.tolentino@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-974",
+        "name": "Diaz Tolentino, Elvin Jose",
+        "email": "diaz.tolentino@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 972
+      }
+    },
+    {
+      "position": 974,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-975',\n    name: 'Alarcon Elbal, Pedro Maria',\n    email: 'alarcon.elbal@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-975",
+        "name": "Alarcon Elbal, Pedro Maria",
+        "email": "alarcon.elbal@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 973
+      }
+    },
+    {
+      "position": 976,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-977',\n    name: 'Perez Guerrero, Maria Fernanda',\n    email: 'perez.guerrero@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas',\n    subjects: ['administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas',\n    description: 'Profesor especializado en administración de empresas.'\n  },",
+        "id": "unibe-977",
+        "name": "Perez Guerrero, Maria Fernanda",
+        "email": "perez.guerrero@unibe.edu.do",
+        "subjects": "['administracion-empresas']",
+        "position": 975
+      }
+    },
+    {
+      "position": 977,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-978',\n    name: 'Rivero Nicasio, Tegui Jose',\n    email: 'rivero.nicasio@unibe.edu.do',\n    department: 'Arquitectura',\n    position: 'Profesor',\n    specialization: 'Arquitectura',\n    subjects: ['arquitectura'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Arquitectura',\n    description: 'Profesor especializado en arquitectura.'\n  },",
+        "id": "unibe-978",
+        "name": "Rivero Nicasio, Tegui Jose",
+        "email": "rivero.nicasio@unibe.edu.do",
+        "subjects": "['arquitectura']",
+        "position": 976
+      }
+    },
+    {
+      "position": 978,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-979',\n    name: 'Concepcion Heredia, Roberto',\n    email: 'concepcion.heredia@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Comunicación Publicitaria',\n    subjects: ['comunicacion', 'publicidad'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Comunicación Publicitaria',\n    description: 'Profesor especializado en comunicación publicitaria.'\n  },",
+        "id": "unibe-979",
+        "name": "Concepcion Heredia, Roberto",
+        "email": "concepcion.heredia@unibe.edu.do",
+        "subjects": "['comunicacion', 'publicidad']",
+        "position": 977
+      }
+    },
+    {
+      "position": 979,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-980',\n    name: 'Molina Gomez, Gloria Maria',\n    email: 'molina.gomez@unibe.edu.do',\n    department: 'Educación',\n    position: 'Profesor',\n    specialization: 'Educación Temprana',\n    subjects: ['educacion'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Educación Temprana',\n    description: 'Profesor especializado en educación temprana.'\n  },",
+        "id": "unibe-980",
+        "name": "Molina Gomez, Gloria Maria",
+        "email": "molina.gomez@unibe.edu.do",
+        "subjects": "['educacion']",
+        "position": 978
+      }
+    },
+    {
+      "position": 980,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-981',\n    name: 'Scheker Ramos, Sheila Nicolle',\n    email: 'scheker.ramos@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología',\n    description: 'Profesor especializado en psicología.'\n  },",
+        "id": "unibe-981",
+        "name": "Scheker Ramos, Sheila Nicolle",
+        "email": "scheker.ramos@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 979
+      }
+    },
+    {
+      "position": 981,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-982',\n    name: 'Saint-Hilaire Jong, Shaolin Nicole',\n    email: 'sainthilaire.jong@unibe.edu.do',\n    department: 'Arquitectura',\n    position: 'Profesor',\n    specialization: 'Arquitectura',\n    subjects: ['arquitectura'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Arquitectura',\n    description: 'Profesor especializado en arquitectura.'\n  },",
+        "id": "unibe-982",
+        "name": "Saint-Hilaire Jong, Shaolin Nicole",
+        "email": "sainthilaire.jong@unibe.edu.do",
+        "subjects": "['arquitectura']",
+        "position": 980
+      }
+    },
+    {
+      "position": 982,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-983',\n    name: 'Espino Yunes, Jose David',\n    email: 'espino.yunes@unibe.edu.do',\n    department: 'Mercadeo',\n    position: 'Profesor',\n    specialization: 'Mercadeo',\n    subjects: ['mercadeo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Mercadeo',\n    description: 'Profesor especializado en mercadeo.'\n  },",
+        "id": "unibe-983",
+        "name": "Espino Yunes, Jose David",
+        "email": "espino.yunes@unibe.edu.do",
+        "subjects": "['mercadeo']",
+        "position": 981
+      }
+    },
+    {
+      "position": 984,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-985',\n    name: 'Contreras Gonzalez, Johanny Carolina',\n    email: 'contreras.gonzalez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-985",
+        "name": "Contreras Gonzalez, Johanny Carolina",
+        "email": "contreras.gonzalez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 983
+      }
+    },
+    {
+      "position": 985,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-986',\n    name: 'Matos Custodio, Hovel Ismael',\n    email: 'matos.custodio@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas',\n    subjects: ['administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas',\n    description: 'Profesor especializado en administración de empresas.'\n  },",
+        "id": "unibe-986",
+        "name": "Matos Custodio, Hovel Ismael",
+        "email": "matos.custodio@unibe.edu.do",
+        "subjects": "['administracion-empresas']",
+        "position": 984
+      }
+    },
+    {
+      "position": 986,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-987',\n    name: 'Mariano Hernandez, Yumaysla',\n    email: 'mariano.hernandez@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-987",
+        "name": "Mariano Hernandez, Yumaysla",
+        "email": "mariano.hernandez@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 985
+      }
+    },
+    {
+      "position": 987,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-988',\n    name: 'Jiménez Orosco, Danesca Katerine',\n    email: 'jimenez.orosco@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas',\n    subjects: ['administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas',\n    description: 'Profesor especializado en administración de empresas.'\n  },",
+        "id": "unibe-988",
+        "name": "Jiménez Orosco, Danesca Katerine",
+        "email": "jimenez.orosco@unibe.edu.do",
+        "subjects": "['administracion-empresas']",
+        "position": 986
+      }
+    },
+    {
+      "position": 988,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-989',\n    name: 'Montero Polanco, Wanda de los Milagros',\n    email: 'montero.polanco@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Comunicación Publicitaria',\n    subjects: ['comunicacion', 'publicidad'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Comunicación Publicitaria',\n    description: 'Profesor especializado en comunicación publicitaria.'\n  },",
+        "id": "unibe-989",
+        "name": "Montero Polanco, Wanda de los Milagros",
+        "email": "montero.polanco@unibe.edu.do",
+        "subjects": "['comunicacion', 'publicidad']",
+        "position": 987
+      }
+    },
+    {
+      "position": 989,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-990',\n    name: 'Geraldino Alvarez, Juan Oscar',\n    email: 'geraldino.alvarez@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Comunicación Publicitaria',\n    subjects: ['comunicacion', 'publicidad'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Comunicación Publicitaria',\n    description: 'Profesor especializado en comunicación publicitaria.'\n  },",
+        "id": "unibe-990",
+        "name": "Geraldino Alvarez, Juan Oscar",
+        "email": "geraldino.alvarez@unibe.edu.do",
+        "subjects": "['comunicacion', 'publicidad']",
+        "position": 988
+      }
+    },
+    {
+      "position": 990,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-991',\n    name: 'Simono Almonte, Arleny Lucia',\n    email: 'simono.almonte@unibe.edu.do',\n    department: 'Decanato de Estudiantes',\n    position: 'Profesor',\n    specialization: 'Decanato de Estudiantes',\n    subjects: ['administracion'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Decanato de Estudiantes',\n    description: 'Profesor especializado en decanato de estudiantes.'\n  },",
+        "id": "unibe-991",
+        "name": "Simono Almonte, Arleny Lucia",
+        "email": "simono.almonte@unibe.edu.do",
+        "subjects": "['administracion']",
+        "position": 989
+      }
+    },
+    {
+      "position": 991,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-992',\n    name: 'Reyes Guzman, Paul Antonio',\n    email: 'reyes.guzman@unibe.edu.do',\n    department: 'Mercadeo',\n    position: 'Profesor',\n    specialization: 'Mercadeo',\n    subjects: ['mercadeo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Mercadeo',\n    description: 'Profesor especializado en mercadeo.'\n  },",
+        "id": "unibe-992",
+        "name": "Reyes Guzman, Paul Antonio",
+        "email": "reyes.guzman@unibe.edu.do",
+        "subjects": "['mercadeo']",
+        "position": 990
+      }
+    },
+    {
+      "position": 992,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-993',\n    name: 'Vargas Camilo, Juan Pedro',\n    email: 'vargas.camilo@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología',\n    description: 'Profesor especializado en psicología.'\n  },",
+        "id": "unibe-993",
+        "name": "Vargas Camilo, Juan Pedro",
+        "email": "vargas.camilo@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 991
+      }
+    },
+    {
+      "position": 993,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-994',\n    name: 'Fermín Sánchez, Rudolf Joaquín',\n    email: 'fermin.sanchez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-994",
+        "name": "Fermín Sánchez, Rudolf Joaquín",
+        "email": "fermin.sanchez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 992
+      }
+    },
+    {
+      "position": 994,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-995',\n    name: 'Beato Rodríguez, Graciela Maria',\n    email: 'beato.rodriguez@unibe.edu.do',\n    department: 'Educación',\n    position: 'Profesor',\n    specialization: 'Educación Temprana',\n    subjects: ['educacion'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Educación Temprana',\n    description: 'Profesor especializado en educación temprana.'\n  },",
+        "id": "unibe-995",
+        "name": "Beato Rodríguez, Graciela Maria",
+        "email": "beato.rodriguez@unibe.edu.do",
+        "subjects": "['educacion']",
+        "position": 993
+      }
+    },
+    {
+      "position": 995,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-996',\n    name: 'Reyes Valerio, Idalia Albaliris',\n    email: 'reyes.valerio@unibe.edu.do',\n    department: 'Pos-Grado',\n    position: 'Profesor',\n    specialization: 'Pos-Grado',\n    subjects: ['general'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Pos-Grado',\n    description: 'Profesor especializado en pos-grado.'\n  },",
+        "id": "unibe-996",
+        "name": "Reyes Valerio, Idalia Albaliris",
+        "email": "reyes.valerio@unibe.edu.do",
+        "subjects": "['general']",
+        "position": 994
+      }
+    },
+    {
+      "position": 996,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-997',\n    name: 'Zimmermann Hazim, Mariel',\n    email: 'zimmermann.hazim@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología',\n    description: 'Profesor especializado en psicología.'\n  },",
+        "id": "unibe-997",
+        "name": "Zimmermann Hazim, Mariel",
+        "email": "zimmermann.hazim@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 995
+      }
+    },
+    {
+      "position": 998,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-999',\n    name: 'Castillo Gonzalez, Carmen Karina',\n    email: 'castillo.gonzalez@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-999",
+        "name": "Castillo Gonzalez, Carmen Karina",
+        "email": "castillo.gonzalez@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 997
+      }
+    },
+    {
+      "position": 999,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1000',\n    name: 'Basilis Abreu, Barbara Jacqueline',\n    email: 'basilis.abreu@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología',\n    description: 'Profesor especializado en psicología.'\n  },",
+        "id": "unibe-1000",
+        "name": "Basilis Abreu, Barbara Jacqueline",
+        "email": "basilis.abreu@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 998
+      }
+    },
+    {
+      "position": 1000,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1001',\n    name: 'Ramirez Agramonte, Ambar Ydioselin',\n    email: 'ramirez.agramonte@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-1001",
+        "name": "Ramirez Agramonte, Ambar Ydioselin",
+        "email": "ramirez.agramonte@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 999
+      }
+    },
+    {
+      "position": 1001,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1002',\n    name: 'Paulino Sosa, Carlos Manuel',\n    email: 'paulino.sosa@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-1002",
+        "name": "Paulino Sosa, Carlos Manuel",
+        "email": "paulino.sosa@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 1000
+      }
+    },
+    {
+      "position": 1002,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1003',\n    name: 'Rivera Estaba, Helen Josefina',\n    email: 'rivera.estaba@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-1003",
+        "name": "Rivera Estaba, Helen Josefina",
+        "email": "rivera.estaba@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 1001
+      }
+    },
+    {
+      "position": 433,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-434',\n    name: 'Morales Pérez, Edgar Octavio',\n    email: 'morales.perez@unibe.edu.do',\n    department: 'Derecho',\n    position: 'Profesor',\n    specialization: 'Maestría en Derecho Tributario y Asesoría Fiscal',\n    subjects: ['posgrado'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Maestría en Derecho Tributario y Asesoría Fiscal',\n    description: 'Profesor especializado en maestría en derecho tributario y asesoría fiscal.'\n  },",
+        "id": "unibe-434",
+        "name": "Morales Pérez, Edgar Octavio",
+        "email": "morales.perez@unibe.edu.do",
+        "subjects": "['posgrado']",
+        "position": 432
+      }
+    },
+    {
+      "position": 1004,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1005',\n    name: 'Morales Perez, Julio',\n    email: 'morales.perez@unibe.edu.do',\n    department: 'Ingeniería Civil',\n    position: 'Profesor',\n    specialization: 'Ingeniería Civil',\n    subjects: ['ingenieria-civil'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Civil',\n    description: 'Profesor especializado en ingeniería civil.'\n  },",
+        "id": "unibe-1005",
+        "name": "Morales Perez, Julio",
+        "email": "morales.perez@unibe.edu.do",
+        "subjects": "['ingenieria-civil']",
+        "position": 1003
+      }
+    },
+    {
+      "position": 1005,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1006',\n    name: 'Gomez Gonzalez, Jaime Jose',\n    email: 'gomez.gonzalez@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Comunicación Publicitaria',\n    subjects: ['comunicacion', 'publicidad'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Comunicación Publicitaria',\n    description: 'Profesor especializado en comunicación publicitaria.'\n  },",
+        "id": "unibe-1006",
+        "name": "Gomez Gonzalez, Jaime Jose",
+        "email": "gomez.gonzalez@unibe.edu.do",
+        "subjects": "['comunicacion', 'publicidad']",
+        "position": 1004
+      }
+    },
+    {
+      "position": 1054,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1055',\n    name: 'Gomez Gonzalez, Noelia Margarita',\n    email: 'gomez.gonzalez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-1055",
+        "name": "Gomez Gonzalez, Noelia Margarita",
+        "email": "gomez.gonzalez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 1053
+      }
+    },
+    {
+      "position": 1006,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1007',\n    name: 'Rivera Leon, Rafael Francisco',\n    email: 'rivera.leon@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-1007",
+        "name": "Rivera Leon, Rafael Francisco",
+        "email": "rivera.leon@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 1005
+      }
+    },
+    {
+      "position": 1007,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1008',\n    name: 'Marte Rosario, Darwin',\n    email: 'marte.rosario@unibe.edu.do',\n    department: 'Derecho',\n    position: 'Profesor',\n    specialization: 'Derecho',\n    subjects: ['derecho'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Derecho',\n    description: 'Profesor especializado en derecho.'\n  },",
+        "id": "unibe-1008",
+        "name": "Marte Rosario, Darwin",
+        "email": "marte.rosario@unibe.edu.do",
+        "subjects": "['derecho']",
+        "position": 1006
+      }
+    },
+    {
+      "position": 1008,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1009',\n    name: 'Alcantara Abreu, Maribel Elisa',\n    email: 'alcantara.abreu@unibe.edu.do',\n    department: 'Mercadeo',\n    position: 'Profesor',\n    specialization: 'Mercadeo',\n    subjects: ['mercadeo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Mercadeo',\n    description: 'Profesor especializado en mercadeo.'\n  },",
+        "id": "unibe-1009",
+        "name": "Alcantara Abreu, Maribel Elisa",
+        "email": "alcantara.abreu@unibe.edu.do",
+        "subjects": "['mercadeo']",
+        "position": 1007
+      }
+    },
+    {
+      "position": 1009,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1010',\n    name: 'Suárez Velásquez, Marlio',\n    email: 'suarez.velasquez@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas Turísticas y Hoteleras',\n    subjects: ['turismo', 'administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas Turísticas y Hoteleras',\n    description: 'Profesor especializado en administración de empresas turísticas y hoteleras.'\n  },",
+        "id": "unibe-1010",
+        "name": "Suárez Velásquez, Marlio",
+        "email": "suarez.velasquez@unibe.edu.do",
+        "subjects": "['turismo', 'administracion-empresas']",
+        "position": 1008
+      }
+    },
+    {
+      "position": 1010,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1011',\n    name: 'Baez Desangles, Luis Augusto',\n    email: 'baez.desangles@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas Turísticas y Hoteleras',\n    subjects: ['turismo', 'administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas Turísticas y Hoteleras',\n    description: 'Profesor especializado en administración de empresas turísticas y hoteleras.'\n  },",
+        "id": "unibe-1011",
+        "name": "Baez Desangles, Luis Augusto",
+        "email": "baez.desangles@unibe.edu.do",
+        "subjects": "['turismo', 'administracion-empresas']",
+        "position": 1009
+      }
+    },
+    {
+      "position": 1011,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1012',\n    name: 'Jeldes Colón, Wilhelm Cristóbal',\n    email: 'jeldes.colon@unibe.edu.do',\n    department: 'Ingeniería Civil',\n    position: 'Profesor',\n    specialization: 'Ingeniería Civil',\n    subjects: ['ingenieria-civil'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Civil',\n    description: 'Profesor especializado en ingeniería civil.'\n  },",
+        "id": "unibe-1012",
+        "name": "Jeldes Colón, Wilhelm Cristóbal",
+        "email": "jeldes.colon@unibe.edu.do",
+        "subjects": "['ingenieria-civil']",
+        "position": 1010
+      }
+    },
+    {
+      "position": 1012,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1013',\n    name: 'Falette Peña, Pilar Carolina',\n    email: 'falette.pena@unibe.edu.do',\n    department: 'Ingeniería Civil',\n    position: 'Profesor',\n    specialization: 'Ingeniería Civil',\n    subjects: ['ingenieria-civil'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Civil',\n    description: 'Profesor especializado en ingeniería civil.'\n  },",
+        "id": "unibe-1013",
+        "name": "Falette Peña, Pilar Carolina",
+        "email": "falette.pena@unibe.edu.do",
+        "subjects": "['ingenieria-civil']",
+        "position": 1011
+      }
+    },
+    {
+      "position": 1014,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1015',\n    name: 'Sánchez Feliz, Jeison Alexander',\n    email: 'sanchez.feliz@unibe.edu.do',\n    department: 'Ciclo Básico',\n    position: 'Profesor',\n    specialization: 'Ciclo Básico',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo Básico',\n    description: 'Profesor especializado en ciclo básico.'\n  },",
+        "id": "unibe-1015",
+        "name": "Sánchez Feliz, Jeison Alexander",
+        "email": "sanchez.feliz@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 1013
+      }
+    },
+    {
+      "position": 1015,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1016',\n    name: 'Fernández Lagares, Apolinar David',\n    email: 'fernandez.lagares@unibe.edu.do',\n    department: 'Ingeniería Industrial',\n    position: 'Profesor',\n    specialization: 'Ingeniería Industrial',\n    subjects: ['ingenieria-industrial'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Industrial',\n    description: 'Profesor especializado en ingeniería industrial.'\n  },",
+        "id": "unibe-1016",
+        "name": "Fernández Lagares, Apolinar David",
+        "email": "fernandez.lagares@unibe.edu.do",
+        "subjects": "['ingenieria-industrial']",
+        "position": 1014
+      }
+    },
+    {
+      "position": 1016,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1017',\n    name: 'Soto Segura, Yasmin Carolina',\n    email: 'soto.segura@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología',\n    description: 'Profesor especializado en psicología.'\n  },",
+        "id": "unibe-1017",
+        "name": "Soto Segura, Yasmin Carolina",
+        "email": "soto.segura@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 1015
+      }
+    },
+    {
+      "position": 1017,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1018',\n    name: 'Gautreau Gomez, Rosminer Patricia',\n    email: 'gautreau.gomez@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología',\n    description: 'Profesor especializado en psicología.'\n  },",
+        "id": "unibe-1018",
+        "name": "Gautreau Gomez, Rosminer Patricia",
+        "email": "gautreau.gomez@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 1016
+      }
+    },
+    {
+      "position": 1018,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1019',\n    name: 'Domínguez Perez, Simon Alfredo',\n    email: 'dominguez.perez@unibe.edu.do',\n    department: 'Especialidad en Cirugía Bucal e Implantes Dentales',\n    position: 'Profesor',\n    specialization: 'Especialidad en Cirugía Bucal e Implantes Dentales',\n    subjects: ['general'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Especialidad en Cirugía Bucal e Implantes Dentales',\n    description: 'Profesor especializado en especialidad en cirugía bucal e implantes dentales.'\n  },",
+        "id": "unibe-1019",
+        "name": "Domínguez Perez, Simon Alfredo",
+        "email": "dominguez.perez@unibe.edu.do",
+        "subjects": "['general']",
+        "position": 1017
+      }
+    },
+    {
+      "position": 914,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-915',\n    name: 'Gonzalez Disla, Fernando Gabriel',\n    email: 'gonzalez.disla@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-915",
+        "name": "Gonzalez Disla, Fernando Gabriel",
+        "email": "gonzalez.disla@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 913
+      }
+    },
+    {
+      "position": 1019,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1020',\n    name: 'Gonzalez Disla, Yolanda Iluminada Antonia',\n    email: 'gonzalez.disla@unibe.edu.do',\n    department: 'Derecho',\n    position: 'Profesor',\n    specialization: 'Derecho',\n    subjects: ['derecho'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Derecho',\n    description: 'Profesor especializado en derecho.'\n  },",
+        "id": "unibe-1020",
+        "name": "Gonzalez Disla, Yolanda Iluminada Antonia",
+        "email": "gonzalez.disla@unibe.edu.do",
+        "subjects": "['derecho']",
+        "position": 1018
+      }
+    },
+    {
+      "position": 1020,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1021',\n    name: 'Martínez Hernandez, Nadia',\n    email: 'martinez.hernandez@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-1021",
+        "name": "Martínez Hernandez, Nadia",
+        "email": "martinez.hernandez@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 1019
+      }
+    },
+    {
+      "position": 1021,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1022',\n    name: 'Pou Espinal, Ana Beatriz',\n    email: 'pou.espinal@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-1022",
+        "name": "Pou Espinal, Ana Beatriz",
+        "email": "pou.espinal@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 1020
+      }
+    },
+    {
+      "position": 1022,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1023',\n    name: 'Polanco Sánchez, Víctor Julián',\n    email: 'polanco.sanchez@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-1023",
+        "name": "Polanco Sánchez, Víctor Julián",
+        "email": "polanco.sanchez@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 1021
+      }
+    },
+    {
+      "position": 1025,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1026',\n    name: 'Hernández Gonzalez, Niurka del Carmen',\n    email: 'hernandez.gonzalez@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Ingeniería en Tecnologías de la Información y la Comunicación',\n    subjects: ['ingenieria-sistemas', 'tecnologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería en Tecnologías de la Información y la Comunicación',\n    description: 'Profesor especializado en ingeniería en tecnologías de la información y la comunicación.'\n  },",
+        "id": "unibe-1026",
+        "name": "Hernández Gonzalez, Niurka del Carmen",
+        "email": "hernandez.gonzalez@unibe.edu.do",
+        "subjects": "['ingenieria-sistemas', 'tecnologia']",
+        "position": 1024
+      }
+    },
+    {
+      "position": 1027,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1028',\n    name: 'Cobas Perez, Juan Luis',\n    email: 'cobas.perez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-1028",
+        "name": "Cobas Perez, Juan Luis",
+        "email": "cobas.perez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 1026
+      }
+    },
+    {
+      "position": 1029,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1030',\n    name: 'Almonte Valdez, Ana Melissa',\n    email: 'almonte.valdez@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-1030",
+        "name": "Almonte Valdez, Ana Melissa",
+        "email": "almonte.valdez@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 1028
+      }
+    },
+    {
+      "position": 1030,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1031',\n    name: 'Ceron Castro, Yasmin Veronica',\n    email: 'ceron.castro@unibe.edu.do',\n    department: 'Derecho',\n    position: 'Profesor',\n    specialization: 'Derecho',\n    subjects: ['derecho'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Derecho',\n    description: 'Profesor especializado en derecho.'\n  },",
+        "id": "unibe-1031",
+        "name": "Ceron Castro, Yasmin Veronica",
+        "email": "ceron.castro@unibe.edu.do",
+        "subjects": "['derecho']",
+        "position": 1029
+      }
+    },
+    {
+      "position": 1031,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1032',\n    name: 'Rodríguez Perez, Pamella Natassa',\n    email: 'rodriguez.perez@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-1032",
+        "name": "Rodríguez Perez, Pamella Natassa",
+        "email": "rodriguez.perez@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 1030
+      }
+    },
+    {
+      "position": 1032,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1033',\n    name: 'Urrutia Liriano, Pedro Emmanuel',\n    email: 'urrutia.liriano@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Comunicación Publicitaria',\n    subjects: ['comunicacion', 'publicidad'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Comunicación Publicitaria',\n    description: 'Profesor especializado en comunicación publicitaria.'\n  },",
+        "id": "unibe-1033",
+        "name": "Urrutia Liriano, Pedro Emmanuel",
+        "email": "urrutia.liriano@unibe.edu.do",
+        "subjects": "['comunicacion', 'publicidad']",
+        "position": 1031
+      }
+    },
+    {
+      "position": 1033,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1034',\n    name: 'Hernández Fondeur, Laura Patricia',\n    email: 'hernandez.fondeur@unibe.edu.do',\n    department: 'Ciclo Básico',\n    position: 'Profesor',\n    specialization: 'Ciclo Básico',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo Básico',\n    description: 'Profesor especializado en ciclo básico.'\n  },",
+        "id": "unibe-1034",
+        "name": "Hernández Fondeur, Laura Patricia",
+        "email": "hernandez.fondeur@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 1032
+      }
+    },
+    {
+      "position": 1034,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1035',\n    name: 'Ortiz Fernandez de Espejo, Ana Maria',\n    email: 'ortiz.fernandez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-1035",
+        "name": "Ortiz Fernandez de Espejo, Ana Maria",
+        "email": "ortiz.fernandez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 1033
+      }
+    },
+    {
+      "position": 1035,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1036',\n    name: 'Javier Pimentel, Alejandro Enmanuel',\n    email: 'javier.pimentel@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas, Mención Negocios Internacionales',\n    subjects: ['administracion-empresas', 'negocios-internacionales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas, Mención Negocios Internacionales',\n    description: 'Profesor especializado en administración de empresas, mención negocios internacionales.'\n  },",
+        "id": "unibe-1036",
+        "name": "Javier Pimentel, Alejandro Enmanuel",
+        "email": "javier.pimentel@unibe.edu.do",
+        "subjects": "['administracion-empresas', 'negocios-internacionales']",
+        "position": 1034
+      }
+    },
+    {
+      "position": 1037,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1038',\n    name: 'Peñalver Garcia, Ignacio Patricio',\n    email: 'penalver.garcia@unibe.edu.do',\n    department: 'Turismo',\n    position: 'Profesor',\n    specialization: 'Turismo',\n    subjects: ['turismo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Turismo',\n    description: 'Profesor especializado en turismo.'\n  },",
+        "id": "unibe-1038",
+        "name": "Peñalver Garcia, Ignacio Patricio",
+        "email": "penalver.garcia@unibe.edu.do",
+        "subjects": "['turismo']",
+        "position": 1036
+      }
+    },
+    {
+      "position": 1038,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1039',\n    name: 'Gomez Mendez, Rafael Delio',\n    email: 'gomez.mendez@unibe.edu.do',\n    department: 'Mercadeo',\n    position: 'Profesor',\n    specialization: 'Mercadeo',\n    subjects: ['mercadeo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Mercadeo',\n    description: 'Profesor especializado en mercadeo.'\n  },",
+        "id": "unibe-1039",
+        "name": "Gomez Mendez, Rafael Delio",
+        "email": "gomez.mendez@unibe.edu.do",
+        "subjects": "['mercadeo']",
+        "position": 1037
+      }
+    },
+    {
+      "position": 1039,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1040',\n    name: 'Castillo Ogando, Nelson Rudys',\n    email: 'castillo.ogando@unibe.edu.do',\n    department: 'Derecho',\n    position: 'Profesor',\n    specialization: 'Derecho',\n    subjects: ['derecho'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Derecho',\n    description: 'Profesor especializado en derecho.'\n  },",
+        "id": "unibe-1040",
+        "name": "Castillo Ogando, Nelson Rudys",
+        "email": "castillo.ogando@unibe.edu.do",
+        "subjects": "['derecho']",
+        "position": 1038
+      }
+    },
+    {
+      "position": 1040,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1041',\n    name: 'Dilone Ferreras, Juleidy Violeta',\n    email: 'dilone.ferreras@unibe.edu.do',\n    department: 'Educación',\n    position: 'Profesor',\n    specialization: 'Educación Temprana',\n    subjects: ['educacion'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Educación Temprana',\n    description: 'Profesor especializado en educación temprana.'\n  },",
+        "id": "unibe-1041",
+        "name": "Dilone Ferreras, Juleidy Violeta",
+        "email": "dilone.ferreras@unibe.edu.do",
+        "subjects": "['educacion']",
+        "position": 1039
+      }
+    },
+    {
+      "position": 1041,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1042',\n    name: 'Rosario Javier, Juan Felix',\n    email: 'rosario.javier@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-1042",
+        "name": "Rosario Javier, Juan Felix",
+        "email": "rosario.javier@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 1040
+      }
+    },
+    {
+      "position": 1042,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1043',\n    name: 'Aguilo Alvarez, Pamela Massiel',\n    email: 'aguilo.alvarez@unibe.edu.do',\n    department: 'Diseño de Interiores',\n    position: 'Profesor',\n    specialization: 'Diseño de Interiores',\n    subjects: ['diseno-interiores'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Diseño de Interiores',\n    description: 'Profesor especializado en diseño de interiores.'\n  },",
+        "id": "unibe-1043",
+        "name": "Aguilo Alvarez, Pamela Massiel",
+        "email": "aguilo.alvarez@unibe.edu.do",
+        "subjects": "['diseno-interiores']",
+        "position": 1041
+      }
+    },
+    {
+      "position": 1043,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1044',\n    name: 'Valenzuela Oliver, Erika',\n    email: 'valenzuela.oliver@unibe.edu.do',\n    department: 'Mercadeo',\n    position: 'Profesor',\n    specialization: 'Mercadeo',\n    subjects: ['mercadeo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Mercadeo',\n    description: 'Profesor especializado en mercadeo.'\n  },",
+        "id": "unibe-1044",
+        "name": "Valenzuela Oliver, Erika",
+        "email": "valenzuela.oliver@unibe.edu.do",
+        "subjects": "['mercadeo']",
+        "position": 1042
+      }
+    },
+    {
+      "position": 1044,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1045',\n    name: 'Mejía Trinidad, Gabriela Maria',\n    email: 'mejia.trinidad@unibe.edu.do',\n    department: 'Mercadeo',\n    position: 'Profesor',\n    specialization: 'Mercadeo',\n    subjects: ['mercadeo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Mercadeo',\n    description: 'Profesor especializado en mercadeo.'\n  },",
+        "id": "unibe-1045",
+        "name": "Mejía Trinidad, Gabriela Maria",
+        "email": "mejia.trinidad@unibe.edu.do",
+        "subjects": "['mercadeo']",
+        "position": 1043
+      }
+    },
+    {
+      "position": 1046,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1047',\n    name: 'Veloz Dominguez, William Rafael',\n    email: 'veloz.dominguez@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas',\n    subjects: ['administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas',\n    description: 'Profesor especializado en administración de empresas.'\n  },",
+        "id": "unibe-1047",
+        "name": "Veloz Dominguez, William Rafael",
+        "email": "veloz.dominguez@unibe.edu.do",
+        "subjects": "['administracion-empresas']",
+        "position": 1045
+      }
+    },
+    {
+      "position": 1047,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1048',\n    name: 'Borg Polanco, Dionnys Michelle',\n    email: 'borg.polanco@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-1048",
+        "name": "Borg Polanco, Dionnys Michelle",
+        "email": "borg.polanco@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 1046
+      }
+    },
+    {
+      "position": 1048,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1049',\n    name: 'Vasquez Garcia, Angelica Mercedes',\n    email: 'vasquez.garcia@unibe.edu.do',\n    department: 'Ciclo Básico',\n    position: 'Profesor',\n    specialization: 'Ciclo Básico',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo Básico',\n    description: 'Profesor especializado en ciclo básico.'\n  },",
+        "id": "unibe-1049",
+        "name": "Vasquez Garcia, Angelica Mercedes",
+        "email": "vasquez.garcia@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 1047
+      }
+    },
+    {
+      "position": 554,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-555',\n    name: 'Benzo Hernández, María Jesús',\n    email: 'benzo.hernandez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-555",
+        "name": "Benzo Hernández, María Jesús",
+        "email": "benzo.hernandez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 553
+      }
+    },
+    {
+      "position": 614,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-615',\n    name: 'Benzo Hernández, Francisco Rafael',\n    email: 'benzo.hernandez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-615",
+        "name": "Benzo Hernández, Francisco Rafael",
+        "email": "benzo.hernandez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 613
+      }
+    },
+    {
+      "position": 862,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-863',\n    name: 'Mendez Perez, Ivan Eugenio',\n    email: 'mendez.perez@unibe.edu.do',\n    department: 'Ingeniería Civil',\n    position: 'Profesor',\n    specialization: 'Ingeniería Civil',\n    subjects: ['ingenieria-civil'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Civil',\n    description: 'Profesor especializado en ingeniería civil.'\n  },",
+        "id": "unibe-863",
+        "name": "Mendez Perez, Ivan Eugenio",
+        "email": "mendez.perez@unibe.edu.do",
+        "subjects": "['ingenieria-civil']",
+        "position": 861
+      }
+    },
+    {
+      "position": 717,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-718',\n    name: 'De la Rosa Pimentel, Gloria Yanneris',\n    email: 'de.la@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-718",
+        "name": "De la Rosa Pimentel, Gloria Yanneris",
+        "email": "de.la@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 716
+      }
+    },
+    {
+      "position": 967,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-968',\n    name: 'De la Rosa Franco, Victor Isaac',\n    email: 'de.la@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-968",
+        "name": "De la Rosa Franco, Victor Isaac",
+        "email": "de.la@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 966
+      }
+    },
+    {
+      "position": 983,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-984',\n    name: 'De la Cruz Cabral, Loyda Daribel',\n    email: 'de.la@unibe.edu.do',\n    department: 'Mercadeo',\n    position: 'Profesor',\n    specialization: 'Mercadeo',\n    subjects: ['mercadeo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Mercadeo',\n    description: 'Profesor especializado en mercadeo.'\n  },",
+        "id": "unibe-984",
+        "name": "De la Cruz Cabral, Loyda Daribel",
+        "email": "de.la@unibe.edu.do",
+        "subjects": "['mercadeo']",
+        "position": 982
+      }
+    },
+    {
+      "position": 1059,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1060',\n    name: 'De la Rocha Camilo, Isabel Carolina',\n    email: 'de.la@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas',\n    subjects: ['administracion-empresas'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas',\n    description: 'Profesor especializado en administración de empresas.'\n  },",
+        "id": "unibe-1060",
+        "name": "De la Rocha Camilo, Isabel Carolina",
+        "email": "de.la@unibe.edu.do",
+        "subjects": "['administracion-empresas']",
+        "position": 1058
+      }
+    },
+    {
+      "position": 593,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-594',\n    name: 'Escoto Rodríguez, Julio Miguel',\n    email: 'escoto.rodriguez@unibe.edu.do',\n    department: 'Especialidad en Cirugía Bucal e Implantes Dentales',\n    position: 'Profesor',\n    specialization: 'Especialidad en Cirugía Bucal e Implantes Dentales',\n    subjects: ['general'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Especialidad en Cirugía Bucal e Implantes Dentales',\n    description: 'Profesor especializado en especialidad en cirugía bucal e implantes dentales.'\n  },",
+        "id": "unibe-594",
+        "name": "Escoto Rodríguez, Julio Miguel",
+        "email": "escoto.rodriguez@unibe.edu.do",
+        "subjects": "['general']",
+        "position": 592
+      }
+    },
+    {
+      "position": 938,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-939',\n    name: 'Montas Pimentel, Daisy Indhira',\n    email: 'montas.pimentel@unibe.edu.do',\n    department: 'Derecho',\n    position: 'Profesor',\n    specialization: 'Derecho',\n    subjects: ['derecho'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Derecho',\n    description: 'Profesor especializado en derecho.'\n  },",
+        "id": "unibe-939",
+        "name": "Montas Pimentel, Daisy Indhira",
+        "email": "montas.pimentel@unibe.edu.do",
+        "subjects": "['derecho']",
+        "position": 937
+      }
+    },
+    {
+      "position": 824,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-825',\n    name: 'Cochon Feliz, Paloma Nathalie',\n    email: 'cochon.feliz@unibe.edu.do',\n    department: 'Ingeniería Civil',\n    position: 'Profesor',\n    specialization: 'Ingeniería Civil',\n    subjects: ['ingenieria-civil'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Civil',\n    description: 'Profesor especializado en ingeniería civil.'\n  },",
+        "id": "unibe-825",
+        "name": "Cochon Feliz, Paloma Nathalie",
+        "email": "cochon.feliz@unibe.edu.do",
+        "subjects": "['ingenieria-civil']",
+        "position": 823
+      }
+    },
+    {
+      "position": 835,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-836',\n    name: 'De los Santos Rosario, Erick Joel',\n    email: 'de.los@unibe.edu.do',\n    department: 'Especialidad en Endodoncia',\n    position: 'Profesor',\n    specialization: 'Especialidad en Endodoncia',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Especialidad en Endodoncia',\n    description: 'Profesor especializado en especialidad en endodoncia.'\n  },",
+        "id": "unibe-836",
+        "name": "De los Santos Rosario, Erick Joel",
+        "email": "de.los@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 834
+      }
+    },
+    {
+      "position": 928,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-929',\n    name: 'De los Santos Rodriguez, Indira',\n    email: 'de.los@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-929",
+        "name": "De los Santos Rodriguez, Indira",
+        "email": "de.los@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 927
+      }
+    },
+    {
+      "position": 1013,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1014',\n    name: 'De los Santos Villamán, Yudihect',\n    email: 'de.los@unibe.edu.do',\n    department: 'Ingeniería Industrial',\n    position: 'Profesor',\n    specialization: 'Ingeniería Industrial',\n    subjects: ['ingenieria-industrial'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Industrial',\n    description: 'Profesor especializado en ingeniería industrial.'\n  },",
+        "id": "unibe-1014",
+        "name": "De los Santos Villamán, Yudihect",
+        "email": "de.los@unibe.edu.do",
+        "subjects": "['ingenieria-industrial']",
+        "position": 1012
+      }
+    },
+    {
+      "position": 904,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-905',\n    name: 'De Leon Reyes, Boris Francisco',\n    email: 'de.leon@unibe.edu.do',\n    department: 'Derecho',\n    position: 'Profesor',\n    specialization: 'Derecho',\n    subjects: ['derecho'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Derecho',\n    description: 'Profesor especializado en derecho.'\n  },",
+        "id": "unibe-905",
+        "name": "De Leon Reyes, Boris Francisco",
+        "email": "de.leon@unibe.edu.do",
+        "subjects": "['derecho']",
+        "position": 903
+      }
+    },
+    {
+      "position": 969,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-970',\n    name: 'De Leon Roberts, Amelia Virginia',\n    email: 'de.leon@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Comunicación Publicitaria',\n    subjects: ['comunicacion', 'publicidad'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Comunicación Publicitaria',\n    description: 'Profesor especializado en comunicación publicitaria.'\n  },",
+        "id": "unibe-970",
+        "name": "De Leon Roberts, Amelia Virginia",
+        "email": "de.leon@unibe.edu.do",
+        "subjects": "['comunicacion', 'publicidad']",
+        "position": 968
+      }
+    },
+    {
+      "position": 662,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-663',\n    name: 'de Jesús Ulerio, Luis Felipe',\n    email: 'de.jesus@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-663",
+        "name": "de Jesús Ulerio, Luis Felipe",
+        "email": "de.jesus@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 661
+      }
+    },
+    {
+      "position": 881,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-882',\n    name: 'De Jesus Rodriguez, Sarah',\n    email: 'de.jesus@unibe.edu.do',\n    department: 'Comunicación',\n    position: 'Profesor',\n    specialization: 'Comunicación Publicitaria',\n    subjects: ['comunicacion', 'publicidad'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Comunicación Publicitaria',\n    description: 'Profesor especializado en comunicación publicitaria.'\n  },",
+        "id": "unibe-882",
+        "name": "De Jesus Rodriguez, Sarah",
+        "email": "de.jesus@unibe.edu.do",
+        "subjects": "['comunicacion', 'publicidad']",
+        "position": 880
+      }
+    },
+    {
+      "position": 1003,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1004',\n    name: 'De Jesus Aramboles, Yocasitia',\n    email: 'de.jesus@unibe.edu.do',\n    department: 'Ciclo de Estudios Generales',\n    position: 'Profesor',\n    specialization: 'Ciclo de Estudios Generales',\n    subjects: ['estudios-generales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ciclo de Estudios Generales',\n    description: 'Profesor especializado en ciclo de estudios generales.'\n  },",
+        "id": "unibe-1004",
+        "name": "De Jesus Aramboles, Yocasitia",
+        "email": "de.jesus@unibe.edu.do",
+        "subjects": "['estudios-generales']",
+        "position": 1002
+      }
+    },
+    {
+      "position": 1024,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1025',\n    name: 'De Jesus Cruz, Jenny Patricia',\n    email: 'de.jesus@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-1025",
+        "name": "De Jesus Cruz, Jenny Patricia",
+        "email": "de.jesus@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 1023
+      }
+    },
+    {
+      "position": 590,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-591',\n    name: 'Almodóvar Hache, Ana Idalia',\n    email: 'almodovar.hache@unibe.edu.do',\n    department: 'Odontología',\n    position: 'Profesor',\n    specialization: 'Odontología',\n    subjects: ['odontologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Odontología',\n    description: 'Profesor especializado en odontología.'\n  },",
+        "id": "unibe-591",
+        "name": "Almodóvar Hache, Ana Idalia",
+        "email": "almodovar.hache@unibe.edu.do",
+        "subjects": "['odontologia']",
+        "position": 589
+      }
+    },
+    {
+      "position": 734,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-735',\n    name: 'Rodríguez Sosa, Karina Virginia',\n    email: 'rodriguez.sosa@unibe.edu.do',\n    department: 'Mercadeo',\n    position: 'Profesor',\n    specialization: 'Mercadeo',\n    subjects: ['mercadeo'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Mercadeo',\n    description: 'Profesor especializado en mercadeo.'\n  },",
+        "id": "unibe-735",
+        "name": "Rodríguez Sosa, Karina Virginia",
+        "email": "rodriguez.sosa@unibe.edu.do",
+        "subjects": "['mercadeo']",
+        "position": 733
+      }
+    },
+    {
+      "position": 1055,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1056',\n    name: 'Alam Lora, Nancy Ivelisse',\n    email: 'alam.lora@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-1056",
+        "name": "Alam Lora, Nancy Ivelisse",
+        "email": "alam.lora@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 1054
+      }
+    },
+    {
+      "position": 1051,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-1052',\n    name: 'Hernández Medina, Larissa',\n    email: 'hernandez.medina@unibe.edu.do',\n    department: 'Psicología',\n    position: 'Profesor',\n    specialization: 'Psicología',\n    subjects: ['psicologia'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Psicología',\n    description: 'Profesor especializado en psicología.'\n  },",
+        "id": "unibe-1052",
+        "name": "Hernández Medina, Larissa",
+        "email": "hernandez.medina@unibe.edu.do",
+        "subjects": "['psicologia']",
+        "position": 1050
+      }
+    },
+    {
+      "position": 810,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-811',\n    name: 'Núñez Fernandez, Lillibe',\n    email: 'nunez.fernandez@unibe.edu.do',\n    department: 'Medicina',\n    position: 'Profesor',\n    specialization: 'Medicina',\n    subjects: ['medicina'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Medicina',\n    description: 'Profesor especializado en medicina.'\n  },",
+        "id": "unibe-811",
+        "name": "Núñez Fernandez, Lillibe",
+        "email": "nunez.fernandez@unibe.edu.do",
+        "subjects": "['medicina']",
+        "position": 809
+      }
+    },
+    {
+      "position": 927,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-928',\n    name: 'Almonte Castro, Cristian Manuel',\n    email: 'almonte.castro@unibe.edu.do',\n    department: 'Ingeniería Industrial',\n    position: 'Profesor',\n    specialization: 'Ingeniería Industrial',\n    subjects: ['ingenieria-industrial'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Ingeniería Industrial',\n    description: 'Profesor especializado en ingeniería industrial.'\n  },",
+        "id": "unibe-928",
+        "name": "Almonte Castro, Cristian Manuel",
+        "email": "almonte.castro@unibe.edu.do",
+        "subjects": "['ingenieria-industrial']",
+        "position": 926
+      }
+    },
+    {
+      "position": 900,
+      "professor": {
+        "originalText": "{\n    id: 'unibe-901',\n    name: 'Lajara Baez, Bianca',\n    email: 'lajara.baez@unibe.edu.do',\n    department: 'Administración de Empresas',\n    position: 'Profesor',\n    specialization: 'Administración de Empresas, Mención Negocios Internacionales',\n    subjects: ['administracion-empresas', 'negocios-internacionales'],\n    university: 'UNIBE',\n    campus: 'Santo Domingo',\n    credentials: 'Especialidad en Administración de Empresas, Mención Negocios Internacionales',\n    description: 'Profesor especializado en administración de empresas, mención negocios internacionales.'\n  },",
+        "id": "unibe-901",
+        "name": "Lajara Baez, Bianca",
+        "email": "lajara.baez@unibe.edu.do",
+        "subjects": "['administracion-empresas', 'negocios-internacionales']",
+        "position": 899
+      }
+    }
+  ]
+}

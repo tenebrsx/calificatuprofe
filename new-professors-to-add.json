@@ -1,0 +1,757 @@
+[
+  {
+    "id": "unibe-321",
+    "name": "Mota Mencia, Rafael Adriano",
+    "email": "mota.mencia,@unibe.edu.do",
+    "department": "Decanato de Estudiantes",
+    "position": "Profesor",
+    "specialization": "Decanato de Estudiantes",
+    "subjects": [
+      "administracion"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Decanato de Estudiantes",
+    "description": "Profesor especializado en decanato de estudiantes."
+  },
+  {
+    "id": "unibe-322",
+    "name": "Polanco Vidal, Alba Iris",
+    "email": "polanco.vidal,@unibe.edu.do",
+    "department": "Psicología",
+    "position": "Profesor",
+    "specialization": "Psicología",
+    "subjects": [
+      "psicologia"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Psicología",
+    "description": "Profesor especializado en psicología."
+  },
+  {
+    "id": "unibe-323",
+    "name": "Reyes Polanco, Jeimie Marlene",
+    "email": "reyes.polanco,@unibe.edu.do",
+    "department": "Mercadeo",
+    "position": "Profesor",
+    "specialization": "Mercadeo",
+    "subjects": [
+      "mercadeo"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Mercadeo",
+    "description": "Profesor especializado en mercadeo."
+  },
+  {
+    "id": "unibe-324",
+    "name": "Restituyo Medrano, Luis Vladimir",
+    "email": "restituyo.medrano,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-325",
+    "name": "Moreno Alonzo, Milagros Beatriz",
+    "email": "moreno.alonzo,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-326",
+    "name": "Ramírez Romero, María Altagracia",
+    "email": "ramírez.romero,@unibe.edu.do",
+    "department": "Administración de Empresas",
+    "position": "Profesor",
+    "specialization": "Administración de Empresas",
+    "subjects": [
+      "administracion-empresas"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Administración de Empresas",
+    "description": "Profesor especializado en administración de empresas."
+  },
+  {
+    "id": "unibe-327",
+    "name": "Caraballo Montero, Tomás Leonardo",
+    "email": "caraballo.montero,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-328",
+    "name": "Santana Herrera, Ruth Dilania",
+    "email": "santana.herrera,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-329",
+    "name": "De Wannemaeker, Peter Paul Ghislain",
+    "email": "de.wannemaeker,@unibe.edu.do",
+    "department": "Especialidad Intervenciones en Crisis y Traumas",
+    "position": "Profesor",
+    "specialization": "Especialidad Intervenciones en Crisis y Traumas",
+    "subjects": [
+      "psicologia"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Especialidad Intervenciones en Crisis y Traumas",
+    "description": "Profesor especializado en especialidad intervenciones en crisis y traumas."
+  },
+  {
+    "id": "unibe-330",
+    "name": "Carpio Pérez, Ruth Aleyda",
+    "email": "carpio.pérez,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-331",
+    "name": "Estevez Nuñez, Yoselina Yenny",
+    "email": "estevez.nuñez,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-332",
+    "name": "Checo Brito, Jose Miguel",
+    "email": "checo.brito,@unibe.edu.do",
+    "department": "Administración de Empresas",
+    "position": "Profesor",
+    "specialization": "Administración de Empresas",
+    "subjects": [
+      "administracion-empresas"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Administración de Empresas",
+    "description": "Profesor especializado en administración de empresas."
+  },
+  {
+    "id": "unibe-333",
+    "name": "Mallen Medina, Pamela Marcelle",
+    "email": "mallen.medina,@unibe.edu.do",
+    "department": "Arquitectura",
+    "position": "Profesor",
+    "specialization": "Arquitectura",
+    "subjects": [
+      "arquitectura"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Arquitectura",
+    "description": "Profesor especializado en arquitectura."
+  },
+  {
+    "id": "unibe-334",
+    "name": "Vargas de la Cruz, Carlos Joel",
+    "email": "vargas.de@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-335",
+    "name": "Espaillat Gonzalez, Sandra Melissa",
+    "email": "espaillat.gonzalez,@unibe.edu.do",
+    "department": "Educación",
+    "position": "Profesor",
+    "specialization": "Educación Temprana",
+    "subjects": [
+      "educacion"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Educación Temprana",
+    "description": "Profesor especializado en educación temprana."
+  },
+  {
+    "id": "unibe-336",
+    "name": "Cohn-Lois Eusebio, Anniete Isaure",
+    "email": "cohn-lois.eusebio,@unibe.edu.do",
+    "department": "Administración de Empresas",
+    "position": "Profesor",
+    "specialization": "Administración de Empresas, Mención Negocios Internacionales",
+    "subjects": [
+      "administracion-empresas",
+      "negocios-internacionales"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Administración de Empresas, Mención Negocios Internacionales",
+    "description": "Profesor especializado en administración de empresas, mención negocios internacionales."
+  },
+  {
+    "id": "unibe-337",
+    "name": "Javier Mercedes, Adriana",
+    "email": "javier.mercedes,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-338",
+    "name": "Collado Marte, Giselle",
+    "email": "collado.marte,@unibe.edu.do",
+    "department": "Ciclo de Estudios Generales",
+    "position": "Profesor",
+    "specialization": "Ciclo de Estudios Generales",
+    "subjects": [
+      "estudios-generales"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Ciclo de Estudios Generales",
+    "description": "Profesor especializado en ciclo de estudios generales."
+  },
+  {
+    "id": "unibe-339",
+    "name": "Marte Santana, Luz Argentina",
+    "email": "marte.santana,@unibe.edu.do",
+    "department": "Derecho",
+    "position": "Profesor",
+    "specialization": "Derecho",
+    "subjects": [
+      "derecho"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Derecho",
+    "description": "Profesor especializado en derecho."
+  },
+  {
+    "id": "unibe-340",
+    "name": "Yunes Fragoso, Paula Massiel",
+    "email": "yunes.fragoso,@unibe.edu.do",
+    "department": "Odontología",
+    "position": "Profesor",
+    "specialization": "Odontología",
+    "subjects": [
+      "odontologia"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Odontología",
+    "description": "Profesor especializado en odontología."
+  },
+  {
+    "id": "unibe-341",
+    "name": "Caraballo Vasquez, Orlando Anthony",
+    "email": "caraballo.vasquez,@unibe.edu.do",
+    "department": "Mercadeo",
+    "position": "Profesor",
+    "specialization": "Mercadeo",
+    "subjects": [
+      "mercadeo"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Mercadeo",
+    "description": "Profesor especializado en mercadeo."
+  },
+  {
+    "id": "unibe-342",
+    "name": "Betances Almanzar, Jose David",
+    "email": "betances.almanzar,@unibe.edu.do",
+    "department": "Derecho",
+    "position": "Profesor",
+    "specialization": "Derecho",
+    "subjects": [
+      "derecho"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Derecho",
+    "description": "Profesor especializado en derecho."
+  },
+  {
+    "id": "unibe-343",
+    "name": "Jimenez Montas, Roberto",
+    "email": "jimenez.montas,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-344",
+    "name": "Mejía Matos, Julio Anibal",
+    "email": "mejía.matos,@unibe.edu.do",
+    "department": "Especialidad en Ortopedia Maxilar y Orto",
+    "position": "Profesor",
+    "specialization": "Especialidad en Ortopedia Maxilar y Orto",
+    "subjects": [
+      "odontologia"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Especialidad en Ortopedia Maxilar y Orto",
+    "description": "Profesor especializado en especialidad en ortopedia maxilar y orto."
+  },
+  {
+    "id": "unibe-345",
+    "name": "Peña Castillo, Manuel Urbencio",
+    "email": "peña.castillo,@unibe.edu.do",
+    "department": "Odontología",
+    "position": "Profesor",
+    "specialization": "Odontología",
+    "subjects": [
+      "odontologia"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Odontología",
+    "description": "Profesor especializado en odontología."
+  },
+  {
+    "id": "unibe-346",
+    "name": "Farrell Marmol, Elizabeth Maria",
+    "email": "farrell.marmol,@unibe.edu.do",
+    "department": "Decanato de Estudiantes",
+    "position": "Profesor",
+    "specialization": "Decanato de Estudiantes",
+    "subjects": [
+      "administracion"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Decanato de Estudiantes",
+    "description": "Profesor especializado en decanato de estudiantes."
+  },
+  {
+    "id": "unibe-347",
+    "name": "Benzo Hernandez, Mary Francis",
+    "email": "benzo.hernandez,@unibe.edu.do",
+    "department": "Educación",
+    "position": "Profesor",
+    "specialization": "Educación Temprana",
+    "subjects": [
+      "educacion"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Educación Temprana",
+    "description": "Profesor especializado en educación temprana."
+  },
+  {
+    "id": "unibe-348",
+    "name": "Martinez Valentín, Julio Cesar",
+    "email": "martinez.valentín,@unibe.edu.do",
+    "department": "Decoración Arquitectónica",
+    "position": "Profesor",
+    "specialization": "Decoración Arquitectónica",
+    "subjects": [
+      "general"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Decoración Arquitectónica",
+    "description": "Profesor especializado en decoración arquitectónica."
+  },
+  {
+    "id": "unibe-349",
+    "name": "Garrido Rodríguez, Carolina de la Altagracia",
+    "email": "garrido.rodríguez,@unibe.edu.do",
+    "department": "Derecho",
+    "position": "Profesor",
+    "specialization": "Derecho",
+    "subjects": [
+      "derecho"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Derecho",
+    "description": "Profesor especializado en derecho."
+  },
+  {
+    "id": "unibe-350",
+    "name": "Guerrero de Jesus, Juan Manuel",
+    "email": "guerrero.de@unibe.edu.do",
+    "department": "Derecho",
+    "position": "Profesor",
+    "specialization": "Derecho",
+    "subjects": [
+      "derecho"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Derecho",
+    "description": "Profesor especializado en derecho."
+  },
+  {
+    "id": "unibe-351",
+    "name": "Grassals Castro, Leonardo Alexis",
+    "email": "grassals.castro,@unibe.edu.do",
+    "department": "Decanato de Estudiantes",
+    "position": "Profesor",
+    "specialization": "Decanato de Estudiantes",
+    "subjects": [
+      "administracion"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Decanato de Estudiantes",
+    "description": "Profesor especializado en decanato de estudiantes."
+  },
+  {
+    "id": "unibe-352",
+    "name": "Heinsen Guerra, Margarita Maria",
+    "email": "heinsen.guerra,@unibe.edu.do",
+    "department": "Educación",
+    "position": "Profesor",
+    "specialization": "Educación Temprana",
+    "subjects": [
+      "educacion"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Educación Temprana",
+    "description": "Profesor especializado en educación temprana."
+  },
+  {
+    "id": "unibe-353",
+    "name": "Grachova de Fernandez, Olga Vasilevna",
+    "email": "grachova.de@unibe.edu.do",
+    "department": "Educación",
+    "position": "Profesor",
+    "specialization": "Educación Temprana",
+    "subjects": [
+      "educacion"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Educación Temprana",
+    "description": "Profesor especializado en educación temprana."
+  },
+  {
+    "id": "unibe-354",
+    "name": "Comas Mena de Perdomo, Martha Minerva",
+    "email": "comas.mena@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-355",
+    "name": "Despradel Lample, Luis Manuel Ramón José",
+    "email": "despradel.lample,@unibe.edu.do",
+    "department": "Odontología",
+    "position": "Profesor",
+    "specialization": "Odontología",
+    "subjects": [
+      "odontologia"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Odontología",
+    "description": "Profesor especializado en odontología."
+  },
+  {
+    "id": "unibe-356",
+    "name": "Joubert Hued, Rony Antonio",
+    "email": "joubert.hued,@unibe.edu.do",
+    "department": "Especialidad en Ortopedia Maxilar y Orto",
+    "position": "Profesor",
+    "specialization": "Especialidad en Ortopedia Maxilar y Orto",
+    "subjects": [
+      "odontologia"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Especialidad en Ortopedia Maxilar y Orto",
+    "description": "Profesor especializado en especialidad en ortopedia maxilar y orto."
+  },
+  {
+    "id": "unibe-357",
+    "name": "Castillo Mateo, Martín Julián",
+    "email": "castillo.mateo,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-358",
+    "name": "Coss Osorio, Rafael Tobías",
+    "email": "coss.osorio,@unibe.edu.do",
+    "department": "Medicina",
+    "position": "Profesor",
+    "specialization": "Medicina",
+    "subjects": [
+      "medicina"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Medicina",
+    "description": "Profesor especializado en medicina."
+  },
+  {
+    "id": "unibe-359",
+    "name": "Martino Soto, Yo-Mayra Jeannelly",
+    "email": "martino.soto,@unibe.edu.do",
+    "department": "Derecho",
+    "position": "Profesor",
+    "specialization": "Derecho",
+    "subjects": [
+      "derecho"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Derecho",
+    "description": "Profesor especializado en derecho."
+  },
+  {
+    "id": "unibe-360",
+    "name": "Reyes Gómez, Carlos Abiezer",
+    "email": "reyes.gómez,@unibe.edu.do",
+    "department": "Administración de Empresas",
+    "position": "Profesor",
+    "specialization": "Administración de Empresas, Mención Negocios Internacionales",
+    "subjects": [
+      "administracion-empresas",
+      "negocios-internacionales"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Administración de Empresas, Mención Negocios Internacionales",
+    "description": "Profesor especializado en administración de empresas, mención negocios internacionales."
+  },
+  {
+    "id": "unibe-361",
+    "name": "Nicolás Miladeh, Víctor Javier",
+    "email": "nicolás.miladeh,@unibe.edu.do",
+    "department": "Administración de Empresas",
+    "position": "Profesor",
+    "specialization": "Administración de Empresas, Mención Negocios Internacionales",
+    "subjects": [
+      "administracion-empresas",
+      "negocios-internacionales"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Administración de Empresas, Mención Negocios Internacionales",
+    "description": "Profesor especializado en administración de empresas, mención negocios internacionales."
+  },
+  {
+    "id": "unibe-362",
+    "name": "Isa Tavárez, Jhael",
+    "email": "isa.tavárez,@unibe.edu.do",
+    "department": "Ingeniería Civil",
+    "position": "Profesor",
+    "specialization": "Ingeniería Civil",
+    "subjects": [
+      "ingenieria-civil"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Ingeniería Civil",
+    "description": "Profesor especializado en ingeniería civil."
+  },
+  {
+    "id": "unibe-363",
+    "name": "Lagares Feliz, Osvaldo Yasser",
+    "email": "lagares.feliz,@unibe.edu.do",
+    "department": "Administración de Empresas",
+    "position": "Profesor",
+    "specialization": "Administración de Empresas, Mención Negocios Internacionales",
+    "subjects": [
+      "administracion-empresas",
+      "negocios-internacionales"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Administración de Empresas, Mención Negocios Internacionales",
+    "description": "Profesor especializado en administración de empresas, mención negocios internacionales."
+  },
+  {
+    "id": "unibe-364",
+    "name": "D’Oleo Seiffe, Oliver Alexander",
+    "email": "d’oleo.seiffe,@unibe.edu.do",
+    "department": "Escuela de Graduados de UNIBE",
+    "position": "Profesor",
+    "specialization": "Escuela de Graduados de UNIBE",
+    "subjects": [
+      "posgrado"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Escuela de Graduados de UNIBE",
+    "description": "Profesor especializado en escuela de graduados de unibe."
+  },
+  {
+    "id": "unibe-365",
+    "name": "Frías Morillo, Pedro José",
+    "email": "frías.morillo,@unibe.edu.do",
+    "department": "Derecho",
+    "position": "Profesor",
+    "specialization": "Derecho",
+    "subjects": [
+      "derecho"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Derecho",
+    "description": "Profesor especializado en derecho."
+  },
+  {
+    "id": "unibe-366",
+    "name": "Ramos Velásquez, Marjorie Roxanna",
+    "email": "ramos.velásquez,@unibe.edu.do",
+    "department": "Ciclo de Estudios Generales",
+    "position": "Profesor",
+    "specialization": "Ciclo de Estudios Generales",
+    "subjects": [
+      "estudios-generales"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Ciclo de Estudios Generales",
+    "description": "Profesor especializado en ciclo de estudios generales."
+  },
+  {
+    "id": "unibe-367",
+    "name": "Durán Tapia, Eunice del Carmen",
+    "email": "durán.tapia,@unibe.edu.do",
+    "department": "Ingeniería Civil",
+    "position": "Profesor",
+    "specialization": "Ingeniería Civil",
+    "subjects": [
+      "ingenieria-civil"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Ingeniería Civil",
+    "description": "Profesor especializado en ingeniería civil."
+  },
+  {
+    "id": "unibe-368",
+    "name": "Rivera Suárez, Osiris Martín",
+    "email": "rivera.suárez,@unibe.edu.do",
+    "department": "Ingeniería Industrial",
+    "position": "Profesor",
+    "specialization": "Ingeniería Industrial",
+    "subjects": [
+      "ingenieria-industrial"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Ingeniería Industrial",
+    "description": "Profesor especializado en ingeniería industrial."
+  },
+  {
+    "id": "unibe-369",
+    "name": "Florentino Porcella, Leonor Elise",
+    "email": "florentino.porcella,@unibe.edu.do",
+    "department": "Psicología",
+    "position": "Profesor",
+    "specialization": "Psicología",
+    "subjects": [
+      "psicologia"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Psicología",
+    "description": "Profesor especializado en psicología."
+  },
+  {
+    "id": "unibe-370",
+    "name": "Germán Morales, Manuela",
+    "email": "germán.morales,@unibe.edu.do",
+    "department": "Comunicación",
+    "position": "Profesor",
+    "specialization": "Comunicación Publicitaria",
+    "subjects": [
+      "comunicacion",
+      "publicidad"
+    ],
+    "university": "UNIBE",
+    "campus": "Santo Domingo",
+    "credentials": "Especialidad en Comunicación Publicitaria",
+    "description": "Profesor especializado en comunicación publicitaria."
+  }
+]

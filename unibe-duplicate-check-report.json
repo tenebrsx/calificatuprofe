@@ -1,0 +1,22 @@
+{
+  "summary": {
+    "totalProfessors": 957,
+    "duplicateIds": 0,
+    "duplicateNames": 0,
+    "duplicateEmails": 0,
+    "similarNames": 0,
+    "missingIds": 0,
+    "unexpectedIds": 0,
+    "totalIssues": 0
+  },
+  "duplicates": {
+    "ids": [],
+    "names": [],
+    "emails": [],
+    "similar": []
+  },
+  "idIssues": {
+    "missing": [],
+    "unexpected": []
+  }
+}
