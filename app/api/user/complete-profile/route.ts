@@ -52,8 +52,6 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     })
 
-    console.log('Profile completed for user:', userId)
-
     return NextResponse.json({
       success: true,
       message: 'Profile completed successfully',

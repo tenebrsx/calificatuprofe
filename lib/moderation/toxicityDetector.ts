@@ -425,9 +425,6 @@ export class ToxicityDetector {
     }
 
     // In production, save to database
-    console.log('🚫 CONTENT REJECTED:', logEntry)
-    
-    // You can implement database logging here
     // await db.collection('moderation_logs').add(logEntry)
   }
 

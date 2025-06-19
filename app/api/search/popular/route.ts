@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 // Popular search terms based on Dominican universities and common searches
 const POPULAR_SEARCHES = [
@@ -18,81 +18,80 @@ const POPULAR_SEARCHES = [
   'Literatura'
 ]
 
+const MOCK_POPULAR_SEARCHES = [
+  { query: 'Ingeniería', count: 156 },
+  { query: 'Medicina', count: 142 },
+  { query: 'Administración', count: 98 },
+  { query: 'Derecho', count: 87 },
+  { query: 'Psicología', count: 76 },
+  { query: 'Matemáticas', count: 65 },
+  { query: 'Historia', count: 54 },
+  { query: 'Química', count: 43 },
+  { query: 'Física', count: 38 },
+  { query: 'Filosofía', count: 32 }
+]
+
+// Track searches (in a real app, this would go to a database)
+const searchTracker = new Map<string, number>()
+
 export async function GET() {
   try {
-    // Popular searches for Dominican universities and subjects
-    const popularSearches = {
-      universities: [
-        { name: 'INTEC', count: 29, description: 'Instituto Tecnológico de Santo Domingo' },
-        { name: 'PUCMM', count: 32, description: 'Pontificia Universidad Católica Madre y Maestra' },
-        { name: 'UASD', count: 22, description: 'Universidad Autónoma de Santo Domingo' },
-        { name: 'UNPHU', count: 27, description: 'Universidad Nacional Pedro Henríquez Ureña' },
-        { name: 'UNIBE', count: 20, description: 'Universidad Iberoamericana' },
-        { name: 'UNICARIBE', count: 13, description: 'Universidad del Caribe' },
-        { name: 'UTESA', count: 10, description: 'Universidad Tecnológica de Santiago' },
-        { name: 'UNAPEC', count: 8, description: 'Universidad APEC' }
-      ],
-      subjects: [
-        { name: 'Ingeniería', count: 85, icon: '⚙️' },
-        { name: 'Medicina', count: 72, icon: '🏥' },
-        { name: 'Derecho', count: 68, icon: '⚖️' },
-        { name: 'Administración', count: 64, icon: '💼' },
-        { name: 'Contabilidad', count: 58, icon: '📊' },
-        { name: 'Psicología', count: 45, icon: '🧠' },
-        { name: 'Educación', count: 42, icon: '📚' },
-        { name: 'Arquitectura', count: 38, icon: '🏗️' },
-        { name: 'Comunicación', count: 35, icon: '📢' },
-        { name: 'Informática', count: 33, icon: '💻' }
-      ],
-      trending: [
-        'Dr. Víctor Gómez-Valenzuela',
-        'Dra. Solhanlle Bonilla Duarte', 
-        'Dr. Luis Álvarez López',
-        'Dr. Fernando Santamaría',
-        'Ing. Carlos Cordero'
-      ]
-    }
+    // In a real implementation, you'd fetch from your database
+    // For now, return mock data with some tracked searches mixed in
+    const trackedSearches = Array.from(searchTracker.entries())
+      .map(([query, count]) => ({ query, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5)
+
+    const allSearches = [...trackedSearches, ...MOCK_POPULAR_SEARCHES]
+      .reduce((acc, curr) => {
+        const existing = acc.find(item => item.query.toLowerCase() === curr.query.toLowerCase())
+        if (existing) {
+          existing.count += curr.count
+        } else {
+          acc.push(curr)
+        }
+        return acc
+      }, [] as { query: string; count: number }[])
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10)
 
     return NextResponse.json({
       success: true,
-      data: popularSearches,
-      timestamp: new Date().toISOString()
+      searches: allSearches
     })
-
   } catch (error) {
-    console.error('Error fetching popular searches:', error)
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Failed to fetch popular searches',
-        data: {
-          universities: [],
-          subjects: [],
-          trending: []
-        }
-      },
+      { success: false, error: 'Failed to fetch popular searches' },
       { status: 500 }
     )
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const { query } = await request.json()
     
-    // In a real app, you'd track search queries in a database
-    // For now, just return success
-    console.log('Search tracked:', query)
-    
+    if (!query || typeof query !== 'string') {
+      return NextResponse.json(
+        { success: false, error: 'Invalid query' },
+        { status: 400 }
+      )
+    }
+
+    // Track the search
+    const normalizedQuery = query.trim().toLowerCase()
+    const currentCount = searchTracker.get(normalizedQuery) || 0
+    searchTracker.set(normalizedQuery, currentCount + 1)
+
     return NextResponse.json({
       success: true,
-      message: 'Search tracked successfully'
+      message: 'Search tracked'
     })
   } catch (error) {
-    console.error('Error tracking search:', error)
-    return NextResponse.json({
-      success: false,
-      message: 'Failed to track search'
-    }, { status: 500 })
+    return NextResponse.json(
+      { success: false, error: 'Failed to track search' },
+      { status: 500 }
+    )
   }
 } 

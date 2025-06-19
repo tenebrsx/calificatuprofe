@@ -44,7 +44,6 @@ export const authOptions: AuthOptions = {
           
           return null
         } catch (error) {
-          console.error('Firebase auth error:', error)
           return null
         }
       }
@@ -66,8 +65,6 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log("SignIn callback triggered:", { user: user?.email, provider: account?.provider });
-      
       if (account?.provider === "google") {
         try {
           // Check if user exists in Firestore
@@ -86,14 +83,10 @@ export const authOptions: AuthOptions = {
               isStudent: null,
               institution: null,
             });
-            console.log(`New user created: ${user.id}`);
-          } else {
-            console.log(`Existing user signed in: ${user.id}`);
           }
           
           return true;
         } catch (error) {
-          console.error(`Google sign-in error:`, error);
           return "/auth/error?error=DatabaseError";
         }
       }
@@ -116,7 +109,7 @@ export const authOptions: AuthOptions = {
             (session.user as any).institution = userData.institution;
           }
         } catch (error) {
-          console.error("Error fetching user data:", error);
+          // Silent error handling - user data will remain incomplete
         }
       }
       return session;
@@ -128,17 +121,9 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async redirect({ url, baseUrl }) {
-      console.log("🔄 NextAuth redirect called:", { 
-        url, 
-        baseUrl, 
-        timestamp: new Date().toISOString() 
-      });
-      
       // Handle relative URLs
       if (url.startsWith("/")) {
-        const finalUrl = `${baseUrl}${url}`;
-        console.log("✅ Relative URL redirect:", finalUrl);
-        return finalUrl;
+        return `${baseUrl}${url}`;
       }
       
       // Allow same origin redirects
@@ -147,22 +132,14 @@ export const authOptions: AuthOptions = {
         const baseUrlObj = new URL(baseUrl);
         
         if (urlObj.origin === baseUrlObj.origin) {
-          console.log("✅ Same origin redirect:", url);
           return url;
         }
-        
-        console.log("⚠️ Different origin detected:", {
-          urlOrigin: urlObj.origin,
-          baseUrlOrigin: baseUrlObj.origin
-        });
       } catch (e) {
-        console.error("❌ Invalid URL in redirect:", e);
+        // Invalid URL, fall back to default
       }
       
       // Default redirect after successful authentication
-      const defaultUrl = `${baseUrl}/`;
-      console.log("🏠 Default redirect to home:", defaultUrl);
-      return defaultUrl;
+      return `${baseUrl}/`;
     },
   },
 } 

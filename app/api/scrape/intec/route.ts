@@ -349,12 +349,8 @@ export async function POST() {
     // In a real application, you would save to a database
     // For now, we'll simulate adding INTEC professors to our mock data
     
-    console.log('🏫 Scraping INTEC professors...')
-    
     // Simulate processing time
     await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    console.log(`✅ Successfully scraped ${intecProfessors.length} INTEC professors`)
     
     return NextResponse.json({
       success: true,
@@ -370,7 +366,6 @@ export async function POST() {
       }
     })
   } catch (error) {
-    console.error('❌ INTEC scraping failed:', error)
     return NextResponse.json(
       { success: false, error: 'Failed to scrape INTEC professors' },
       { status: 500 }

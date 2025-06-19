@@ -45,15 +45,11 @@ export default function RateProfessorPage() {
     
     try {
       // Simulate API call
-      console.log('Submitting rating:', ratingData)
-      
-      // Simulate delay
       await new Promise(resolve => setTimeout(resolve, 2000))
       
       // Success - redirect back to professor page
       router.push(`/profesor/${professorId}?success=rating-submitted`)
     } catch (error) {
-      console.error('Error submitting rating:', error)
       // Handle error (show toast, etc.)
     } finally {
       setIsSubmitting(false)

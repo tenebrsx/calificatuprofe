@@ -68,7 +68,6 @@ export const testFirebaseConnection = async () => {
     const { doc, getDoc } = await import('firebase/firestore')
     const testDoc = doc(db, 'test', 'connection')
     await getDoc(testDoc)
-    console.log('✅ Firebase connection successful')
     return true
   } catch (error) {
     console.warn('⚠️ Firebase connection test failed:', error)

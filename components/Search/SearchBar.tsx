@@ -51,8 +51,34 @@ export default function SearchBar() {
         type: 'institution' as const
       }))
 
-    // TODO: Add professor filtering when the backend is ready
+    // Basic professor search implementation
+    // This will be enhanced when the full backend is ready
+    const searchProfessors = async () => {
+      try {
+        const response = await fetch(`/api/professors/search?q=${encodeURIComponent(query)}&limit=5`)
+        if (response.ok) {
+          const data = await response.json()
+          if (data.success && data.results) {
+            const professorResults = data.results.map((prof: any) => ({
+              id: prof.id,
+              name: prof.name,
+              type: 'professor' as const,
+              department: prof.department
+            }))
+            setResults([...filteredInstitutions, ...professorResults])
+            return
+          }
+        }
+      } catch (error) {
+        // If professor search fails, continue with just institutions
+      }
+    }
+
+    // Set institutions immediately and fetch professors
     setResults(filteredInstitutions)
+    if (query.length >= 2) {
+      searchProfessors()
+    }
   }, [query])
 
   const handleSubmit = (e: React.FormEvent) => {

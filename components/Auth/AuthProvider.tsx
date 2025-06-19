@@ -1,8 +1,20 @@
+'use client'
+
 import { createContext, useContext, ReactNode } from 'react';
 import { useFirebaseAuth } from '@/lib/hooks/useFirebaseAuth';
 
+interface User {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  profileComplete?: boolean;
+  isStudent?: boolean | null;
+  institution?: string | null;
+}
+
 interface AuthContextType {
-  user: any;
+  user: User | null;
   loading: boolean;
   isAuthenticated: boolean;
 }

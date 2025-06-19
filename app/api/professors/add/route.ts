@@ -67,14 +67,6 @@ export async function POST(request: Request) {
     // Add to Firestore
     const docRef = await addDoc(collection(db, 'professors'), professorData)
 
-    console.log('✅ New professor added instantly:', {
-      id: docRef.id,
-      name: professorData.name,
-      institution: professorData.institution,
-      department: professorData.department,
-      addedBy: professorData.addedBy
-    })
-
     return NextResponse.json({
       success: true,
       message: 'Professor added successfully and is now available on the site!',
