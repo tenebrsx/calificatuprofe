@@ -10,8 +10,9 @@ export async function GET(
   try {
     const professorId = params.id
     
-    // Create a mock request to get all professors
-    const mockRequest = new Request('http://localhost/api/professors/mock', {
+    // Create a mock request to get all professors using the current request's origin
+    const baseUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}`;
+    const mockRequest = new Request(`${baseUrl}/api/professors/mock`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
